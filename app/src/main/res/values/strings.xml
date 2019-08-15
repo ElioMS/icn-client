@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">icnclient</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="client_type_persona">Personal</string>
+    <string name="client_type_company">Empresa</string>
+    <string name="create_account">Crear cuenta</string>
+    <string name="sign_in_button">Iniciar sesión</string>
+
+    <string name="login_title">Iniciar sesión</string>
+    <string name="login_username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+
+    <string name="login_button">Ingresar</string>
+    <string name="login_facebook_button">Ingresar con
+        <b>facebook</b>
+    </string>
+</resources>
