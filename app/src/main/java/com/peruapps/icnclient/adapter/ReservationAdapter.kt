@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.peruapps.icnclient.databinding.RvItemAppointmentBinding
-import com.peruapps.icnclient.entity.Appointment
+import com.peruapps.icnclient.model.Appointment
 import com.peruapps.icnclient.ui.holder.ReservationViewHolder
 
 class ReservationAdapter (private var items: ArrayList<Appointment>):
@@ -22,6 +22,11 @@ class ReservationAdapter (private var items: ArrayList<Appointment>):
 
     override fun onBindViewHolder(holder: ReservationViewHolder, position: Int) {
         holder.bind(items[position])
+    }
+
+    fun replaceData(arrayList: ArrayList<Appointment>) {
+        items = arrayList
+        notifyDataSetChanged()
     }
 
 }

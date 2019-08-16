@@ -10,7 +10,7 @@
 
         <variable
                 name="appointment"
-                type="com.peruapps.icnclient.entity.Appointment" />
+                type="com.peruapps.icnclient.model.Appointment" />
     </data>
 
     <LinearLayout

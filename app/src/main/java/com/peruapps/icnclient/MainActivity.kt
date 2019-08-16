@@ -3,12 +3,11 @@ package com.peruapps.icnclient
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.peruapps.icnclient.adapter.ServiceAdapter
 import com.peruapps.icnclient.databinding.ActivityMainBinding
-import com.peruapps.icnclient.model.request.Service
+import com.peruapps.icnclient.model.Service
 
 class MainActivity : AppCompatActivity(), ServiceAdapter.OnItemClickListener {
     override fun onItemClick(position: Int) {
@@ -32,12 +31,12 @@ class MainActivity : AppCompatActivity(), ServiceAdapter.OnItemClickListener {
 
 //        val arrayList = viewModel.loadServices()
 
-        val serviceAdapter = ServiceAdapter(arrayList, this)
-
-        binding.rvItemService.layoutManager = LinearLayoutManager(this)
-        binding.rvItemService.adapter = serviceAdapter
-        viewModel.services.observe(this,
-            Observer<ArrayList<Service>> { it?.let { serviceAdapter.replaceData(it) } })
+//        val serviceAdapter = ServiceAdapter(arrayList, this)
+//
+//        binding.rvItemService.layoutManager = LinearLayoutManager(this)
+//        binding.rvItemService.adapter = serviceAdapter
+//        viewModel.services.observe(this,
+//            Observer<ArrayList<Service>> { it?.let { serviceAdapter.replaceData(it) } })
 
         //        binding.apply {
 //            tvTitle.text = "MVVM"

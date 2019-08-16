@@ -1,3 +1,3 @@
-package com.peruapps.icnclient.entity
+package com.peruapps.icnclient.model
 
 data class Appointment (val name: String)

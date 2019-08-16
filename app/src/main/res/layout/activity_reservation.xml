@@ -3,6 +3,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel"
+                  type="com.peruapps.icnclient.features.reservations.viewmodel.ReservationViewModel"/>
+    </data>
+
     <RelativeLayout
 
             android:layout_height="match_parent"
@@ -32,10 +38,11 @@
                         android:id="@+id/textView11"/>
 
                 <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/iv_profile"
                         android:background="?attr/selectableItemBackground"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_profile_icon" android:id="@+id/bivProfile"
+                        app:srcCompat="@drawable/ic_profile_icon"
                         android:layout_marginBottom="20dp" app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="20dp"/>
 
@@ -76,7 +83,8 @@
                 android:id="@+id/tabFilters"
                 android:layout_below="@+id/tabCategories"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+              >
 
             <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
@@ -84,6 +92,7 @@
                     android:text="Ahora"/>
 
             <com.google.android.material.tabs.TabItem
+                    android:id="@+id/ti_scheduled"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Programados"/>
@@ -94,12 +103,23 @@
 
         </com.google.android.material.tabs.TabLayout>
 
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.loadScheduledAppointments()}"/>
+
+        <ProgressBar
+                android:id="@+id/loading"
+                android:layout_centerInParent="true"
+                android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_item_appointment"
                 android:background="@color/colorWhite"
                 android:layout_below="@id/tabFilters"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
                 tools:itemCount="5"
                 tools:listitem="@layout/rv_item_appointment">
         </androidx.recyclerview.widget.RecyclerView>

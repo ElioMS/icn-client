@@ -1,4 +1,4 @@
-package com.peruapps.icnclient.model.request
+package com.peruapps.icnclient.model
 
 data class Service(
     val id: Int,

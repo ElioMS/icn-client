@@ -4,7 +4,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.peruapps.icnclient.data.*
-import com.peruapps.icnclient.model.request.Service
+import com.peruapps.icnclient.model.Service
 
 class MainViewModel: ViewModel() {
 

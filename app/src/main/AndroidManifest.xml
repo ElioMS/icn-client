@@ -13,8 +13,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".features.reservations.views.ReservationActivity"
-                  android:screenOrientation="portrait">
+        <activity android:name=".features.services.views.ServiceActivity">
+        </activity>
+        <activity android:name=".features.service_category.views.ServiceCategoryActivity">
+        </activity>
+        <activity android:name=".features.profile.views.ProfileActivity">
+        </activity>
+        <activity
+                android:name=".features.reservations.views.ReservationActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

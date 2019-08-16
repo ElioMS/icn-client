@@ -10,6 +10,8 @@ import com.peruapps.icnclient.databinding.ActivityRegisterBinding
 
 import com.peruapps.icnclient.features.register.viewmodel.RegisterViewModel
 import com.peruapps.icnclient.features.register.views.fragments.CreateAccountFragment
+import com.peruapps.icnclient.helpers.NavigationHelper
+import kotlinx.android.synthetic.main.activity_reservation.*
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -31,4 +33,6 @@ class RegisterActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.main_container, CreateAccountFragment(), "CreateAccountFragment")
         fragmentTransaction.commit()
     }
+
+
 }

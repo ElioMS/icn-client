@@ -1,7 +1,7 @@
 package com.peruapps.icnclient.data
 
 import android.os.Handler
-import com.peruapps.icnclient.model.request.Service
+import com.peruapps.icnclient.model.Service
 
 
 class ServiceModel {

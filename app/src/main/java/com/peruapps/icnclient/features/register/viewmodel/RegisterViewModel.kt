@@ -3,6 +3,7 @@ package com.peruapps.icnclient.features.register.viewmodel
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.peruapps.icnclient.model.request.RegisterRequest
+import com.peruapps.icnclient.room.repository.OnRegisterReadyCallback
 import com.peruapps.icnclient.room.repository.RegisterRemoteDataSource
 
 class RegisterViewModel: ViewModel() {
@@ -32,7 +33,11 @@ class RegisterViewModel: ViewModel() {
             0,
             1)
 
-        repository.createNewUser(user)
+        repository.createNewUser(user, object: OnRegisterReadyCallback {
+            override fun onDataReady(data: String) {
+                isLoading.set(false)
+            }
+        })
     }
 
 }
