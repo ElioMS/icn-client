@@ -9,10 +9,7 @@ import com.peruapps.icnclient.adapter.ServiceAdapter
 import com.peruapps.icnclient.databinding.ActivityMainBinding
 import com.peruapps.icnclient.model.Service
 
-class MainActivity : AppCompatActivity(), ServiceAdapter.OnItemClickListener {
-    override fun onItemClick(position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 //    private val serviceAdapter = ServiceAdapter(arrayListOf(), this)

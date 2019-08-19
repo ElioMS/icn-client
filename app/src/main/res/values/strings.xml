@@ -17,4 +17,6 @@
     <string name="login_facebook_button">Ingresar con
         <b>facebook</b>
     </string>
+
+    <string name="services_title">Solicitar servicio</string>
 </resources>

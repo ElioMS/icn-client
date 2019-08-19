@@ -2,6 +2,7 @@ package com.peruapps.icnclient.helpers
 
 import android.app.Activity
 import android.content.Intent
+import androidx.fragment.app.Fragment
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.profile.views.ProfileActivity
 
@@ -20,6 +21,10 @@ object NavigationHelper {
         activity.startActivity(page)
 
         activity.overridePendingTransition(R.anim.transition_slide_up, R.anim.transition_slide_down)
+
+    }
+
+    fun fragmentReplace(layout: Int, newFrag: Fragment) {
 
     }
 

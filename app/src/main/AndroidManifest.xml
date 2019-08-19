@@ -13,7 +13,15 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".features.services.views.ServiceActivity">
+        <activity android:name=".features.services.views.ServiceTypeActivity">
+        </activity>
+        <activity android:name=".features.services.views.ServiceActivity"
+                  android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".features.service_category.views.ServiceCategoryActivity">
         </activity>
@@ -22,11 +30,6 @@
         <activity
                 android:name=".features.reservations.views.ReservationActivity"
                 android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".features.register.views.RegisterActivity"

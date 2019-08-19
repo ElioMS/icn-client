@@ -21,7 +21,7 @@ class ServiceAdapter (private var items: ArrayList<Service>,
     override fun onBindViewHolder(holder: ServiceViewHolder, position: Int){
         holder.bind(items[position])
         holder.btnItemService.setOnClickListener {
-            listener.onClick()
+            listener.onClick(items[position].id)
         }
     }
 
