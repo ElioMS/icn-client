@@ -3,6 +3,7 @@ package com.peruapps.icnclient.helpers
 import android.app.Activity
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.profile.views.ProfileActivity
 
@@ -16,6 +17,12 @@ object NavigationHelper {
         activity.startActivity(page)
     }
 
+    fun redirecToWithData(activity: Activity, c: Class<*>, data: Int) {
+        val page = Intent(activity, c)
+        page.putExtra("data", data)
+        activity.startActivity(page)
+    }
+
     fun toProfilePage(activity: Activity) {
         val page = Intent(activity, ProfileActivity::class.java)
         activity.startActivity(page)
@@ -24,8 +31,10 @@ object NavigationHelper {
 
     }
 
-    fun fragmentReplace(layout: Int, newFrag: Fragment) {
-
+    fun changeFragment(fragmentManager: FragmentManager, layout: Int, newFrag: Fragment, fragName: String) {
+        fragmentManager!!.beginTransaction()
+            .replace(layout, newFrag)
+            .addToBackStack(fragName)
+            .commit()
     }
-
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel"
+                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+    </data>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="@{ viewModel.hasMaterial ? (viewModel.showTimePicker ? View.VISIBLE : View.GONE) : View.GONE }"-->
+    <!--&gt;-->
+
+        <LinearLayout
+                android:id="@+id/sp_hour"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_gray_round_corners">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="Hora"/>
+        </LinearLayout>
+
+        <TimePicker
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/sp_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner">
+        </TimePicker>
+
+    </RelativeLayout>
+
+</layout>

@@ -20,6 +20,7 @@ class ServiceCategoryActivity : AppCompatActivity() {
 
     private fun initActivityEvents() {
         iv_back.setOnClickListener { super.onBackPressed() }
-        iv_item.setOnClickListener { NavigationHelper.redirectTo(this, ServiceActivity::class.java) }
+        iv_item.setOnClickListener { NavigationHelper.redirecToWithData(this, ServiceActivity::class.java, 1) }
+        iv_technical.setOnClickListener { NavigationHelper.redirecToWithData(this, ServiceActivity::class.java, 2) }
     }
 }

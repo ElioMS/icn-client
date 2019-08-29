@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:elevation="10dp"
             android:layout_gravity="bottom"
             android:background="@drawable/bg_custom_bottom_bar"

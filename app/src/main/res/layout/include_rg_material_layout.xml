@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="android.view.View" />
+        <variable name="viewModel"
+                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/tv_title_material"
+                style="@style/ServicesListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/services_material_title"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"/>
+
+        <TextView
+                android:id="@+id/tv_subtitle_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicamente, jeringa algodón, gasa"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"/>
+
+        <RadioGroup
+                android:id="@+id/toggle"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:checkedButton="@+id/optYes"
+                android:orientation="horizontal"
+                android:background="@drawable/btn_state_left"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="8dp">
+
+            <RadioButton
+                    android:id="@+id/optYes"
+                    android:onClick="@{ () -> viewModel.changeHasMaterialStatus(true) }"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Sí"
+                    android:textSize="@dimen/button_text"
+                    android:background="@drawable/switch_item"
+                    android:textColor="@drawable/switch_text"/>
+
+            <RadioButton
+                    android:id="@+id/optNo"
+                    android:onClick="@{ () -> viewModel.changeHasMaterialStatus(false) }"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="No"
+                    android:textSize="@dimen/button_text"
+                    android:background="@drawable/switch_item"
+                    android:textColor="@drawable/switch_text"/>
+        </RadioGroup>
+
+    </LinearLayout>
+
+</layout>

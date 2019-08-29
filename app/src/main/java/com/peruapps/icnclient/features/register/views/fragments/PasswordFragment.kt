@@ -59,4 +59,6 @@ class PasswordFragment : Fragment() {
     private fun initFragmentEvents() {
         iv_back.setOnClickListener { activity?.onBackPressed() }
     }
+
+
 }

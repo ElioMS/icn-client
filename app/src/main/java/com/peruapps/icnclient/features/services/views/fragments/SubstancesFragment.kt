@@ -10,11 +10,10 @@ import android.view.ViewGroup
 
 import com.peruapps.icnclient.R
 
-class IntramuscularFragment : Fragment() {
+class SubstancesFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -22,7 +21,6 @@ class IntramuscularFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_intramuscular, container, false)
+        return inflater.inflate(R.layout.fragment_substance, container, false)
     }
-
 }

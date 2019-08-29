@@ -1,8 +1,10 @@
 package com.peruapps.icnclient.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.RvItemServiceBinding
 import com.peruapps.icnclient.features.services.views.ServiceListener
 import com.peruapps.icnclient.model.Service
@@ -18,10 +20,11 @@ class ServiceAdapter (private var items: ArrayList<Service>,
         return ServiceViewHolder(binding)
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ServiceViewHolder, position: Int){
         holder.bind(items[position])
         holder.btnItemService.setOnClickListener {
-            listener.onClick(items[position].id)
+            listener.onClick(items[position])
         }
     }
 

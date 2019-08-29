@@ -19,4 +19,51 @@
     </string>
 
     <string name="services_title">Solicitar servicio</string>
+    <string name="services_material_title">¿Posee material?</string>
+    <string name="services_schedule_title">¿Cuando?</string>
+
+    <string name="button_next">Siguiente</string>
+    <string name="button_generate">Generar</string>
+    <string name="button_confirm">Confirmar</string>
+    <string name="custom_dialog_text">Recuerda que para realizar \n los procesos de enfermería \n necesitas los
+        materiales \n mencionados
+    </string>
+
+    <string name="title_month">Mes</string>
+    <string name="title_schedule">Recordar</string>
+    <string name="add_new_service">Agregar otro servicio</string>
+    <string name="title_substances">Sustancias</string>
+    <string name="title_turn">Turno</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat.
+    </string>
+
+    <string-array name="months">
+        <item>Enero</item>
+        <item>Febrero</item>
+        <item>Marzo</item>
+        <item>Abril</item>
+        <item>Mayo</item>
+        <item>Junio</item>
+        <item>Julio</item>
+        <item>Agosto</item>
+        <item>Setiembre</item>
+        <item>Octubre</item>
+        <item>Noviembre</item>
+        <item>Diciembre</item>
+    </string-array>
+
+    <string-array name="schedule_types">
+        <item>Asignar a todo</item>
+        <item>Asignar por días</item>
+    </string-array>
+
+    <string-array name="turn_list">
+        <item>Día</item>
+        <item>Noche</item>
+        <item>24 hrs</item>
+    </string-array>
+
 </resources>
