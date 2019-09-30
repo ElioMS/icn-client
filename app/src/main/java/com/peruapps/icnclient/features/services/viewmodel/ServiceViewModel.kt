@@ -190,6 +190,7 @@ class ServiceViewModel: BaseViewModel<ServicesNavigator>() {
 
     fun setHour(model: AppointmentDate, position: Int) {
         selectedAppointmentDate.set(position)
+        Log.d("spinner_pos", position.toString())
 //        model.hour = "05:50"
     }
 

@@ -9,8 +9,8 @@
                   type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
     </data>
 
+    <!--android:visibility="@{ viewModel.category == 2 ? (viewModel.selectedScheduleType == 0 ? View.VISIBLE : View.GONE) : View.GONE }"-->
     <RelativeLayout
-            android:visibility="@{ viewModel.category == 2 ? (viewModel.selectedScheduleType == 0 ? View.VISIBLE : View.GONE) : View.GONE }"
             android:id="@+id/sp_select_turn"
             android:background="@drawable/background_gray_round_corners"
             android:layout_margin="5dp"
@@ -24,12 +24,13 @@
                 android:id="@+id/tvMonth"
                 android:text="@string/title_turn"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/muli_bold"
+                android:textSize="18sp"
                 android:padding="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"/>
+
         <Spinner
                 android:id="@+id/sp_turn"
                 android:layout_toEndOf="@id/tvMonth"
@@ -37,7 +38,6 @@
                 android:layout_height="wrap_content"
                 android:spinnerMode="dropdown"
                 android:textAlignment="textEnd"
-                android:layout_centerVertical="true"
-                android:selectedItemPosition="@={viewModel.selectedTurn}"/>
+                android:layout_centerVertical="true"/>
     </RelativeLayout>
 </layout>

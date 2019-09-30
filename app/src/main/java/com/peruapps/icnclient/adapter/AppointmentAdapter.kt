@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.RvItemDateBinding
@@ -52,10 +53,12 @@ class AppointmentAdapter(var items: MutableList<AppointmentDate>,
     private fun verifyState(layout: LinearLayout, date: TextView, hour: TextView) {
         val colorSelected = ContextCompat.getDrawable(layout.context, R.drawable.background_white_round_corners)
         val colorTextSelected = ContextCompat.getColor(date.context, R.color.colorPrimary)
+        val typeface = ResourcesCompat.getFont(date.context, R.font.muli_bold)
 
         layout.background = colorSelected
         date.setTextColor(colorTextSelected)
-        date.setTypeface(date.typeface, Typeface.BOLD)
+
+        date.typeface = typeface
         hour.setTextColor(colorTextSelected)
     }
 

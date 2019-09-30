@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="item"
                   type="com.peruapps.icnclient.model.AppointmentDate"/>
     </data>
 
     <LinearLayout
             android:id="@+id/layout_dates"
-                  android:orientation="vertical"
-                  android:layout_width="120dp"
-                  android:layout_height="100dp"
-                  android:background="@drawable/background_light_gray_round_corners"
-                  android:padding="15dip"
-                  android:layout_margin="10dp"
-                    android:gravity="center">
+            android:orientation="vertical"
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:background="@drawable/background_light_gray_round_corners"
+            android:padding="15dip"
+            android:layout_margin="10dp"
+            android:gravity="center">
 
         <TextView
                 android:id="@+id/schedule_date"
@@ -28,8 +31,16 @@
                 android:id="@+id/schedule_hour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{item.hour}"
                 android:gravity="center"
-        />
+                app:turnAdapter="@{item}"/>
+
+        <!--<TextView-->
+                <!--android:visibility="@{ viewModel.category == 2 ? View.VISIBLE : View.GONE}"-->
+                <!--android:id="@+id/schedule_hour_v"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--app:turnAdapter="@{item.turn}"/>-->
+
     </LinearLayout>
 </layout>

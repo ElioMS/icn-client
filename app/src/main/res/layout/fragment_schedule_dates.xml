@@ -4,6 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="viewModel"
                   type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
     </data>
@@ -50,6 +51,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
+                android:visibility="@{ viewModel.category == 2 ? View.GONE : View.VISIBLE }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_gray_round_corners"
@@ -68,16 +70,42 @@
         </LinearLayout>
 
         <TimePicker
+                android:visibility="@{ viewModel.category == 2 ? View.GONE : View.VISIBLE }"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:timePickerMode="spinner"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 android:id="@+id/timePicker"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp">
 
         </TimePicker>
+
+        <include
+                android:id="@+id/sp_turn_container"
+                android:visibility="@{ viewModel.category == 2 ? View.VISIBLE : View.GONE }"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/include_sp_turn_layout"
+                app:layout_constraintTop_toBottomOf="@+id/rv_item_date"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="10dp" android:layout_marginEnd="10dp"/>
+
+        <include
+                android:visibility="@{ viewModel.category == 2 ? View.VISIBLE : View.GONE }"
+                app:layout_constraintTop_toBottomOf="@+id/sp_turn_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/include_pick_personal_layout"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:viewModel="@{viewModel}"/>
 
         <TextView
                 android:id="@+id/add_new_service"

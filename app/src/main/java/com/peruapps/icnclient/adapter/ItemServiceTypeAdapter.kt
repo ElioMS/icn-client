@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.RvItemServiceTypeBinding
@@ -54,9 +55,11 @@ class ItemServiceTypeAdapter (var items: MutableList<ServiceType>,
 
     private fun verifyState(btn: Button) {
         val colorSelected = ColorStateList.valueOf( ContextCompat.getColor(btn.context, R.color.colorPrimary))
+        val typeface = ResourcesCompat.getFont(btn.context, R.font.muli_bold)
+
         btn.background.setTintList(colorSelected)
         btn.setTextColor(Color.WHITE)
-        btn.setTypeface(btn.typeface, Typeface.BOLD)
+        btn.typeface = typeface
     }
 
     fun cleanList(){

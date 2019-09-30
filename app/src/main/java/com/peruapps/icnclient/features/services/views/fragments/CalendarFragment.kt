@@ -86,7 +86,7 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener {
         val spanish =  Locale("es", "ES")
         val weekdayName = SimpleDateFormat("EEEE dd", spanish).format(date)
 
-        val appointmentDate = AppointmentDate(weekdayName.capitalize(),"", formatDate)
+        val appointmentDate = AppointmentDate(weekdayName.capitalize(),"", formatDate, 1000)
 
         if (!days.contains(appointmentDate)) {
             days.add(appointmentDate)

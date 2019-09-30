@@ -84,9 +84,9 @@
                     <TextView
                             android:id="@+id/tvMonth"
                             android:text="@string/title_schedule"
+                            android:fontFamily="@font/muli_bold"
                             android:textColor="@color/colorAccent"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             android:padding="15dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -104,6 +104,7 @@
                 </RelativeLayout>
 
                 <include
+                        android:visibility="@{ viewModel.category == 2 ? (viewModel.selectedScheduleType == 0 ? View.VISIBLE : View.GONE) : View.GONE }"
                         layout="@layout/include_sp_turn_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

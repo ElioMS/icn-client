@@ -30,6 +30,7 @@
                         android:id="@+id/tvMonth"
                         android:text="@string/title_schedule"
                         android:textColor="@color/colorAccent"
+                        android:fontFamily="@font/muli_bold"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:padding="15dp"
