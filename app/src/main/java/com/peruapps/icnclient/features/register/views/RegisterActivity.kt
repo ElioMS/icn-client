@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.androidnetworking.AndroidNetworking
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.ActivityRegisterBinding
 
@@ -21,7 +20,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        AndroidNetworking.initialize(applicationContext)
+//        AndroidNetworking.initialize(applicationContext)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.setCustomAnimations(

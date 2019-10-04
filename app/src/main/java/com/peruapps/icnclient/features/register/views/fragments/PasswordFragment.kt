@@ -11,10 +11,7 @@ import androidx.databinding.DataBindingUtil
 import com.peruapps.icnclient.R
 import kotlinx.android.synthetic.main.fragment_password.*
 import androidx.lifecycle.ViewModelProviders
-import com.androidnetworking.AndroidNetworking
-import com.androidnetworking.common.Priority
-import com.androidnetworking.error.ANError
-import com.androidnetworking.interfaces.JSONObjectRequestListener
+
 import com.peruapps.icnclient.databinding.FragmentPasswordBinding
 import com.peruapps.icnclient.features.register.viewmodel.RegisterViewModel
 import org.json.JSONObject

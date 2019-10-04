@@ -1,9 +1,9 @@
-package com.peruapps.icnclient.features.account.views
+package com.peruapps.icnclient.features.account.presentation.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.peruapps.icnclient.R
-import com.peruapps.icnclient.features.account.views.fragments.AccountFragment
+import com.peruapps.icnclient.features.account.presentation.views.fragments.AccountFragment
 
 class AccountActivity : AppCompatActivity() {
 

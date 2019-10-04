@@ -11,7 +11,13 @@
     <string name="login_title">Iniciar sesión</string>
     <string name="login_username">Usuario</string>
     <string name="password">Contraseña</string>
+    <string name="new_password">Nueva contraseña</string>
     <string name="confirm_password">Confirmar contraseña</string>
+    <string name="forgot_password">Olvide mi contraseña</string>
+    <string name="password_recovery">Recuperar contraseña</string>
+    <string name="text_email">Correo</string>
+    <string name="text_send">Enviar</string>
+    <string name="text_code">Código</string>
 
     <string name="login_button">Ingresar</string>
     <string name="login_facebook_button">Ingresar con
@@ -39,6 +45,7 @@
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
         aliquip ex ea commodo consequat.
     </string>
+    <string name="actionBar_title">Mis reservas</string>
 
     <string-array name="months">
         <item>Enero</item>

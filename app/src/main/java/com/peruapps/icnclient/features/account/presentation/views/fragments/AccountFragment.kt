@@ -1,4 +1,4 @@
-package com.peruapps.icnclient.features.account.views.fragments
+package com.peruapps.icnclient.features.account.presentation.views.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,0 +1,24 @@
+ext {
+    def koinVersion = '2.0.1'
+    koinDependencies = [
+            // Koin for Android
+            koin            : "org.koin:koin-android:$koinVersion",
+            // Koin AndroidX ViewModel features
+            koinForViewModel: "org.koin:koin-androidx-viewmodel:$koinVersion"
+    ]
+
+    def lifecycleVersion = '2.2.0-alpha03'
+    lifecycleDependencies = [
+            lifecyleExtensions: "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion",
+            viewModel         : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    ]
+
+    def retrofit = '2.6.0'
+    def okhttp = '3.10.0'
+    squareDependencies = [
+            retrofit   : "com.squareup.retrofit2:retrofit:$retrofit",
+            gson       : "com.squareup.retrofit2:converter-gson:$retrofit",
+            interceptor: "com.squareup.okhttp3:logging-interceptor:$okhttp",
+            okhttp     : "com.squareup.okhttp3:okhttp:$okhttp"
+    ]
+}

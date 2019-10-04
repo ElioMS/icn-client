@@ -12,9 +12,13 @@ object NavigationHelper {
     /**
      * @param activity Activity
      * */
-    fun redirectTo(activity: Activity, c: Class<*>) {
+    fun redirectTo(activity: Activity, c: Class<*>, end: Boolean = false) {
         val page = Intent(activity, c)
         activity.startActivity(page)
+
+        if (end) {
+            activity.finish()
+        }
     }
 
     fun redirecToWithData(activity: Activity, c: Class<*>, data: Int) {
@@ -31,8 +35,9 @@ object NavigationHelper {
 
     }
 
-    fun changeFragment(fragmentManager: FragmentManager, layout: Int, newFrag: Fragment, fragName: String) {
-        fragmentManager!!.beginTransaction()
+    fun changeFragment(fragmentManager: FragmentManager, layout: Int, newFrag: Fragment, fragName: String,
+                       addToStack: Boolean = true) {
+        fragmentManager.beginTransaction()
             .replace(layout, newFrag)
             .addToBackStack(fragName)
             .commit()

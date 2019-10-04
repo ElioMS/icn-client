@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.helpers.NavigationHelper
-import com.peruapps.icnclient.features.account.views.AccountActivity
+import com.peruapps.icnclient.features.account.presentation.views.AccountActivity
 import kotlinx.android.synthetic.main.fragment_client_type.*
 
 class ClientTypeFragment : Fragment() {
