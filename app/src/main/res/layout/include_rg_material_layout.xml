@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View" />
         <variable name="viewModel"
-                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+                  type="com.peruapps.icnclient.features.service_type.presentation.ServiceTypeViewModel"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -54,8 +54,8 @@
                     android:padding="10dp"
                     android:text="Sí"
                     android:textSize="@dimen/button_text"
-                    android:background="@drawable/switch_item"
-                    android:textColor="@drawable/switch_text"/>
+                    app:radioIsChecked="@{ viewModel.hasMaterial }"
+                    app:radioName="@{ 1 }"/>
 
             <RadioButton
                     android:id="@+id/optNo"
@@ -71,8 +71,9 @@
                     android:padding="10dp"
                     android:text="No"
                     android:textSize="@dimen/button_text"
-                    android:background="@drawable/switch_item"
-                    android:textColor="@drawable/switch_text"/>
+                    app:radioIsChecked="@{ viewModel.hasMaterial }"
+                    app:radioName="@{ 2 }"/>
+
         </RadioGroup>
 
     </LinearLayout>

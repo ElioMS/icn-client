@@ -5,9 +5,7 @@ import android.os.Bundle
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.services.views.ServiceActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
-import com.peruapps.icnclient.widgets.CustomBottomBar
 import kotlinx.android.synthetic.main.activity_service_category.*
-import kotlinx.android.synthetic.main.navigation_bottom_bar.*
 
 class ServiceCategoryActivity : AppCompatActivity() {
 

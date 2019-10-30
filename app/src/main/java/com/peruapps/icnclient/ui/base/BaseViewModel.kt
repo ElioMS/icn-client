@@ -2,6 +2,8 @@ package com.peruapps.icnclient.ui.base
 
 import android.util.Log
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.peruapps.icnclient.dialogs.CustomDialogContactUs
@@ -10,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import retrofit2.HttpException
 import java.lang.ref.WeakReference
 import java.util.logging.Handler
 
@@ -24,6 +28,12 @@ abstract class BaseViewModel<T> : ViewModel() {
     var doSchedule = ObservableField<Boolean>()
     var selectScheduleType = ObservableField<Boolean>()
 
+
+
+    private val _showError = MutableLiveData("")
+    val showError : LiveData<String>
+        get() = _showError
+
     fun getNavigator(): T {
         return navigator?.get()!!
     }
@@ -35,20 +45,19 @@ abstract class BaseViewModel<T> : ViewModel() {
     protected fun startJob(block: suspend () -> Unit): Job {
         return viewModelScope.launch {
             try {
-//                withContext(Dispatchers.Main) {
-                    requestLoading.set(true)
-//                }
+                requestLoading.set(true)
                 block()
-
             } catch (error: Throwable) {
+                var oError = ""
+
+                if (error is HttpException) {
+                    oError = JSONObject(error.response()?.errorBody()!!.string()).optString("description")
+                    Log.e("viewmodel", oError)
+                }
+//                val message = JSONObject(error.toString()).optString("message")
+                _showError.value = oError
+
                 Log.e("BaseViewModel", error.message ?: "")
-                // Display only our custom exception.
-                // Other type of exception should only be printed.
-                // Because other types can be for X reason we are not handled.
-                /*if (error is XMLResponseException) {
-                    _errorCause.value = error.message
-                }*/
-//                _showEmptyView.value = true
             } finally {
                 requestLoading.set(false)
             }

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="viewModel"
+                  type="com.peruapps.icnclient.features.substances.presentation.dialogs.SubstanceDialogViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/colorWhite">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_item_substances"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="5"
+                tools:listitem="@layout/rv_item_substances"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:itemSubstanceAdapter="@{viewModel.adapter}"/>
+
+        <RelativeLayout
+                android:id="@+id/spPersonal"
+                android:background="@drawable/background_gray_round_corners"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:id="@+id/tvPersonal"
+                    android:text="Días"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="18sp"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <EditText
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorSecondaryText"
+                    android:background="@null"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="@={ viewModel.days }"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:background="@drawable/background_gray_round_corners"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:text="Cada"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="18sp"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <Spinner
+                    android:id="@+id/spPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="textEnd"
+                    android:layout_centerVertical="true"
+                    android:selectedItemPosition="@={viewModel.period}"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:background="@drawable/background_gray_round_corners"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:text="Primera dosis"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="18sp"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <TextView
+                    tools:text="Lunes 21"
+                    android:layout_width="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/selectDatePicker"
+                    android:text="@{ viewModel.dateToString }"/>
+
+            <FrameLayout
+                    android:id="@+id/selectDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{ () -> viewModel.setDate() }">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_forward"/>
+
+            </FrameLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:background="@drawable/background_gray_round_corners"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:text="Hora"
+                    android:textColor="@color/colorSecondaryText"
+                    android:textSize="18sp"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <TextView
+                    android:id="@+id/tvHour"
+                    android:layout_toStartOf="@+id/selectTimePicker"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorSecondaryText"
+                    android:text="@{ viewModel.hour }"/>
+
+            <FrameLayout
+                    android:id="@+id/selectTimePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{ () -> viewModel.setTime() }">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_forward"/>
+
+            </FrameLayout>
+
+
+        </RelativeLayout>
+
+        <Button
+                style="@style/Button.Rounded.Primary"
+                android:layout_margin="20dp"
+                android:text="Generar"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{ () -> viewModel.updateSubstanceDetail() }"/>
+
+    </LinearLayout>
+
+</layout>

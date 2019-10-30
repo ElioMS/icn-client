@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="item"
+                  type="com.peruapps.icnclient.model.response.NotificationResponse"/>
+    </data>
+
+    <LinearLayout
+            android:id="@+id/rvItemNotificationLayout"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:background="@drawable/background_bottom_border">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_appointment_icon"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp">
+
+            <TextView
+                    android:id="@+id/tvCategoryService"
+                    android:fontFamily="@font/muli_bold"
+                    style="@style/PrimaryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Personal técnico de enfermería"
+                    android:text="@{item.categoryName}"/>
+
+            <TextView
+                    android:id="@+id/tvServiceName"
+                    android:layout_below="@+id/tvCategoryService"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Servicio"/>
+
+            <TextView
+                    android:layout_below="@+id/tvCategoryService"
+                    android:layout_toEndOf="@+id/tvServiceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Nombre de Servicio"
+                    android:text="@{item.serviceName}"/>
+
+            <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_below="@+id/tvServiceName"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Dirección"/>
+
+            <TextView
+                    android:id="@+id/addressContent"
+                    android:layout_below="@+id/tvServiceName"
+                    android:layout_toEndOf="@+id/tvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Nombre de Servicio"
+                    android:text="@{item.address}"/>
+
+            <TextView
+                    android:id="@+id/tvDay"
+                    android:layout_below="@+id/addressContent"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Día"/>
+
+            <TextView
+                    android:layout_below="@+id/addressContent"
+                    android:layout_toEndOf="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Día"
+                    android:text="@{item.stringDate}"/>
+
+            <TextView
+                    android:id="@+id/tvHour"
+                    android:layout_below="@+id/tvDay"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hora"/>
+
+            <TextView
+                    android:layout_below="@+id/tvDay"
+                    android:layout_toEndOf="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Hora"
+                    android:text="@{item.stringHour}"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</layout>

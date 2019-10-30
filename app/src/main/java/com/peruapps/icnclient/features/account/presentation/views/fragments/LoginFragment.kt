@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.peruapps.icnclient.BR
 
 import com.peruapps.icnclient.R
@@ -32,6 +34,7 @@ class LoginFragment : Fragment(), LoginNavigator {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.setNavigator(this)
+        subscribeLiveData()
         binding.setVariable(BR.viewModel, model)
     }
 
@@ -44,5 +47,13 @@ class LoginFragment : Fragment(), LoginNavigator {
             R.id.main_container,
             ForgotPasswordFragment(),
             "ForgotPasswordFragment")
+    }
+
+    private fun subscribeLiveData() {
+        model.showError.observe(this, Observer {
+            if  (it != "") {
+                Toast.makeText(context!!, it , Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

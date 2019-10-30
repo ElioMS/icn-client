@@ -4,6 +4,11 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable name="viewModel"
+                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+    </data>
+
     <RelativeLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -77,6 +82,7 @@
                 android:layout_height="match_parent"
                 tools:itemCount="4"
                 android:padding="15dp"
+                app:itemServiceAdapter="@{viewModel.serviceAdapter}"
                 tools:listitem="@layout/rv_item_service">
         </androidx.recyclerview.widget.RecyclerView>
 

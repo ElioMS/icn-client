@@ -37,11 +37,12 @@
                     style="@style/TextField.Rounded"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:hint="@string/login_username"
                     android:fontFamily="@font/muli_bold"
                     android:layout_marginTop="25dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:text="@={viewModel.email}"/>
 
             <EditText
                     android:id="@+id/etPWd"
@@ -52,7 +53,8 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.password}"/>
 
             <TextView
                     android:layout_gravity="center"
@@ -76,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="8dp">
+                android:layout_marginBottom="40dp">
             <Button
                     android:id="@+id/btn_create_account"
                     style="@style/Button.Rounded.Accent"

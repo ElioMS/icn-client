@@ -6,7 +6,7 @@
     <data>
         <import type="android.view.View"/>
         <variable name="viewModel"
-                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+                  type="com.peruapps.icnclient.features.calendar.presentation.CalendarViewModel"/>
     </data>
 
     <!--android:visibility="@{ viewModel.category == 2 ? (viewModel.selectedScheduleType == 0 ? View.VISIBLE : View.GONE) : View.GONE }"-->

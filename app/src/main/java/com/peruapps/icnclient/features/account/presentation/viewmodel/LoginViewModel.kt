@@ -1,18 +1,18 @@
 package com.peruapps.icnclient.features.account.presentation.viewmodel
 
-import android.util.Log
+import androidx.databinding.ObservableField
 import com.peruapps.icnclient.features.account.data.LoginRepository
 import com.peruapps.icnclient.features.account.presentation.views.LoginNavigator
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
 class LoginViewModel (private val repository: LoginRepository): BaseViewModel<LoginNavigator>() {
 
+    var email = ObservableField<String>("")
+    var password = ObservableField<String>("")
+
     fun signIn() {
-
-//        requestLoading.set(true)
-
         startJob {
-            val response = repository.login("egarcia@peruapps.com.pe", "123123")
+            repository.login(email.get()!!, password.get()!!)
             getNavigator().redirectAfterLogin()
         }
     }

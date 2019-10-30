@@ -19,6 +19,10 @@ class PreferencesManager(private val mPreferences: PowerPreferences) {
         mPreferences.saveObject(Constants.USER_DATA, response)
     }
 
+    fun getUserData(): LoginResponse? {
+        return mPreferences.getObject(Constants.USER_DATA, LoginResponse::class.java, "")
+    }
+
     fun removeAuthData() {
         mPreferences.removeItemPreference(Constants.TOKEN_KEY)
         mPreferences.removeItemPreference(Constants.USER_DATA)

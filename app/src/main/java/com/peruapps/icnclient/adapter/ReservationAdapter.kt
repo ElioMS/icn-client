@@ -7,7 +7,7 @@ import com.peruapps.icnclient.databinding.RvItemAppointmentBinding
 import com.peruapps.icnclient.model.Appointment
 import com.peruapps.icnclient.ui.holder.ReservationViewHolder
 
-class ReservationAdapter (private var items: ArrayList<Appointment>):
+class ReservationAdapter (private var items: MutableList<Appointment>):
     RecyclerView.Adapter<ReservationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservationViewHolder {
@@ -24,9 +24,8 @@ class ReservationAdapter (private var items: ArrayList<Appointment>):
         holder.bind(items[position])
     }
 
-    fun replaceData(arrayList: ArrayList<Appointment>) {
-        items = arrayList
+    fun bindItems(data: MutableList<Appointment>) {
+        this.items = data
         notifyDataSetChanged()
     }
-
 }

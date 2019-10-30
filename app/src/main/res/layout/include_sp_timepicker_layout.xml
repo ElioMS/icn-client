@@ -4,7 +4,7 @@
     <data>
         <import type="android.view.View"/>
         <variable name="viewModel"
-                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+                  type="com.peruapps.icnclient.features.service_type.presentation.ServiceTypeViewModel"/>
     </data>
 
     <RelativeLayout

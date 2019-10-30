@@ -11,6 +11,7 @@
     <string name="login_title">Iniciar sesión</string>
     <string name="login_username">Usuario</string>
     <string name="password">Contraseña</string>
+    <string name="change_password">Cambiar contraseña</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="forgot_password">Olvide mi contraseña</string>
@@ -18,6 +19,18 @@
     <string name="text_email">Correo</string>
     <string name="text_send">Enviar</string>
     <string name="text_code">Código</string>
+    <string name="text_edit">Editar</string>
+    <string name="text_save">Guardar</string>
+    <string name="text_phone">Celular</string>
+    <string name="text_gender">Género</string>
+    <string name="text_age">Edad</string>
+    <string name="text_document_type">Tipo de documento</string>
+    <string name="text_dni">DNI</string>
+    <string name="text_passport">Pasaporte</string>
+    <string name="text_document_number">Número de documento</string>
+    <string name="text_gallery">Galería</string>
+    <string name="text_camera">Cámara</string>
+    <string name="text_logout">Cerrar sesión</string>
 
     <string name="login_button">Ingresar</string>
     <string name="login_facebook_button">Ingresar con
@@ -40,6 +53,22 @@
     <string name="add_new_service">Agregar otro servicio</string>
     <string name="title_substances">Sustancias</string>
     <string name="title_turn">Turno</string>
+    <string name="title_hour">Hora</string>
+    <string name="title_personal">Personal</string>
+    <string name="text_nurses">Enfermeras</string>
+    <string name="text_technicians">Técnicos</string>
+    <string name="text_payment_method">Método de pago</string>
+    <string name="text_cards">Tarjetas</string>
+    <string name="text_add_card">Agregar nueva tarjeta</string>
+    <string name="text_address">Dirección</string>
+    <string name="text_address_reference">Referencia</string>
+    <string name="text_pay">Pagar</string>
+    <string name="text_yes">Sí</string>
+    <string name="text_no">No</string>
+    <string name="text_notification_dialog">¿Ha llegado a cumplir su jornada?</string>
+    <string name="title_service_detail">Detalle del servicio</string>
+    <string name="title_notifications">Califícame</string>
+    <string name="text_notifications">Aún no has solicitado un técnico o enfermera.</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -63,8 +92,13 @@
     </string-array>
 
     <string-array name="schedule_types">
-        <item>Asignar a todo</item>
         <item>Asignar por días</item>
+        <item>Asignar a todo</item>
+    </string-array>
+
+    <string-array name="gender_list">
+        <item>Masculino</item>
+        <item>Femenino</item>
     </string-array>
 
     <string-array name="turn_list">
@@ -72,5 +106,22 @@
         <item>Noche</item>
         <item>24 hrs</item>
     </string-array>
+
+    <string-array name="period_list">
+        <item>12 hrs</item>
+        <item>08 hrs</item>
+        <item>06 hrs</item>
+    </string-array>
+
+    <string-array name="tabTitles">
+        <item>AHORA</item>
+        <item>PROGRAMADOS</item>
+        <item>CULMINADOS</item>
+    </string-array>
+
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyAF1fhvKXWuMtps92pgEYFA5_qwzbvHoZY
+    </string>
+
 
 </resources>

@@ -7,9 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.peruapps.icnclient.R
+import com.peruapps.icnclient.features.account.presentation.viewmodel.AccountViewModel
+import com.peruapps.icnclient.features.account.presentation.viewmodel.LoginViewModel
+import com.peruapps.icnclient.features.account.presentation.views.AccountNavigator
 import com.peruapps.icnclient.helpers.NavigationHelper
 import com.peruapps.icnclient.features.register.views.RegisterActivity
 import kotlinx.android.synthetic.main.fragment_account.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
 
@@ -33,6 +37,5 @@ class AccountFragment : Fragment() {
 
         btn_create_account.setOnClickListener { NavigationHelper.redirectTo(activity!!, RegisterActivity::class.java) }
     }
-
 
 }

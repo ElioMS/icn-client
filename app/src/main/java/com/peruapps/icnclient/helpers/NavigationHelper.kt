@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.peruapps.icnclient.R
-import com.peruapps.icnclient.features.profile.views.ProfileActivity
+//import com.peruapps.icnclient.features.profile.presentation.ProfileActivity
 
 object NavigationHelper {
 
@@ -27,13 +27,13 @@ object NavigationHelper {
         activity.startActivity(page)
     }
 
-    fun toProfilePage(activity: Activity) {
-        val page = Intent(activity, ProfileActivity::class.java)
-        activity.startActivity(page)
-
-        activity.overridePendingTransition(R.anim.transition_slide_up, R.anim.transition_slide_down)
-
-    }
+//    fun toProfilePage(activity: Activity) {
+//        val page = Intent(activity, ProfileActivity::class.java)
+//        activity.startActivity(page)
+//
+//        activity.overridePendingTransition(R.anim.transition_slide_up, R.anim.transition_slide_down)
+//
+//    }
 
     fun changeFragment(fragmentManager: FragmentManager, layout: Int, newFrag: Fragment, fragName: String,
                        addToStack: Boolean = true) {

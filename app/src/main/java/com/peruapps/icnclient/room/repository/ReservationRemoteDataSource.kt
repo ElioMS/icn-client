@@ -11,15 +11,15 @@ class ReservationRemoteDataSource: ReservationRepository.Remote {
 
     override fun getCulminatedAppointments(onAppointmentReadyCallback: OnAppointmentReadyCallback) {
         val arrayList = ArrayList<Appointment>()
-        arrayList.add(Appointment("bbb"))
-        arrayList.add(Appointment("aaaa"))
+//        arrayList.add(Appointment("bbb"))
+//        arrayList.add(Appointment("aaaa"))
         Handler().postDelayed({ onAppointmentReadyCallback.onDataReady(arrayList) },2000)
     }
 
     override fun getScheduledAppointments(onAppointmentReadyCallback: OnAppointmentReadyCallback) {
         val arrayList = ArrayList<Appointment>()
-        arrayList.add(Appointment("ccc"))
-        arrayList.add(Appointment("ddd"))
+//        arrayList.add(Appointment("ccc"))
+//        arrayList.add(Appointment("ddd"))
         Handler().postDelayed({ onAppointmentReadyCallback.onDataReady(arrayList) },2000)
     }
 }

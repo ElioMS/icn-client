@@ -35,12 +35,11 @@
                 app:turnAdapter="@{item}"/>
 
         <!--<TextView-->
-                <!--android:visibility="@{ viewModel.category == 2 ? View.VISIBLE : View.GONE}"-->
-                <!--android:id="@+id/schedule_hour_v"-->
+                <!--android:id="@+id/schedule_hour"-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:gravity="center"-->
-                <!--app:turnAdapter="@{item.turn}"/>-->
+                <!--android:text="@{item.hour}"/>-->
 
     </LinearLayout>
 </layout>

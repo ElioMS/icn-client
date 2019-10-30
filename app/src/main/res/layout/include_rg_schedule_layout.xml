@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
         <variable name="viewModel"
-                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+                  type="com.peruapps.icnclient.features.service_type.presentation.ServiceTypeViewModel"/>
     </data>
 
+    <!--<LinearLayout-->
+            <!--android:visibility="@{ safeUnbox(viewModel.showSubstances) ? View.GONE : (viewModel.hasMaterial ? View.VISIBLE : View.GONE) }"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
     <LinearLayout
-            android:visibility="@{ viewModel.showSubstances ? View.GONE : (viewModel.hasMaterial ? View.VISIBLE : View.GONE) }"
+            app:hasMaterial="@{viewModel.hasMaterial}"
+            app:checkServiceId="@{viewModel.service.id}"
+            app:checkItemPosition="@{viewModel.serviceTypePosition}"
+            app:showSubstances="@{viewModel.showSubstances}"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -31,7 +41,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/btn_state_left"
                 android:layout_marginTop="8dp"
-                android:layout_marginStart="10dp" android:layout_marginEnd="10dp">
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
 
             <RadioButton
                     android:id="@+id/optNow"
@@ -47,8 +58,8 @@
                     android:padding="10dp"
                     android:text="Ahora"
                     android:textSize="@dimen/button_text"
-                    android:background="@drawable/switch_item"
-                    android:textColor="@drawable/switch_text"/>
+                    app:radioIsChecked="@{ viewModel.doSchedule }"
+                    app:radioName="@{ 2 }"/>
 
             <RadioButton
                     android:id="@+id/optSchedule"
@@ -64,8 +75,8 @@
                     android:padding="10dp"
                     android:text="Agendar"
                     android:textSize="@dimen/button_text"
-                    android:background="@drawable/switch_item"
-                    android:textColor="@drawable/switch_text"/>
+                    app:radioIsChecked="@{ viewModel.doSchedule }"
+                    app:radioName="@{ 1 }"/>
         </RadioGroup>
 
     </LinearLayout>

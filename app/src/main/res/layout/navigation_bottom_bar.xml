@@ -1,37 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:paddingTop="10dp"
-             android:paddingBottom="10dp">
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:elevation="10dp"
             android:layout_gravity="bottom"
             android:background="@drawable/bg_custom_bottom_bar"
             android:fitsSystemWindows="true">
 
-        <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_calendar" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="50dp" app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginBottom="8dp" android:id="@+id/appCompatImageView"/>
+        <LinearLayout
+                android:id="@+id/appointmentOption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginBottom="8dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_ring" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="50dp" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/appCompatImageView2"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_calendar"
+                    android:id="@+id/appCompatImageView"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appointmentIndicator"
+                    android:visibility="invisible"
+                    android:tint="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    app:srcCompat="@drawable/ic_circle"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/notificationOption"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:srcCompat="@drawable/ic_ring"
+                    android:id="@+id/appCompatImageView2"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/notificationIndicator"
+                    android:visibility="invisible"
+                    android:tint="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    app:srcCompat="@drawable/ic_circle"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_service_category"

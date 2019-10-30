@@ -1,27 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
         <variable name="viewModel"
-                  type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>
+                  type="com.peruapps.icnclient.features.service_type.presentation.ServiceTypeViewModel"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_gray_round_corners"
-            android:visibility="@{ viewModel.hasMaterial ? (viewModel.showSubstances ? View.VISIBLE : View.GONE) : View.GONE }"
-    >
+            android:visibility="@{ viewModel.hasMaterial ? (viewModel.showSubstances ? View.VISIBLE : View.GONE) : View.GONE }">
 
         <TextView
                 style="@style/AccentText"
-                android:textStyle="bold"
+                android:fontFamily="@font/muli_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:text="@string/title_substances"/>
-    </LinearLayout>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_toStartOf="@+id/substanceQty"
+                android:layout_centerVertical="true"
+                android:onClick="@{ () -> viewModel.decrementSubstances() }">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_minus"/>
+        </FrameLayout>
+
+        <TextView
+                android:id="@+id/substanceQty"
+                android:layout_toStartOf="@+id/incrementSubstances"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                app:numberToString="@{ viewModel.substanceQuantity }"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/incrementSubstances"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_plus"
+                android:onClick="@{ () -> viewModel.incrementSubstances() }"/>
+    </RelativeLayout>
 
 </layout>
