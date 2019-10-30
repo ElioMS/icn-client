@@ -3,10 +3,6 @@ package com.peruapps.icnclient.features.services.viewmodel
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import com.peruapps.icnclient.R
-import com.peruapps.icnclient.adapter.AppointmentAdapter
-import com.peruapps.icnclient.adapter.ItemServiceTypeAdapter
-import com.peruapps.icnclient.adapter.NursingStaffAdapter
 import com.peruapps.icnclient.adapter.ServiceAdapter
 import com.peruapps.icnclient.features.services.data.ServiceRepository
 import com.peruapps.icnclient.features.services.views.ServicesNavigator
@@ -23,9 +19,6 @@ class ServiceViewModel(private val repository: ServiceRepository): BaseViewModel
     }
 
 
-
-
-//    var repository: ServiceRemoteDataSource = ServiceRemoteDataSource()
 
     /**
      * category, set the category to load services
@@ -87,6 +80,10 @@ class ServiceViewModel(private val repository: ServiceRepository): BaseViewModel
         }
     }
 
+    fun onPressBack() {
+        getNavigator().goBack()
+    }
+
     private fun showTypesByService(entity: Service, position: Int) {
         if (position == 3) {
             getNavigator().showOthersDialog()
@@ -98,46 +95,4 @@ class ServiceViewModel(private val repository: ServiceRepository): BaseViewModel
             }
         }
     }
-
-
-
-//    private fun nursingStaffSelectedItem(model: ServiceType) {
-//        Log.d("nursing_staff", "${service.get()!!.id} ${model.name}")
-//        serviceType.set(model)
-//
-//        getNavigator().showNextView("CALENDAR")
-//    }
-//
-//    fun nextButtonEvents() {
-//
-//        val serviceId = service.get()!!.id
-//        val scheduleValue = doSchedule.get()
-//        val position = serviceTypePosition.get()
-//
-//        if (serviceId == 1 && position == 1) {
-//            getNavigator().showNextView("SUBSTANCES")
-//        }
-//
-//        if (serviceId == 1 && position != 1 || serviceId == 3) {
-//            when(scheduleValue) {
-//                true -> getNavigator().showNextView("CALENDAR")
-//                false -> getNavigator().showNextView("SUMMARY")
-//            }
-//        }
-//
-//        if (serviceId == 2) {
-//            when(scheduleValue) {
-//                true -> getNavigator().showNextView("SCHEDULE")
-//                false -> {
-//                    doSchedule.set(true)
-//                    showTimePicker.set(false)
-//                }
-//            }
-//        }
-//    }
-
-
-
-
-
 }

@@ -5,12 +5,11 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import com.peruapps.icnclient.db.sharePreferences.PreferencesManager
 import com.peruapps.icnclient.features.edit_profile.data.EditProfileRepository
-import com.peruapps.icnclient.model.request.UpdateProfileRequest
 import com.peruapps.icnclient.model.response.LoginResponse
 import com.peruapps.icnclient.ui.base.BaseViewModel
 import java.io.File
-import android.provider.MediaStore
-
+import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.imagepipeline.core.ImagePipeline
 
 
 class EditProfileViewModel(
@@ -67,32 +66,27 @@ class EditProfileViewModel(
             else -> "F"
         }
 
+        profile.get()!!.phone_number = phoneNumber.get()!!
         profile.get()!!.email = email.get()!!
         profile.get()!!.gender = genderString
+        profile.get()!!.age = age.get()
         profile.get()!!.documentType = documentType.get()
         profile.get()!!.document_number = documentNumber.get()!!
-        profile.get()!!.phone_number = phoneNumber.get()!!
         profile.get()!!.address = address.get()!!
         profile.get()!!.addressReference = addressReference.get()!!
-        profile.get()!!.age = age.get()
 
-//        val data = UpdateProfileRequest(
-//            email.get()!!,
-//            genderString,
-//            documentType.get(),
-//            documentNumber.get()!!,
-//            phoneNumber.get()!!,
-//            address.get()!!,
-//            addressReference.get()!!,
-//            age.get()
-//        )
-
-        Log.d("save_profile", loadedPicture.get()!!.toString())
+        //CLEAR FRESCO CACHE
+        val imagePipeline = Fresco.getImagePipeline()
+        imagePipeline.clearCaches()
 
         startJob {
-            val response = repository.updateProfile(loadedPicture.get()!!,
-                phoneNumber.get()!!, email.get()!!, genderString, age.get())
-//            val response = repository.updateProfile(data)
+            repository.updateProfile(
+                loadedPicture.get(),
+                phoneNumber.get()!!, email.get()!!, genderString, age.get(),
+                documentType.get(), documentNumber.get()!!,
+                address.get()!!, addressReference.get()!!
+            )
+
             preferencesManager.saveAuthData(profile.get()!!)
             getNavigator().updateUserData()
         }
@@ -100,5 +94,9 @@ class EditProfileViewModel(
 
     fun onClickAddPhoto() {
         getNavigator().showGalleryDialog()
+    }
+
+    fun onClickCloseView() {
+        getNavigator().goBack()
     }
 }

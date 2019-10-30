@@ -50,7 +50,6 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
     val REQUEST_GALLERY_PHOTO = 102
 
     private lateinit var mPhotoFile: File
-    var permissionGranted = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -97,47 +96,20 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
     }
 
     override fun showGalleryDialog() {
-//        val dialog = GalleryDialog(context!!, R.style.FullScreenDialogStyle, this)
         val dialog = GalleryDialog(context!!, this)
         dialog.show()
     }
 
-    private fun setupPermissions() {
-        val permission = ContextCompat.checkSelfPermission(context!!,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            makeRequest()
-            Log.i("gaaaa", "Permission to record denied")
-        }
-    }
-
-    private fun makeRequest() {
-        ActivityCompat.requestPermissions(activity!!,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            REQUEST_GALLERY_PHOTO)
-
-        permissionGranted = true
-    }
-
     override fun openGallery() {
-
         val permission = ContextCompat.checkSelfPermission(context!!,
             Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 REQUEST_GALLERY_PHOTO)
-
-//            permissionGranted = true
         } else {
             dispatchSelectFromGallery()
         }
-
-//        if (permissionGranted) {
-//            dispatchSelectFromGallery()
-//        }
-
     }
 
     override fun openCamera() {
@@ -223,7 +195,6 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-
         when (requestCode) {
             REQUEST_GALLERY_PHOTO -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -234,6 +205,10 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
                 return
             }
         }
-
     }
+
+    override fun goBack() {
+        activity!!.onBackPressed()
+    }
+
 }

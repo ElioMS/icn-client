@@ -38,6 +38,7 @@ ext.versions = [
 ]
 def version = ext.versions
 dependencies {
+    implementation 'com.facebook.fresco:fresco:2.0.0'
 
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 

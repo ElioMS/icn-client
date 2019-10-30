@@ -35,7 +35,8 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="20dp"
                     android:layout_marginTop="50dp"
-                    android:src="@drawable/ic_close"/>
+                    android:src="@drawable/ic_close"
+                    android:onClick="@{ () -> viewModel.onClickCloseView() }"/>
 
         </androidx.cardview.widget.CardView>
 
@@ -48,19 +49,32 @@
                 android:layout_centerHorizontal="true"
                 android:onClick="@{ () -> viewModel.onClickAddPhoto() }">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/profile_image"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/ic_add_photo"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@color/colorAccent"/>
+                    android:scaleType="centerInside"
+                    app:roundedCornerRadius="50dp"
+                    app:roundAsCircle="true"
+                    app:roundingBorderWidth="3dp"
+                    app:roundingBorderColor="@color/colorAccent"
+                    app:setImageControllerResize="@{viewModel.profile.photo}"
+                    android:elevation="10dp"/>
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView-->
+                    <!--android:id="@+id/profile_image"-->
+                    <!--android:layout_width="120dp"-->
+                    <!--android:layout_height="120dp"-->
+                    <!--android:src="@drawable/ic_add_photo"-->
+                    <!--app:civ_border_width="2dp"-->
+                    <!--app:civ_border_color="@color/colorAccent"/>-->
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/ic_add_image"
-                    android:layout_gravity="end|bottom"/>
+                    android:layout_gravity="end|bottom"
+                    android:elevation="20dp"/>
 
         </FrameLayout>
 
@@ -174,13 +188,15 @@
                                 android:paddingTop="5dp"
                                 android:paddingBottom="5dp"
                                 android:background="@drawable/background_gray_round_corners">
+
                         <Spinner
                                 android:id="@+id/sp_gender"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:spinnerMode="dropdown"
                                 android:textAlignment="textStart"
-                               />
+                                android:selectedItemPosition="@={viewModel.gender}"/>
+
                         </FrameLayout>
 
                     </LinearLayout>

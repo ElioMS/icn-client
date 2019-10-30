@@ -31,6 +31,8 @@
     <string name="text_gallery">Galería</string>
     <string name="text_camera">Cámara</string>
     <string name="text_logout">Cerrar sesión</string>
+    <string name="category_nurse">Procedimientos de enfermería</string>
+    <string name="category_technician">Personal de enfermería o técnico de enfermería</string>
 
     <string name="login_button">Ingresar</string>
     <string name="login_facebook_button">Ingresar con

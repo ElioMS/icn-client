@@ -45,8 +45,7 @@
         </activity>
         <activity android:name=".features.service_category.views.ServiceCategoryActivity">
         </activity>
-        <activity android:name=".features.profile.presentation.ProfileActivity">
-        </activity>
+
         <activity
                 android:name=".features.reservations.presentation.views.ReservationActivity"
                 android:screenOrientation="portrait">
@@ -56,6 +55,7 @@
                 android:screenOrientation="portrait">
         </activity>
         <activity
+                android:theme="@style/AppTheme.Launcher"
                 android:name=".features.account.presentation.views.AccountActivity"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -64,7 +64,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.SplashActivity">
+        <activity android:name=".features.splash.SplashActivity">
         </activity>
         <activity android:name=".MainActivity">
         </activity>

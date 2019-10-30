@@ -1,4 +1,4 @@
-package com.peruapps.icnclient.ui.activities
+package com.peruapps.icnclient.features.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,8 +11,5 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_container, SplashFragment(), "SplashFragment")
-        fragmentTransaction.commit()
     }
 }

@@ -6,4 +6,5 @@ interface EditProfileNavigator {
     fun showGalleryDialog()
     fun openGallery()
     fun openCamera()
+    fun goBack()
 }

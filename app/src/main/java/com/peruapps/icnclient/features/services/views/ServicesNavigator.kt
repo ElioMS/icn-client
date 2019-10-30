@@ -6,4 +6,5 @@ import com.peruapps.icnclient.model.ServiceType
 interface ServicesNavigator {
     fun showServiceTypeView(serviceTypes: ArrayList<ServiceType>, service: Service)
     fun showOthersDialog()
+    fun goBack()
 }

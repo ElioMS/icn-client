@@ -57,11 +57,15 @@ interface ApiService {
 
     @POST("me/profile")
     @Multipart
-    suspend fun updateProfile(@Part photo: MultipartBody.Part,
+    suspend fun updateProfile(@Part photo: MultipartBody.Part? = null,
                               @Part("phone_number") phoneNumber: RequestBody,
                               @Part("email") email: RequestBody,
                               @Part("gender") gender: RequestBody,
-                              @Part("age") age: RequestBody): Response<Unit>
+                              @Part("age") age: RequestBody,
+                              @Part("document_type") documentType: RequestBody,
+                              @Part("document_number") documentNumber: RequestBody,
+                              @Part("address") address: RequestBody,
+                              @Part("address_reference") addressReference: RequestBody): Response<Unit>
 
     @PUT("me/changepassword")
     suspend fun changePassword(@Body data: PasswordRequest): ResponseBody

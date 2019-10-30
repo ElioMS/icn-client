@@ -15,12 +15,12 @@ class AccountActivity : AppCompatActivity(), AccountNavigator {
     private val model: AccountViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_account)
         model.setNavigator(this)
         model.authenticationCheck()
     }
-
 
     override fun showLoginView() {
         NavigationHelper.redirectTo(this, ReservationActivity::class.java, true)

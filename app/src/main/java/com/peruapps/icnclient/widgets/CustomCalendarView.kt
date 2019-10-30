@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -60,8 +61,22 @@ class CustomCalendarView @JvmOverloads constructor(context: Context,
 
         // Depending on your needs, you would have to set
         // a background instead of backgroundColor.
-        val color = if (shouldPaintDateView(calendar.time.time.toDate())) Color.parseColor("#37d1dc") else Color.parseColor("#ffffff")
-        dayOfTheMonthText.setBackgroundColor(color)
+
+        if (shouldPaintDateView(calendar.time.time.toDate())) {
+            dayOfTheMonthText.apply {
+                setBackgroundResource(R.drawable.background_day_of_the_month)
+                setTextColor(Color.WHITE)
+            }
+        } else {
+
+            dayOfTheMonthText.apply {
+//                setBackgroundColor(Color.parseColor("#ffffff"))
+                setBackgroundResource(R.drawable.background_day_of_the_month_none)
+                setTextColor(ContextCompat.getColor(this.context, R.color.colorSecondaryText))
+            }
+//            dayOfTheMonthText.setBackgroundColor(Color.parseColor("#ffffff"))
+        }
+
 
         // Fire event
         checkNotNull(calendarListener) { "You must assign a valid CustomCalendarListener first!" }

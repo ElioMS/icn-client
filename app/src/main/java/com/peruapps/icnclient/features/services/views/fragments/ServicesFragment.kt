@@ -48,7 +48,6 @@ class ServicesFragment : Fragment(), ServicesNavigator {
         model.setNavigator(this)
         binding.setVariable(BR.viewModel, model)
         setParentData(true)
-        initFragmentEvents()
     }
 
     override fun onDestroyView() {
@@ -56,12 +55,7 @@ class ServicesFragment : Fragment(), ServicesNavigator {
         super.onDestroyView()
     }
 
-    private fun initFragmentEvents() {
-//        iv_profile.setOnClickListener { NavigationHelper.toProfilePage(activity!!) }
-    }
-
     override fun showServiceTypeView(serviceTypes: ArrayList<ServiceType>, service: Service) {
-        Log.d("services_id", service.toString())
         if  (service.id > 4) {
             NavigationHelper.changeFragment(fragmentManager!!, R.id.main_container,
                 NursingStaffFragment.newInstance(serviceTypes, service), "NursingStaffFragment")
@@ -79,5 +73,9 @@ class ServicesFragment : Fragment(), ServicesNavigator {
     private fun setParentData(value: Boolean) {
         val myParentActivity = (activity) as ServiceActivity
         myParentActivity.hideActionBar(value)
+    }
+
+    override fun goBack() {
+        activity!!.onBackPressed()
     }
 }
