@@ -1,11 +1,13 @@
 package com.peruapps.icnclient.features.profile.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.facebook.login.LoginManager
 import com.peruapps.icnclient.BR
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.FragmentProfileBinding
@@ -14,6 +16,12 @@ import com.peruapps.icnclient.features.edit_profile.presentation.EditProfileFrag
 import com.peruapps.icnclient.features.reservations.presentation.views.ReservationActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.facebook.GraphResponse
+import com.facebook.GraphRequest
+import retrofit2.http.DELETE
+import com.facebook.AccessToken
+import com.facebook.HttpMethod
+
 
 class ProfileFragment : Fragment(), ProfileNavigator {
 
@@ -39,11 +47,21 @@ class ProfileFragment : Fragment(), ProfileNavigator {
     }
 
     override fun onDestroyView() {
-        setParentData(false)
+//        setParentData(false)
         super.onDestroyView()
     }
 
     override fun redirectAfterLogOut() {
+//        if (AccessToken.getCurrentAccessToken() == null) {
+//            return  // already logged out
+//        }
+
+//        Log.d("token_fb", AccessToken.getCurrentAccessToken().toString())
+//        GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE,
+//            GraphRequest.Callback {
+//                LoginManager.getInstance().logOut()
+//            }).executeAsync()
+
         NavigationHelper.redirectTo(activity!!, AccountActivity::class.java, true)
     }
 

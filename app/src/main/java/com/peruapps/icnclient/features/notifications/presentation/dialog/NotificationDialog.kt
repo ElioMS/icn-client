@@ -2,6 +2,8 @@ package com.peruapps.icnclient.features.notifications.presentation.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.notifications.presentation.NotificationNavigator
@@ -12,6 +14,8 @@ class NotificationDialog(context: Context, style: Int, private val navigator: No
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         setContentView(R.layout.dialog_notification)
         initEvents()
     }

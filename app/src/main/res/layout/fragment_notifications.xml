@@ -16,7 +16,8 @@
             tools:context=".features.notifications.presentation.NotificationFragment">
 
         <LinearLayout
-                android:visibility="@{ viewModel.adapter.itemCount == 0 ? View.VISIBLE : View.GONE }"
+                android:id="@+id/notificationsText"
+                android:visibility="@{ viewModel.notifications.size == 0 ? View.VISIBLE : View.GONE }"
                 android:layout_centerInParent="true"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -35,6 +36,7 @@
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_bold"
                     android:text="@string/text_notifications"/>
 
         </LinearLayout>

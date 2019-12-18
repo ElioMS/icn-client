@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.dialog_gallery.*
 
 class GalleryDialog (context: Context,
 //                     style: Int,
-                     private val navigator: EditProfileNavigator
+                     var openGallery: () -> Unit,
+                     var openCamera: () -> Unit
+
 ): Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,12 +22,15 @@ class GalleryDialog (context: Context,
 
         setContentView(R.layout.dialog_gallery)
 
-        openGallery.setOnClickListener {
-            navigator.openGallery()
+        btnOpenGallery.setOnClickListener {
+            openGallery.invoke()
+//            navigator.openGallery()
             dismiss()
         }
-        openCamera.setOnClickListener {
-            navigator.openCamera()
+
+        btnOpenCamera.setOnClickListener {
+            openCamera.invoke()
+//            navigator.openCamera()
             dismiss()
         }
     }

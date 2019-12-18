@@ -15,7 +15,7 @@ import com.peruapps.icnclient.BR
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.FragmentScheduleDatesBinding
 import com.peruapps.icnclient.extensions.onItemSelected
-import com.peruapps.icnclient.features.summary.presentation.SummaryFragment
+import com.peruapps.icnclient.features.summary.presentation.SummaryActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
 import com.peruapps.icnclient.model.AppointmentDate
 import com.peruapps.icnclient.model.Service
@@ -23,6 +23,8 @@ import com.peruapps.icnclient.model.ServiceType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
+
+    val TAG = ScheduleDatesFragment::class.java.simpleName
 
     val model: ScheduleDatesViewModel by viewModel()
     private lateinit var binding: FragmentScheduleDatesBinding
@@ -44,14 +46,22 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
      */
     var selectedDatesList = ArrayList<AppointmentDate>()
 
+    private lateinit var currentService: Service
+    private var currentServiceType: ServiceType? = null
+
+
     companion object {
         fun setData(category: Int, service: Service, serviceType: ServiceType? = null, dates: ArrayList<AppointmentDate>, scheduleType: Int?) = ScheduleDatesFragment().apply {
             this.selectedDatesList = dates
             this.currentCategory = category
 
-            scheduleType?.let {
-                this.scheduleType = it
-            }
+            Log.d(TAG, service.toString())
+            Log.d(TAG, serviceType.toString())
+
+            this.currentService = service
+
+            serviceType?.let { this.currentServiceType = it }
+            scheduleType?.let { this.scheduleType = it }
         }
     }
 
@@ -78,6 +88,8 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
         model.scheduledDates.value = selectedDatesList
         model.categoryId.set(currentCategory)
         model.addDates(selectedDatesList)
+        model.service.set(currentService)
+        model.serviceType.set(currentServiceType)
 
         val timePicker = view.findViewById(R.id.timePicker) as TimePicker
 
@@ -126,6 +138,7 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
         when (scheduleType) {
             0 -> {
                 model.appointmentAdapter.items[model.selectedAppointmentDate.get()!!].hour = "$hourOfDay:$min"
+                model.appointmentAdapter.items[model.selectedAppointmentDate.get()!!].stringHour = "$hourOfDay:$min $meridiem"
                 model.appointmentAdapter.notifyDataSetChanged()
             }
             else -> {
@@ -144,9 +157,8 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
     }
 
     override fun showSummaryView() {
-        NavigationHelper.changeFragment(
-            fragmentManager!!,
-                R.id.main_container, SummaryFragment(), "SummaryFragment")
+
+        NavigationHelper.redirectTo(activity!!, SummaryActivity::class.java)
 
     }
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@drawable/splash">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#CC4ad4dd">
+
+        <ImageView
+                android:id="@+id/ivPersonal"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/ic_cliente_persona"
+                android:layout_centerHorizontal="true"/>
+
+        <TextView
+                android:id="@+id/txtPersonal"
+                android:layout_below="@id/ivPersonal"
+                android:text="@string/text_persona"
+                android:textSize="24sp"
+                android:fontFamily="@font/muli_bold"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <ImageView
+                android:id="@+id/ivEmpresa"
+                android:layout_below="@id/txtPersonal"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="100dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/ic_cliente_empresa"
+                android:layout_centerHorizontal="true"/>
+
+        <TextView
+                android:layout_below="@id/ivEmpresa"
+                android:text="@string/text_company"
+                android:textSize="24sp"
+                android:fontFamily="@font/muli_bold"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

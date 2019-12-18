@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class NotificationResponse(
     val id: Long,
+    @SerializedName("category_id") val categoryId: Long,
     @SerializedName("category_name") val categoryName: String,
     @SerializedName("service_name") val serviceName: String,
     val address: String,

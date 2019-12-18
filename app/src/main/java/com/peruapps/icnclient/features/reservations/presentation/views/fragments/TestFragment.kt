@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.peruapps.icnclient.BR
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.FragmentTestBinding
@@ -39,5 +40,17 @@ class TestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.setVariable(BR.viewModel, model)
+
+        subscribeToLiveData()
+    }
+
+    private fun subscribeToLiveData() {
+        model.appointments.observe(this, Observer {
+            if  (it.size > 0) {
+                appointmentText.visibility = View.GONE
+            } else {
+                appointmentText.visibility = View.VISIBLE
+            }
+        })
     }
 }

@@ -9,8 +9,9 @@ import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 
 @BindingAdapter("setImageControllerResize")
-fun setImageControllerResize(photo: SimpleDraweeView, uri: String){
-    if (uri.isNotEmpty()) {
+fun setImageControllerResize(photo: SimpleDraweeView, uri: String?){
+    if (uri != null) {
+        photo.visibility = View.VISIBLE
         val request = ImageRequestBuilder.newBuilderWithSource(Uri.parse(uri))
 //            .setResizeOptions(ResizeOptions(width, height))
             .build()
@@ -18,7 +19,5 @@ fun setImageControllerResize(photo: SimpleDraweeView, uri: String){
             .setOldController(photo.controller)
             .setImageRequest(request)
             .build()
-    } else {
-        photo.visibility = View.GONE
     }
 }

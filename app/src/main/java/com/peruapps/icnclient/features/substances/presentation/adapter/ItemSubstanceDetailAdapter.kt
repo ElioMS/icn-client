@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.peruapps.icnclient.databinding.RvItemSubstanceDetailBinding
 import com.peruapps.icnclient.model.SubstanceDetail
 
-class ItemSubstanceDetailAdapter(var items: MutableList<SubstanceDetail>,
-                                 var listener: (SubstanceDetail, Int) -> Unit): RecyclerView.Adapter<ItemSubstanceDetailViewHolder>() {
+class ItemSubstanceDetailAdapter(var items: MutableList<SubstanceDetail>): RecyclerView.Adapter<ItemSubstanceDetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSubstanceDetailViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -27,12 +26,12 @@ class ItemSubstanceDetailAdapter(var items: MutableList<SubstanceDetail>,
         val layout = holder.layout
 
         layout.setOnClickListener {
-            listener.invoke(model, position)
+//            listener.invoke(model, position)
         }
     }
 
-    fun bindItems(data: MutableList<SubstanceDetail>) {
-        this.items = data
+    fun bindItems(data: SubstanceDetail) {
+        this.items.add(data)
         this.notifyDataSetChanged()
     }
 

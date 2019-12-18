@@ -5,9 +5,10 @@ import com.peruapps.icnclient.model.Service
 import com.peruapps.icnclient.model.ServiceType
 import com.peruapps.icnclient.model.Substance
 import com.peruapps.icnclient.model.request.PasswordRequest
+import com.peruapps.icnclient.model.request.RegisterRequest
+import com.peruapps.icnclient.model.request.ResetPasswordRequest
 import com.peruapps.icnclient.model.request.UpdateProfileRequest
-import com.peruapps.icnclient.model.response.LoginResponse
-import com.peruapps.icnclient.model.response.NotificationResponse
+import com.peruapps.icnclient.model.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -69,4 +70,36 @@ interface ApiService {
 
     @PUT("me/changepassword")
     suspend fun changePassword(@Body data: PasswordRequest): ResponseBody
+
+    @POST("register")
+    @Multipart
+    suspend fun createAccount(@Part photo: MultipartBody.Part? = null,
+                              @Part("name") name: RequestBody,
+                              @Part("surname") surname: RequestBody,
+                              @Part("gender") gender: RequestBody,
+                              @Part("document_type") documentType: RequestBody,
+                              @Part("document_number") documentNumber: RequestBody,
+                              @Part("age") age: RequestBody,
+                              @Part("email") email: RequestBody,
+                              @Part("phone_number") phone: RequestBody,
+                              @Part("address") address: RequestBody,
+                              @Part("address_reference") address_reference: RequestBody? = null,
+                              @Part("is_admin") isAdmin: RequestBody,
+                              @Part("type") type: RequestBody,
+                              @Part("password") password: RequestBody): LoginResponse
+
+    @POST("passwordreset/notify")
+    @FormUrlEncoded
+    suspend fun passwordResetRequest(@Field("email") email: String): MessageResponse
+
+    @POST("passwordreset/validation")
+    @FormUrlEncoded
+    suspend fun passwordRequestTokenValidation(@Field("token") token: String): PasswordResetTokenResponse
+
+    @POST("passwordreset")
+    suspend fun resetPassword(@Body data: ResetPasswordRequest): LoginResponse
+
+    @POST("fb/validation")
+    @FormUrlEncoded
+    suspend fun fbEmailValidation(@Field("email") email: String): FbValidationResponse
 }

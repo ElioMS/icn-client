@@ -6,9 +6,11 @@ import androidx.databinding.ObservableInt
 import com.peruapps.icnclient.adapter.ItemServiceTypeAdapter
 import com.peruapps.icnclient.model.Service
 import com.peruapps.icnclient.model.ServiceType
+import com.peruapps.icnclient.room.entity.ServiceDetail
+import com.peruapps.icnclient.room.repository.ServiceDetailRepository
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
-class ServiceTypeViewModel : BaseViewModel<ServiceTypeNavigator>() {
+class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRepository) : BaseViewModel<ServiceTypeNavigator>() {
 
     var service = ObservableField<Service>()
     var serviceType = ObservableField<ServiceType>()
@@ -20,12 +22,15 @@ class ServiceTypeViewModel : BaseViewModel<ServiceTypeNavigator>() {
 
     val substanceQuantity = ObservableInt(0)
 
+    val serviceTypesCount = ObservableField(0)
+
     val itemServiceTypeAdapter = ItemServiceTypeAdapter(arrayListOf()) { model, position ->
         checkSelectedServiceType(model, position)
     }
 
     fun setServiceTypeItems(data: ArrayList<ServiceType>, serviceEntity: Service) {
         itemServiceTypeAdapter.bindItems(data)
+        serviceTypesCount.set(itemServiceTypeAdapter.itemCount)
         service.set(serviceEntity)
     }
 
@@ -69,15 +74,44 @@ class ServiceTypeViewModel : BaseViewModel<ServiceTypeNavigator>() {
         if (serviceId == 1 && position == 0 || serviceId == 3) {
             when (scheduleValue) {
                 true -> getNavigator().showNextView("CALENDAR")
-                false -> getNavigator().showNextView("SUMMARY")
+                false -> {
+                    startJob {
+                        serviceDetailRepository.insert(
+                            ServiceDetail(
+                                serviceId = service.get()!!.id,
+                                serviceName = service.get()!!.name,
+                                serviceTypeId = serviceType.get()!!.id,
+                                serviceTypeName = serviceType.get()!!.name,
+                                price = serviceType.get()!!.price!!
+                            )
+                        )
+
+                        getNavigator().showNextView("SUMMARY")
+                    }
+
+                }
             }
         }
 
         if (serviceId == 2) {
-            Log.d("service_id", scheduleValue.toString())
             when (scheduleValue) {
                 true -> getNavigator().showNextView("SCHEDULE")
-                false -> getNavigator().showNextView("SUMMARY")
+                false -> {
+
+                    startJob {
+                        serviceDetailRepository.insert(
+                            ServiceDetail(
+                                serviceId = service.get()!!.id,
+                                serviceName = service.get()!!.name,
+                                serviceTypeId = null,
+                                serviceTypeName = null,
+                                price = service.get()!!.price!!
+                            )
+                        )
+                    }
+
+                    getNavigator().showNextView("SUMMARY")
+                }
             }
         }
     }

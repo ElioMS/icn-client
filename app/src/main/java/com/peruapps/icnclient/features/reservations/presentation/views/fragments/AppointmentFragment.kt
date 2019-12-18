@@ -21,6 +21,9 @@ import com.peruapps.icnclient.features.reservations.presentation.views.adapter.T
 import kotlinx.android.synthetic.main.fragment_appointment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.widget.LinearLayout
+import androidx.lifecycle.Observer
+import kotlinx.android.synthetic.main.fragment_test.*
 
 class AppointmentFragment : Fragment(), AppointmentNavigator {
 
@@ -46,6 +49,12 @@ class AppointmentFragment : Fragment(), AppointmentNavigator {
         viewPager.offscreenPageLimit = viewPager!!.adapter!!.count
         tabLayout.setupWithViewPager(viewPager)
 
+        val layout = (tabLayout.getChildAt(0) as LinearLayout).getChildAt(0) as LinearLayout
+        val layoutParams = layout.layoutParams as LinearLayout.LayoutParams
+        layoutParams.weight = 0f
+        layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT // e.g. 0.5f
+        layout.layoutParams = layoutParams
+
         tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
                 Log.d("change", p0?.position.toString())
@@ -65,7 +74,6 @@ class AppointmentFragment : Fragment(), AppointmentNavigator {
                 model.optionPosition.set(tab!!.position)
                 model.loadAppointments(model.categoryId.get()!!, tab.position)
             }
-
         })
 
         setParentData()
@@ -75,6 +83,7 @@ class AppointmentFragment : Fragment(), AppointmentNavigator {
         val myParentActivity = (activity) as ReservationActivity
         myParentActivity.changeActionBarTitle("Mis reservas")
         myParentActivity.showNavigationIndicator(0)
+        myParentActivity.hideActionBar(false)
     }
 
     override fun showNotificationsView() {

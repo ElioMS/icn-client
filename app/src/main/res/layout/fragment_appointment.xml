@@ -20,15 +20,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:weightSum="1"
                 android:layout_marginTop="10dp"
                 android:padding="10dp">
 
             <TextView
                     android:gravity="center"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight=".50"
                     android:text="Procedimientos de enfermería"
+                    android:fontFamily="@font/muli_bold"
                     android:textSize="18sp"
                     app:categoryId="@{viewModel.categoryId}"
                     app:currentCategoryValue="@{1}"
@@ -36,9 +38,10 @@
 
             <TextView
                     android:gravity="center"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight=".50"
+                    android:fontFamily="@font/muli_bold"
                     android:text="Enfermería o técnico"
                     android:textSize="18sp"
                     app:categoryId="@{viewModel.categoryId}"
@@ -50,6 +53,14 @@
         <com.google.android.material.tabs.TabLayout
                 android:layout_below="@id/categories"
                 android:id="@+id/tabLayout"
+                app:tabTextColor="@color/colorItem"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabTextAppearance="@style/tab_text"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabMaxWidth="0dp"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

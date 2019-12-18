@@ -28,8 +28,6 @@ abstract class BaseViewModel<T> : ViewModel() {
     var doSchedule = ObservableField<Boolean>()
     var selectScheduleType = ObservableField<Boolean>()
 
-
-
     private val _showError = MutableLiveData("")
     val showError : LiveData<String>
         get() = _showError

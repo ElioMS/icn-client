@@ -14,11 +14,13 @@ object NavigationHelper {
      * */
     fun redirectTo(activity: Activity, c: Class<*>, end: Boolean = false) {
         val page = Intent(activity, c)
-        activity.startActivity(page)
 
         if (end) {
+//            page.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             activity.finish()
         }
+
+        activity.startActivity(page)
     }
 
     fun redirecToWithData(activity: Activity, c: Class<*>, data: Int) {
@@ -35,11 +37,49 @@ object NavigationHelper {
 //
 //    }
 
-    fun changeFragment(fragmentManager: FragmentManager, layout: Int, newFrag: Fragment, fragName: String,
-                       addToStack: Boolean = true) {
-        fragmentManager.beginTransaction()
-            .replace(layout, newFrag)
-            .addToBackStack(fragName)
-            .commit()
+    fun changeFragment(
+        fragmentManager: FragmentManager, layout: Int, newFrag: Fragment, fragName: String,
+        addToStack: Boolean = true
+    ) {
+
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.setCustomAnimations(
+            R.anim.transition_slide_right_in,
+            R.anim.transition_slide_left_out,
+            android.R.anim.slide_in_left,
+            R.anim.transition_slide_right_out
+        )
+
+        if (addToStack) {
+            fragmentTransaction.replace(layout, newFrag, fragName)
+            fragmentTransaction.addToBackStack(fragName)
+            fragmentTransaction.commit()
+        } else {
+            fragmentTransaction.replace(layout, newFrag, fragName)
+            fragmentTransaction.commit()
+        }
+
+//        if (addToStack) {
+//            fragmentManager.beginTransaction()
+//                .setCustomAnimations(
+//                    R.anim.transition_slide_right_in,
+//                    R.anim.transition_slide_left_out,
+//                    android.R.anim.slide_in_left,
+//                    R.anim.transition_slide_right_out
+//                )
+//                .replace(layout, newFrag)
+//                .addToBackStack(fragName)
+//                .commit()
+//        } else {
+//            fragmentManager.beginTransaction()
+//                .setCustomAnimations(
+//                    R.anim.transition_slide_right_in,
+//                    R.anim.transition_slide_left_out,
+//                    android.R.anim.slide_in_left,
+//                    R.anim.transition_slide_right_out
+//                )
+//                .replace(layout, newFrag)
+//                .commit()
+//        }
     }
 }

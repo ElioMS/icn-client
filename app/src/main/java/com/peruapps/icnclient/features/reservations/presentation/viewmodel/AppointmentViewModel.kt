@@ -32,7 +32,13 @@ class AppointmentViewModel(private val repository: AppointmentRepository) : Base
     fun loadAppointments(categoryId: Int, type: Int) {
         startJob {
             val response = repository.listUserAppointments(categoryId, type)
+
+            response.forEach  {
+                it.category = categoryId
+            }
+
             adapter.bindItems(ArrayList(response))
+            appointments.value = ArrayList(response)
         }
     }
 }

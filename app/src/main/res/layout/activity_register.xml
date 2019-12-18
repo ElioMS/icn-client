@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".features.register.views.RegisterActivity">
+            tools:context=".features.register.presentation.RegisterActivity">
 
         <FrameLayout
                 android:id="@+id/main_container"

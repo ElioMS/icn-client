@@ -45,14 +45,24 @@ class EditProfileViewModel(
         phoneNumber.set(data.phone_number)
         email.set(data.email)
         age.set(data.age)
+        setGender(data.gender)
         setDocumentType(data.documentType)
         documentNumber.set(data.document_number)
         address.set(data.address)
         addressReference.set(data.addressReference)
     }
 
-    fun setDocumentType(value: Int) {
-        documentType.set(value)
+    private fun setGender(value: String) {
+        val genderToInt = when (value) {
+            "M" -> 0
+            else -> 1
+        }
+
+        gender.set(genderToInt)
+    }
+
+    fun setDocumentType(value: Int?) {
+        value?.let { documentType.set(it) }
     }
 
     fun showChangePasswordView() {
@@ -72,20 +82,28 @@ class EditProfileViewModel(
         profile.get()!!.age = age.get()
         profile.get()!!.documentType = documentType.get()
         profile.get()!!.document_number = documentNumber.get()!!
-        profile.get()!!.address = address.get()!!
-        profile.get()!!.addressReference = addressReference.get()!!
+
+        address.get()?.let {
+            profile.get()!!.address = it
+        }
+
+        addressReference.get()?.let {
+            profile.get()!!.addressReference = it
+        }
 
         //CLEAR FRESCO CACHE
         val imagePipeline = Fresco.getImagePipeline()
         imagePipeline.clearCaches()
 
         startJob {
+            Log.d("AAAA", "aaaaa")
             repository.updateProfile(
                 loadedPicture.get(),
                 phoneNumber.get()!!, email.get()!!, genderString, age.get(),
                 documentType.get(), documentNumber.get()!!,
                 address.get()!!, addressReference.get()!!
             )
+            Log.d("AAAA", "bbbb")
 
             preferencesManager.saveAuthData(profile.get()!!)
             getNavigator().updateUserData()

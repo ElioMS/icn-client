@@ -9,6 +9,7 @@ import com.peruapps.icnclient.features.notifications.presentation.NotificationFr
 import com.peruapps.icnclient.features.profile.presentation.ProfileFragment
 import com.peruapps.icnclient.features.reservations.presentation.viewmodel.AppointmentViewModel
 import com.peruapps.icnclient.features.reservations.presentation.views.fragments.AppointmentFragment
+import com.peruapps.icnclient.features.summary.presentation.SummaryActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
 import com.peruapps.icnclient.widgets.CustomBottomBar
 import kotlinx.android.synthetic.main.activity_reservation.*
@@ -44,13 +45,13 @@ class ReservationActivity : AppCompatActivity() {
                 NotificationFragment(), "NotificationFragment")
         }
 
-        profileOption.setOnClickListener {
+        bg_profile.setOnClickListener {
             NavigationHelper.changeFragment(supportFragmentManager, R.id.main_container,
                 ProfileFragment(), "ProfileFragment")
         }
 
-        navigationBackOption.setOnClickListener {
-            onBackPressed()
+        summaryOption.setOnClickListener {
+            NavigationHelper.redirectTo(this, SummaryActivity::class.java)
         }
 
         CustomBottomBar(btn_service_category, this).toServiceCategories()

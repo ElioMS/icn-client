@@ -20,9 +20,33 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"/>
 
+        <LinearLayout
+                android:id="@+id/appointmentText"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+            <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:tint="@color/colorGray"
+                    android:src="@{ safeUnbox(viewModel.categoryId == 1) ? @drawable/ic_appointment_icon : @drawable/ic_confirmation_image  }"/>
+
+            <TextView
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_bold"
+                    android:textColor="@color/colorGray"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:text="@string/text_no_appointments"/>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
-                android:visibility="@{ safeUnbox(viewModel.isLoading) ? View.GONE : View.VISIBLE}"
                 android:id="@+id/rv_item_appointment"
+                android:visibility="@{ safeUnbox(viewModel.isLoading) ? View.GONE : View.VISIBLE}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:itemCount="5"

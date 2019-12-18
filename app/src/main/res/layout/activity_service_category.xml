@@ -23,6 +23,7 @@
     <TextView
             android:textSize="35sp"
             android:textColor="@color/colorWhite"
+            android:fontFamily="@font/muli_bold"
             android:layout_width="224dp"
             android:layout_height="120dp"
             android:text="Solicita tu servicio"
@@ -54,13 +55,16 @@
             android:id="@+id/iv_technical"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            app:srcCompat="@drawable/ic_second_category" app:layout_constraintTop_toBottomOf="@+id/textView8"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:srcCompat="@drawable/ic_second_category"
+            app:layout_constraintTop_toBottomOf="@+id/textView8"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="50dp" />
 
     <TextView
-            android:text="Personal de enfermería o Técnico de enfermería"
+            android:text="@string/category_technician_text"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
             android:gravity="center"

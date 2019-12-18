@@ -11,7 +11,9 @@
 
     <color name="colorItem">#e9eaec</color>
     <color name="colorWhite">#fff</color>
+    <color name="colorTransparent">#CCFFFFFF</color>
     <color name="colorLightGray">#d3d5d9</color>
+    <color name="colorGray">#9A9A9A</color>
 
 
 </resources>

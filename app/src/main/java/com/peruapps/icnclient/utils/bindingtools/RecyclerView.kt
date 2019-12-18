@@ -1,7 +1,9 @@
 package com.peruapps.icnclient.utils.bindingtools
 
+import android.util.Log
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.peruapps.icnclient.adapter.*
@@ -9,6 +11,7 @@ import com.peruapps.icnclient.features.notifications.presentation.adapter.ItemNo
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceAdapter
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceDetailAdapter
 import com.peruapps.icnclient.features.summary.presentation.adapter.ItemCreditCardAdapter
+import com.peruapps.icnclient.features.summary.presentation.adapter.ItemServiceDetailAdapter
 import com.peruapps.icnclient.model.AppointmentDate
 
 @BindingAdapter("appointmentsAdapter")
@@ -51,10 +54,29 @@ fun <T> setItemSubstanceAdapter(recyclerView: RecyclerView, masterAdapter: ItemS
 fun <T> setItemDetailSubstanceAdapter(recyclerView: RecyclerView, masterAdapter: ItemSubstanceDetailAdapter) {
     recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
     recyclerView.adapter = masterAdapter
+
+    val swipeHandler = object : SwipeToDeleteCallback() {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//            super.onSwiped(viewHolder, direction)
+            val position = viewHolder.adapterPosition
+            masterAdapter.items.removeAt(position)
+            masterAdapter.notifyDataSetChanged()
+            Log.d("SWIPE", "SWIPE")
+        }
+    }
+
+    val itemTouchHelper = ItemTouchHelper(swipeHandler)
+    itemTouchHelper.attachToRecyclerView(recyclerView)
 }
 
 @BindingAdapter("itemCreditCardAdapter")
 fun <T> setItemCreditCardAdapter(recyclerView: RecyclerView, masterAdapter: ItemCreditCardAdapter) {
+    recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+    recyclerView.adapter = masterAdapter
+}
+
+@BindingAdapter("itemServiceDetailAdapter")
+fun <T> setItemServiceDetailAdapter(recyclerView: RecyclerView, masterAdapter: ItemServiceDetailAdapter) {
     recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
     recyclerView.adapter = masterAdapter
 }

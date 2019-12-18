@@ -19,7 +19,10 @@
                 android:id="@+id/tvItemSubstance"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:padding="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:textColor="@color/colorSecondaryText"
                 android:text="@{item.name}"/>
 

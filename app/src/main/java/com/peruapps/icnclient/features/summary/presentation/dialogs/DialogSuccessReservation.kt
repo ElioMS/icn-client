@@ -2,6 +2,8 @@ package com.peruapps.icnclient.features.summary.presentation.dialogs
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.summary.presentation.SummaryNavigator
@@ -11,6 +13,7 @@ class DialogSuccessReservation(context: Context, style: Int, val navigator: Summ
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(R.layout.dialog_success_reservation)
         initEvents()
     }

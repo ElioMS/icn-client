@@ -7,13 +7,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.peruapps.icnclient.adapter.AppointmentAdapter
 import com.peruapps.icnclient.model.AppointmentDate
+import com.peruapps.icnclient.model.Service
+import com.peruapps.icnclient.model.ServiceType
+import com.peruapps.icnclient.room.entity.ServiceDetail
+import com.peruapps.icnclient.room.repository.ServiceDetailRepository
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
-class ScheduleDatesViewModel: BaseViewModel<ScheduleDatesNavigator>() {
+class ScheduleDatesViewModel(private val serviceDetailRepository: ServiceDetailRepository): BaseViewModel<ScheduleDatesNavigator>() {
 
     val appointmentAdapter = AppointmentAdapter(arrayListOf()) {
             model, position -> setHour(model, position)
     }
+
+    val service = ObservableField<Service>()
+    val serviceType = ObservableField<ServiceType>()
 
     var categoryId = ObservableField<Int>()
     val selectedAppointmentDate = ObservableField<Int>()
@@ -36,6 +43,17 @@ class ScheduleDatesViewModel: BaseViewModel<ScheduleDatesNavigator>() {
     }
 
     fun createAppointment() {
+        startJob {
+            serviceDetailRepository.insert(
+                ServiceDetail(
+                    serviceId = service.get()!!.id,
+                    serviceName = service.get()!!.name,
+                    serviceTypeId = serviceType.get()!!.id,
+                    serviceTypeName = serviceType.get()!!.name,
+                    price = serviceType.get()!!.price!!
+                )
+            )
+        }
         getNavigator().showSummaryView()
     }
 

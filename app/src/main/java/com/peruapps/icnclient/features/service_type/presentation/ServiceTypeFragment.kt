@@ -19,7 +19,7 @@ import com.peruapps.icnclient.dialogs.CustomDialogContactUs
 import com.peruapps.icnclient.features.calendar.presentation.CalendarFragment
 import com.peruapps.icnclient.features.schedule_dates.presentation.ScheduleDatesFragment
 import com.peruapps.icnclient.features.substances.presentation.SubstancesFragment
-import com.peruapps.icnclient.features.summary.presentation.SummaryFragment
+import com.peruapps.icnclient.features.summary.presentation.SummaryActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
 import com.peruapps.icnclient.model.Appointment
 import com.peruapps.icnclient.model.AppointmentDate
@@ -34,6 +34,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListener, ServiceTypeNavigator {
+
+    val TAG = ServiceTypeFragment::class.java.simpleName
 
     val model: ServiceTypeViewModel by viewModel()
     private lateinit var binding: FragmentServiceTypeBinding
@@ -50,6 +52,7 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
         fun newInstance(data: ArrayList<ServiceType>, service: Service) = ServiceTypeFragment().apply {
             this.list = data
             this.service = service
+            Log.d(TAG, service.toString())
         }
     }
 
@@ -67,9 +70,9 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        calendarView = calendar?.also {
-            it.setDayClickedListener(this)
-        }
+//        calendarView = calendar?.also {
+//            it.setDayClickedListener(this)
+//        }
 
         model.setNavigator(this)
         binding.setVariable(BR.viewModel, model)
@@ -153,15 +156,14 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
             }
             "SUBSTANCES" -> {
                 NavigationHelper.changeFragment(fragmentManager!!,
-                    R.id.main_container, SubstancesFragment.setData(1, service, model.serviceType.get()!!, model.substanceQuantity.get()), "SubstancesFragment")
+                    R.id.main_container, SubstancesFragment.setData(1, service, model.serviceType.get()!!), "SubstancesFragment")
             }
             "SCHEDULE" -> {
                 NavigationHelper.changeFragment(fragmentManager!!,
                 R.id.main_container, ScheduleDatesFragment.setData(1, service, model.serviceType.get(), days, 1), "ScheduleDatesFragment")
             }
             "SUMMARY" -> {
-                NavigationHelper.changeFragment(fragmentManager!!,
-                    R.id.main_container, SummaryFragment(), "SummaryFragment")
+                NavigationHelper.redirectTo(activity!!, SummaryActivity::class.java)
             }
         }
     }

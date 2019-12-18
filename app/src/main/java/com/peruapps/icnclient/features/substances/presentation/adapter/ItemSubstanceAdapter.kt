@@ -51,10 +51,11 @@ class ItemSubstanceAdapter(
     private fun verifyState(layout: LinearLayout, textView: TextView) {
         val colorSelected = ContextCompat.getDrawable(layout.context, R.drawable.background_primary_round_corners)
         val colorTextSelected = ContextCompat.getColor(textView.context, R.color.colorWhite)
-//        val typeface = ResourcesCompat.getFont(date.context, R.font.muli_bold)
+        val typeface = ResourcesCompat.getFont(textView.context, R.font.muli_bold)
 
         layout.background = colorSelected
         textView.setTextColor(colorTextSelected)
+        textView.typeface = typeface
     }
 
     fun bindItems(data: MutableList<Substance>) {

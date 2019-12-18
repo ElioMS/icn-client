@@ -13,12 +13,13 @@ import com.peruapps.icnclient.BR
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.FragmentCalendarBinding
 import com.peruapps.icnclient.features.schedule_dates.presentation.ScheduleDatesFragment
-import com.peruapps.icnclient.features.summary.presentation.SummaryFragment
+
 import com.peruapps.icnclient.helpers.NavigationHelper
 import com.peruapps.icnclient.model.AppointmentDate
 import com.peruapps.icnclient.model.Service
 import com.peruapps.icnclient.model.ServiceType
 import com.peruapps.icnclient.widgets.CustomCalendarView
+import kotlinx.android.synthetic.main.calendar_view_layout.*
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -39,9 +40,10 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
 
     var currentCategory = 1
 
-
     private lateinit var service: Service
     private lateinit var serviceType: ServiceType
+
+    private var calendarVisibility = true
 
     companion object {
         fun setData(category: Int, service: Service, serviceType: ServiceType) = CalendarFragment().apply {
@@ -65,11 +67,23 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
         super.onViewCreated(view, savedInstanceState)
 
         model.setNavigator(this)
+        model.price.set(0f)
         model.categoryId.set(currentCategory)
+        model.serviceType.set(serviceType)
         binding.setVariable(BR.viewModel, model)
 
         calendarView = customCalendarView?.also {
             it.setDayClickedListener(this)
+        }
+
+        monthSpinner.setOnClickListener {
+            if (calendarVisibility) {
+                weekLayout.visibility = View.GONE
+            } else {
+                weekLayout.visibility = View.VISIBLE
+            }
+
+            calendarVisibility = !calendarVisibility
         }
 
         spSchedule = view.findViewById(R.id.sp_schedule)
@@ -103,6 +117,9 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
 
         days.sortBy { selector(it) }
         model.scheduledDates.value = days
+        val newPrice = days.size * model.serviceType.get()!!.price!!
+        model.price.set(newPrice)
+
         Log.d("click_day", model.scheduledDates.value.toString())
     }
 
@@ -113,14 +130,14 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
             "DAY" -> {
                 NavigationHelper.changeFragment(fragmentManager!!,
                     R.id.main_container,
-                    ScheduleDatesFragment.setData(this.currentCategory, service, serviceType, this.days, model.selectedScheduleType.get()),
+                    ScheduleDatesFragment.setData(this.currentCategory, service, serviceType.apply { price = model.price.get()!! }, this.days, model.selectedScheduleType.get()),
                     "ScheduleDatesFragment")
             }
             "SUMMARY" -> {
-                NavigationHelper.changeFragment(fragmentManager!!,
-                    R.id.main_container,
-                    SummaryFragment(),
-                    "SummaryFragment")
+//                NavigationHelper.changeFragment(fragmentManager!!,
+//                    R.id.main_container,
+//                    SummaryFragment(),
+//                    "SummaryFragment")
             }
         }
     }

@@ -12,63 +12,271 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".features.services.views.fragments.endovenoso.SubstanceFragment">
+            android:backgroundTint="@color/colorWhite">
 
         <TextView
-                android:id="@+id/tvTitle"
-                style="@style/ServicesListTitle"
+                android:id="@+id/titleSubstances"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/title_substances"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"/>
-
-        <!--<androidx.recyclerview.widget.RecyclerView-->
-                <!--android:id="@+id/rv_item_substances"-->
-                <!--android:layout_below="@+id/tvTitle"-->
-                <!--android:orientation="horizontal"-->
-                <!--app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-                <!--tools:itemCount="5"-->
-                <!--tools:listitem="@layout/rv_item_substances"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--app:itemSubstanceAdapter="@{viewModel.adapter}">-->
+                style="@style/AccentText"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/muli_bold"
+                android:textSize="@dimen/accent_size"
+                android:text="@string/title_substances"/>
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_item_substance_detail"
-                android:layout_below="@+id/tvTitle"
+                android:id="@+id/rv_item_substances"
+                android:layout_below="@+id/titleSubstances"
+                android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
-                tools:listitem="@layout/rv_item_substance_detail"
+                tools:listitem="@layout/rv_item_substances"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                app:itemDetailSubstanceAdapter="@{viewModel.detailAdapter}">
+                app:itemSubstanceAdapter="@{viewModel.adapter}"/>
+
+        <RelativeLayout
+                android:id="@+id/spPersonal"
+                android:layout_below="@+id/rv_item_substances"
+                android:background="@drawable/bg_substances_info"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:id="@+id/tvPersonal"
+                    android:text="Días"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:textSize="@dimen/label_size"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <EditText
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:background="@null"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textSize="@dimen/label_size"
+                    android:text="@={ viewModel.days }"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/selectRange"
+                android:layout_below="@+id/spPersonal"
+                android:background="@drawable/bg_substances_info"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:text="Cada"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:textSize="@dimen/label_size"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <Spinner
+                    android:id="@+id/spPeriod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:textAlignment="textEnd"
+                    android:layout_centerVertical="true"
+                    android:selectedItemPosition="@={viewModel.period}"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/selectDate"
+                android:layout_below="@+id/selectRange"
+                android:background="@drawable/bg_substances_info"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:text="Primera dosis"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:textSize="@dimen/label_size"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <TextView
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    tools:text="Lunes 21"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/label_size"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@+id/selectDatePicker"
+                    android:text="@{ viewModel.dateToString }"/>
+
+            <FrameLayout
+                    android:id="@+id/selectDatePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{ () -> viewModel.setDate() }">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_forward"/>
+
+            </FrameLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/selectHour"
+                android:layout_below="@+id/selectDate"
+                android:background="@drawable/bg_substances_info"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true">
+
+            <TextView
+                    android:text="@string/title_hour"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:textSize="@dimen/label_size"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+
+            <TextView
+                    android:id="@+id/tvHour"
+                    android:layout_toStartOf="@+id/selectTimePicker"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/label_size"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ viewModel.hour }"/>
+
+            <FrameLayout
+                    android:id="@+id/selectTimePicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:onClick="@{ () -> viewModel.setTime() }">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_forward"/>
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/addSubstances"
+                android:layout_below="@+id/selectHour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/addItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_add_file"
+                    android:layout_alignParentStart="true"
+                    android:onClick="@{ () -> viewModel.addSubstance() }"/>
+
+            <TextView
+                    android:layout_toEndOf="@+id/addItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_bold"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/secondary_size"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/add_new_substance"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    tools:text="1"
+                    android:fontFamily="@font/muli_bold"
+                    android:textColor="@color/colorGray"
+                    android:textSize="@dimen/secondary_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{ ``+viewModel.itemCount }"/>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/addSubstances"
+                android:layout_above="@+id/btnGenerate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/rv_item_substance_detail"
+                itemDetailSubstanceAdapter="@{ viewModel.detailAdapter }">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-
         <LinearLayout
-                android:id="@+id/btn_next"
+                android:id="@+id/btnGenerate"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_height="60dp"
-                android:background="@color/colorPrimary"
-                android:layout_alignParentBottom="true">
+                android:background="@{ safeUnbox(viewModel.itemCount > 0) ?  @color/colorPrimary : @color/colorLightGray }"
+                android:layout_alignParentBottom="true"
+                android:onClick="@{ () -> viewModel.onClickGenerateButton() }">
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
+                    android:fontFamily="@font/muli_bold"
                     android:textSize="22sp"
-                    android:text="@string/button_generate"
-            />
+                    android:text="@string/text_generate"/>
         </LinearLayout>
-
 
     </RelativeLayout>
 

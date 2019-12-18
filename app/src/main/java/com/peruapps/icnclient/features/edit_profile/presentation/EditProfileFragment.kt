@@ -76,7 +76,7 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
     }
 
     override fun onDestroyView() {
-        setParentData(false)
+//        setParentData(false)
         super.onDestroyView()
     }
 
@@ -96,7 +96,7 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
     }
 
     override fun showGalleryDialog() {
-        val dialog = GalleryDialog(context!!, this)
+        val dialog = GalleryDialog(context!!, ::openGallery, ::openCamera)
         dialog.show()
     }
 

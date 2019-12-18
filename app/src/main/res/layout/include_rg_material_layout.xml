@@ -18,6 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/services_material_title"
+                android:textSize="@dimen/accent_size"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"/>
 
@@ -25,7 +26,7 @@
                 android:id="@+id/tv_subtitle_material"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medicamente, jeringa algodón, gasa"
+                android:text="Medicamento, jeringa, algodón, gasa"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"/>
 
@@ -43,6 +44,7 @@
             <RadioButton
                     android:id="@+id/optYes"
                     android:onClick="@{ () -> viewModel.changeHasMaterialStatus(true) }"
+                    android:fontFamily="@font/muli_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="1dp"
@@ -59,6 +61,7 @@
 
             <RadioButton
                     android:id="@+id/optNo"
+                    android:fontFamily="@font/muli_bold"
                     android:onClick="@{ () -> viewModel.changeHasMaterialStatus(false) }"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

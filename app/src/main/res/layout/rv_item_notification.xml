@@ -18,9 +18,9 @@
             android:background="@drawable/background_bottom_border">
 
         <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_appointment_icon"/>
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@{ item.categoryId == 1 ? @drawable/ic_service : @drawable/ic_service_tech }"/>
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -58,7 +58,7 @@
                     android:fontFamily="@font/muli_bold"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="Dirección"/>
+                    android:text="@string/text_address"/>
 
             <TextView
                     android:id="@+id/addressContent"
@@ -91,7 +91,7 @@
                     android:fontFamily="@font/muli_bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hora"/>
+                    android:text="@string/title_hour"/>
 
             <TextView
                     android:layout_below="@+id/tvDay"

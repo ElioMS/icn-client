@@ -3,4 +3,13 @@
     <dimen name="services_detail_titles">18sp</dimen>
     <dimen name="list_item_text">16sp</dimen>
     <dimen name="button_text">16sp</dimen>
+
+    <dimen name="accent_size">19sp</dimen>
+    <dimen name="primary_size">19sp</dimen>
+    <dimen name="secondary_size">18sp</dimen>
+    <dimen name="text_field_size">17sp</dimen>
+    <dimen name="label_size">17sp</dimen>
+
+    <dimen name="five">5dp</dimen>
+    <dimen name="twentyfive">25dp</dimen>
 </resources>

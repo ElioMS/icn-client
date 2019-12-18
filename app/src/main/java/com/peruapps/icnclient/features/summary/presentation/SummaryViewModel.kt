@@ -1,23 +1,49 @@
 package com.peruapps.icnclient.features.summary.presentation
 
-import androidx.databinding.Observable
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableInt
+import android.util.Log
+import androidx.databinding.*
+import androidx.lifecycle.MutableLiveData
+import com.peruapps.icnclient.db.sharePreferences.PreferencesManager
+import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceDetailAdapter
 import com.peruapps.icnclient.features.summary.presentation.adapter.ItemCreditCardAdapter
-import com.peruapps.icnclient.model.CreditCard
+import com.peruapps.icnclient.features.summary.presentation.adapter.ItemServiceDetailAdapter
+import com.peruapps.icnclient.model.*
+import com.peruapps.icnclient.room.entity.ServiceDetail
+import com.peruapps.icnclient.room.repository.ServiceDetailRepository
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
-class SummaryViewModel : BaseViewModel<SummaryNavigator>() {
+class SummaryViewModel (private val serviceDetailRepository: ServiceDetailRepository) : BaseViewModel<SummaryNavigator>() {
 
     val itemCreditCardAdapter = ItemCreditCardAdapter(arrayListOf()) {
         model, position -> selectedCreditCard(model, position)
     }
 
+    val summaryPrice = ObservableFloat(0F)
+
+    val service = ObservableField<Service>()
+    val serviceType = ObservableField<ServiceType>()
+
+    val showSubstance = ObservableBoolean(false)
+
+
+    val substanceAdapter = ItemSubstanceDetailAdapter(arrayListOf())
+    val servicesAdapter = ItemServiceDetailAdapter(arrayListOf())
+
     var receiptType = ObservableInt(1)
     var isVoucher = ObservableBoolean(true)
 
+    var summaryData = ObservableField<MutableList<SummaryServiceDetail>>(arrayListOf())
+
     init {
         fakeCreditCards()
+
+        startJob {
+            val list = serviceDetailRepository.list()
+            servicesAdapter.bindItems(ArrayList(list))
+
+            val price = serviceDetailRepository.summaryPrice()
+            summaryPrice.set(price)
+        }
     }
 
     private fun selectedCreditCard(model: CreditCard, position: Int) {
@@ -31,6 +57,11 @@ class SummaryViewModel : BaseViewModel<SummaryNavigator>() {
 
     fun generateAppointment() {
         // ADD WEB SERVICE
+//        preferencesManager.removeSummaryData()
+        startJob {
+            serviceDetailRepository.deleteAll()
+        }
+
         getNavigator().showSuccessReservationDialog()
     }
 
@@ -40,5 +71,14 @@ class SummaryViewModel : BaseViewModel<SummaryNavigator>() {
         creditCards.add(CreditCard("************4556"))
 
         itemCreditCardAdapter.bindItems(creditCards)
+    }
+
+    fun onClickShowSubstance() {
+        val value = !showSubstance.get()
+        showSubstance.set(value)
+    }
+
+    fun onClickAddNewService() {
+        getNavigator().addNewService()
     }
 }

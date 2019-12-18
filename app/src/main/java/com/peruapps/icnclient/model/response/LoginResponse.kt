@@ -7,13 +7,13 @@ data class LoginResponse(
     val surname: String,
     var email: String,
     var gender: String,
-    @SerializedName("document_type") var documentType: Int,
-    var document_number: String,
+    @SerializedName("document_type") var documentType: Int? = 0,
+    var document_number: String? = "",
     var phone_number: String,
-    var address: String,
-    @SerializedName("address_reference") var addressReference: String,
+    var address: String? = "",
+    @SerializedName("address_reference") var addressReference: String? = "",
     var age: Int,
-    var photo: String,
+    var photo: String? = "",
     var token: String
 ) {
 
@@ -24,14 +24,16 @@ data class LoginResponse(
     fun genderToString(): String {
         return when (this.gender) {
             "M" -> "Masculino"
-            else -> "Femenino"
+            "F" -> "Femenino"
+            else -> ""
         }
     }
 
     fun documentTypeToString(): String {
         return when(this.documentType) {
             1 -> "DNI"
-            else -> "PASAPORTE"
+            2 -> "PASAPORTE"
+            else -> ""
         }
     }
 }

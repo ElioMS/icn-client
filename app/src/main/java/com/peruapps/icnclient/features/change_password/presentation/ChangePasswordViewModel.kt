@@ -1,19 +1,11 @@
 package com.peruapps.icnclient.features.change_password.presentation
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.peruapps.icnclient.features.change_password.data.ChangePasswordRepository
 import com.peruapps.icnclient.model.request.PasswordRequest
 import com.peruapps.icnclient.ui.base.BaseViewModel
-import java.util.*
-import androidx.core.app.ActivityCompat.startActivityForResult
-import android.provider.MediaStore
-import androidx.core.content.FileProvider
-import android.content.Intent
-
-
 
 class ChangePasswordViewModel(
     private val repository: ChangePasswordRepository

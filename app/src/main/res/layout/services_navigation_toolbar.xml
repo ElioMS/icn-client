@@ -12,20 +12,29 @@
             android:layout_height="wrap_content"
             >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" tools:layout_editor_absoluteY="6dp"
                 tools:layout_editor_absoluteX="16dp">
 
-            <androidx.appcompat.widget.AppCompatImageButton
+            <FrameLayout
+                    android:id="@+id/ib_back"
                     android:background="?attr/selectableItemBackground"
+                    android:layout_centerVertical="true"
+                    android:padding="10dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_navigation_back" android:id="@+id/ib_back"
-                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="8dp"/>
+                    android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimary"
+                        android:src="@drawable/ic_navigation_back"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp"/>
+
+            </FrameLayout>
 
             <androidx.appcompat.widget.AppCompatImageButton
                     android:background="?attr/selectableItemBackground"
@@ -38,18 +47,19 @@
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>
 
             <TextView
+                    android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/services_title"
                     style="@style/PrimaryText"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/muli_bold"
                     android:textSize="20sp"
-                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"/>
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 

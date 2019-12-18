@@ -5,4 +5,5 @@ data class Appointment (val id: Int,
                         val subtitle: String, // Service type
                         val address: String,
                         val time: String,
-                        val turn: String)
+                        val turn: String,
+                        var category: Int? = null)

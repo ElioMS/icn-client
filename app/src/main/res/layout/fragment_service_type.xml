@@ -8,9 +8,6 @@
         <import type="android.view.View"/>
         <variable name="viewModel"
                   type="com.peruapps.icnclient.features.service_type.presentation.ServiceTypeViewModel"/>
-
-        <!--<variable name="sharedViewModel"-->
-                  <!--type="com.peruapps.icnclient.features.services.viewmodel.ServiceViewModel"/>-->
     </data>
 
     <RelativeLayout
@@ -23,7 +20,7 @@
                 android:layout_above="@+id/btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-        android:fillViewport="true">
+                android:fillViewport="true">
 
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -33,11 +30,40 @@
                 <TextView
                         android:id="@+id/serviceTitle"
                         style="@style/ServicesListTitle"
+                        tools:text="Endovenoso"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{ viewModel.service.name }"
+                        android:textSize="@dimen/accent_size"
                         android:layout_marginTop="8dp"
                         android:layout_marginStart="18dp"/>
+
+                <TextView
+                        style="@style/AccentText"
+                        android:fontFamily="@font/muli_bold"
+                        android:visibility="@{ viewModel.serviceType.price != null ? View.VISIBLE : View.GONE }"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="@dimen/accent_size"
+                        tools:text="S/ 30.00"
+                        android:text="@{ `S/ `+viewModel.serviceType.formatPrice }"/>
+
+
+                <TextView
+                        style="@style/AccentText"
+                        android:fontFamily="@font/muli_bold"
+                        android:visibility="@{ viewModel.serviceTypesCount == 0 ? View.VISIBLE : View.GONE }"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="8dp"
+                        android:textSize="@dimen/accent_size"
+                        tools:text="S/ 30.00"
+                        android:text="@{ `S/ `+viewModel.service.price }"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_item_service_type"
@@ -85,7 +111,7 @@
 
                     <TextView
                             style="@style/AccentText"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/muli_bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="15dp"
@@ -111,34 +137,32 @@
                 </RelativeLayout>
 
 
-                <com.peruapps.icnclient.widgets.CustomCalendarView
-                        android:id="@+id/calendar"
-                        android:layout_below="@+id/do_schedule"
-                        android:visibility="@{ viewModel.service.id == 2 ? (viewModel.doSchedule ? View.VISIBLE : View.GONE) : View.GONE }"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                >
+                <!--<com.peruapps.icnclient.widgets.CustomCalendarView-->
+                        <!--android:id="@+id/calendar"-->
+                        <!--android:layout_below="@+id/do_schedule"-->
+                        <!--android:visibility="@{ viewModel.service.id == 2 ? (viewModel.doSchedule ? View.VISIBLE : View.GONE) : View.GONE }"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content">-->
+                <!--</com.peruapps.icnclient.widgets.CustomCalendarView>-->
 
-                </com.peruapps.icnclient.widgets.CustomCalendarView>
+                <!--<include-->
+                <!--android:layout_below="@+id/has_material"-->
+                <!--layout="@layout/include_substances_layout"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginStart="10dp"-->
+                <!--android:layout_marginEnd="10dp"-->
+                <!--app:viewModel="@{viewModel}"/>-->
 
-                <include
-                        android:layout_below="@+id/has_material"
-                        layout="@layout/include_substances_layout"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        app:viewModel="@{viewModel}"/>
-
-                <include
-                        android:layout_below="@+id/calendar"
-                        layout="@layout/schedule_services_spinner"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        app:viewModel="@{viewModel}"/>
+                <!--<include-->
+                        <!--android:layout_below="@+id/calendar"-->
+                        <!--layout="@layout/schedule_services_spinner"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_marginStart="10dp"-->
+                        <!--android:layout_marginEnd="10dp"-->
+                        <!--app:viewModel="@{viewModel}"/>-->
 
             </RelativeLayout>
         </ScrollView>
@@ -159,6 +183,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
                     android:textSize="22sp"
+                    android:fontFamily="@font/muli_bold"
                     android:text="@{ safeUnbox(viewModel.showSubstances) ?  @string/button_next : (safeUnbox(viewModel.doSchedule) ? @string/button_next : @string/button_confirm) }"/>
         </LinearLayout>
 

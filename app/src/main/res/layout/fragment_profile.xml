@@ -51,6 +51,8 @@
                 app:roundingBorderColor="@color/colorAccent"
                 app:setImageControllerResize="@{viewModel.profile.photo}"
                 android:elevation="10dp"
+                app:failureImage="@drawable/ic_add_photo"
+                app:placeholderImage="@drawable/ic_add_photo"
                 android:layout_centerHorizontal="true"/>
 
         <!--<androidx.appcompat.widget.AppCompatImageView-->

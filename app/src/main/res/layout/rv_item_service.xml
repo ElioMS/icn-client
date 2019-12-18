@@ -21,6 +21,7 @@
 
         <Button
                 android:id="@+id/btnServiceItem"
+                tools:text="Endovenosos"
                 style="@style/Button.Rounded.Gray"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

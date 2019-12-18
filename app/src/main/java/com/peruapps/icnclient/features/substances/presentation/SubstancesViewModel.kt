@@ -7,54 +7,93 @@ import androidx.lifecycle.MutableLiveData
 import com.peruapps.icnclient.features.substances.data.SubstanceRepository
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceAdapter
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceDetailAdapter
+import com.peruapps.icnclient.model.Service
+import com.peruapps.icnclient.model.ServiceType
 import com.peruapps.icnclient.model.Substance
 import com.peruapps.icnclient.model.SubstanceDetail
+import com.peruapps.icnclient.room.entity.ServiceDetail
+import com.peruapps.icnclient.room.repository.ServiceDetailRepository
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
-class SubstancesViewModel(private val repository: SubstanceRepository) : BaseViewModel<SubstancesNavigator>() {
+class SubstancesViewModel(private val repository: SubstanceRepository,
+                          private val serviceDetailRepository: ServiceDetailRepository
+) : BaseViewModel<SubstancesNavigator>() {
 
-//    val adapter = ItemSubstanceAdapter(arrayListOf()) {
-//        model, position -> onSelectedSubstance(model, position)
-//    }
+    val detailAdapter = ItemSubstanceDetailAdapter(arrayListOf())
 
-    val detailAdapter = ItemSubstanceDetailAdapter(arrayListOf()) {
-        model, position -> onSelectedItem(model, position)
+    val adapter = ItemSubstanceAdapter(arrayListOf()) { model, position ->
+        onSelectedSubstance(model, position)
     }
 
-    val substanceQuantity = ObservableInt(0)
-    val currentPosition = ObservableField<Int>()
-    val substanceItemList = MutableLiveData<ArrayList<SubstanceDetail>>()
+    var body = ObservableField<SubstanceDetail>()
+    var selectedSubstance = ObservableField<Substance>()
+
+    var itemCount = ObservableField(0)
+
+    var isoDate = ObservableField<String>("")
+    var dateToString = ObservableField<String>("")
+    var hour = ObservableField<String>("")
+    var period = ObservableInt(0)
+    var days = ObservableField<String>("")
+
+    val service = ObservableField<Service>()
+    val serviceType = ObservableField<ServiceType>()
 
     init {
-//        loadSubstances()
-//        addSubstanceItems()
+        loadSubstances()
+//        body.set(SubstanceDetail())
     }
 
-    private fun onSelectedItem(model: SubstanceDetail, position: Int) {
-        Log.d("item", position.toString())
-        currentPosition.set(position)
-        getNavigator().openSubstanceDialog()
+    private fun onSelectedSubstance(model: Substance, position: Int) {
+//        Log.d("sustancia", position.toString())
+        selectedSubstance.set(model)
+//        holder.layout.setBackgroundColor(Color.RED)
     }
 
-    private fun onSelectedSubstance(model: Substance, position: Int)  {
-        Log.d("sustancia", position.toString())
-    }
-
-//    private fun loadSubstances() {
-//        startJob {
-//            val response = repository.listSubstances()
-//            adapter.bindItems(ArrayList(response))
-//        }
-//    }
-
-    fun addSubstanceItems() {
-        val arrayList = ArrayList<SubstanceDetail>()
-        for (i in 1..substanceQuantity.get()) {
-            arrayList.add(SubstanceDetail())
+    private fun loadSubstances() {
+        startJob {
+            val response = repository.listSubstances()
+            adapter.bindItems(ArrayList(response))
         }
+    }
 
-        substanceItemList.value = arrayList
-        detailAdapter.bindItems(arrayList)
+    fun setTime() {
+        getNavigator().showTimePicker()
+    }
+
+    fun setDate() {
+        getNavigator().showDatePicker()
+    }
+
+    fun addSubstance() {
+        val data = SubstanceDetail(
+            selectedSubstance.get(),
+            days.get()!!.toInt(),
+            period.get(),
+            isoDate.get(),
+            dateToString.get(),
+            hour.get()
+        )
+
+        detailAdapter.bindItems(data)
+        itemCount.set(detailAdapter.itemCount)
+
+//        detailAdapter.notifyDataSetChanged()
+    }
+
+    fun onClickGenerateButton() {
+        startJob {
+            serviceDetailRepository.insert(
+                ServiceDetail(
+                    serviceId = service.get()!!.id,
+                    serviceName = service.get()!!.name,
+                    serviceTypeId = serviceType.get()!!.id,
+                    serviceTypeName = serviceType.get()!!.name,
+                    price = serviceType.get()!!.price!!
+                )
+            )
+        }
+        getNavigator().showSummaryView()
     }
 
 }

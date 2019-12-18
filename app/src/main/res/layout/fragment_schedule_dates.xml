@@ -14,9 +14,31 @@
             android:layout_height="match_parent"
             tools:context=".features.services.views.fragments.endovenoso.EndovenosoScheduleDetailFragment">
 
+        <TextView
+                android:id="@+id/serviceTitle"
+                style="@style/ServicesListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Canalización S/ 100"
+                android:text="@{ viewModel.serviceType.name }"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:textSize="19sp"/>
+
+        <TextView
+                style="@style/ServicesListTitle"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="S/ 100"
+                android:text="@{ `S/ `+viewModel.serviceType.price }"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="8dp"
+                android:textSize="19sp"/>
+
         <include
                 android:id="@+id/sp_month"
-                android:layout_below="@+id/toolbar"
+                android:layout_below="@+id/serviceTitle"
                 layout="@layout/calendar_month_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -256,6 +278,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="22sp"
                     android:text="@string/button_generate"
+                    android:fontFamily="@font/muli_bold"
             />
         </LinearLayout>
 

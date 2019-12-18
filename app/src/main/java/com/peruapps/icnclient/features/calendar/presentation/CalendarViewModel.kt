@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import com.peruapps.icnclient.model.AppointmentDate
+import com.peruapps.icnclient.model.ServiceType
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
 class CalendarViewModel: BaseViewModel<CalendarNavigator>() {
@@ -17,6 +18,9 @@ class CalendarViewModel: BaseViewModel<CalendarNavigator>() {
 
     var nursesCount = ObservableInt(0)
     var techniciansCount = ObservableInt(0)
+
+    val serviceType = ObservableField<ServiceType>()
+    var price = ObservableField<Float>(0f)
 
     fun calendarButtonEvent() {
         if (categoryId.get()!! == 1) {

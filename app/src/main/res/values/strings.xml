@@ -3,8 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="client_type_persona">Personal</string>
-    <string name="client_type_company">Empresa</string>
+    <string name="text_persona">Personal</string>
+    <string name="text_company">Empresa</string>
     <string name="create_account">Crear cuenta</string>
     <string name="sign_in_button">Iniciar sesión</string>
 
@@ -14,7 +14,7 @@
     <string name="change_password">Cambiar contraseña</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="confirm_password">Confirmar contraseña</string>
-    <string name="forgot_password">Olvide mi contraseña</string>
+    <string name="forgot_password">Olvidé mi contraseña</string>
     <string name="password_recovery">Recuperar contraseña</string>
     <string name="text_email">Correo</string>
     <string name="text_send">Enviar</string>
@@ -34,6 +34,11 @@
     <string name="category_nurse">Procedimientos de enfermería</string>
     <string name="category_technician">Personal de enfermería o técnico de enfermería</string>
 
+    <string name="category_technician_text">Personal de \n enfermería o Técnico \n de enfermería</string>
+
+    <string name="text_name">Nombres</string>
+    <string name="text_surname">Apellidos</string>
+
     <string name="login_button">Ingresar</string>
     <string name="login_facebook_button">Ingresar con
         <b>facebook</b>
@@ -41,7 +46,7 @@
 
     <string name="services_title">Solicitar servicio</string>
     <string name="services_material_title">¿Posee material?</string>
-    <string name="services_schedule_title">¿Cuando?</string>
+    <string name="services_schedule_title">¿Cuándo?</string>
 
     <string name="button_next">Siguiente</string>
     <string name="button_generate">Generar</string>
@@ -49,6 +54,7 @@
     <string name="custom_dialog_text">Recuerda que para realizar \n los procesos de enfermería \n necesitas los
         materiales \n mencionados
     </string>
+    <string name="dialog_register_text">Para mayor \n información \n comuníquese con</string>
 
     <string name="title_month">Mes</string>
     <string name="title_schedule">Recordar</string>
@@ -63,7 +69,7 @@
     <string name="text_cards">Tarjetas</string>
     <string name="text_add_card">Agregar nueva tarjeta</string>
     <string name="text_address">Dirección</string>
-    <string name="text_address_reference">Referencia</string>
+    <string name="text_address_reference">Referencia de la dirección</string>
     <string name="text_pay">Pagar</string>
     <string name="text_yes">Sí</string>
     <string name="text_no">No</string>
@@ -71,6 +77,13 @@
     <string name="title_service_detail">Detalle del servicio</string>
     <string name="title_notifications">Califícame</string>
     <string name="text_notifications">Aún no has solicitado un técnico o enfermera.</string>
+    <string name="text_contact">Contáctanos</string>
+    <string name="phone_contact">+51 377 9999</string>
+    <string name="text_no_appointments">No tienes servicios pendientes</string>
+    <string name="text_delete">Eliminar</string>
+    <string name="text_generate">Generar</string>
+    <string name="add_new_substance">Agregar otra sustancia</string>
+    <string name="success_reservation_message">Nos contactaremos contigo \n para finalizar el servicio.</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -125,5 +138,7 @@
         AIzaSyAF1fhvKXWuMtps92pgEYFA5_qwzbvHoZY
     </string>
 
+    <string name="facebook_app_id">498990974034950</string>
+    <string name="fb_login_protocol_scheme">fb498990974034950</string>
 
 </resources>
