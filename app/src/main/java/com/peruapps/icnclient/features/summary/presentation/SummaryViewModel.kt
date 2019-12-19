@@ -14,6 +14,8 @@ import com.peruapps.icnclient.ui.base.BaseViewModel
 
 class SummaryViewModel (private val serviceDetailRepository: ServiceDetailRepository) : BaseViewModel<SummaryNavigator>() {
 
+    val TAG = SummaryViewModel::class.java.simpleName
+
     val itemCreditCardAdapter = ItemCreditCardAdapter(arrayListOf()) {
         model, position -> selectedCreditCard(model, position)
     }
@@ -40,6 +42,8 @@ class SummaryViewModel (private val serviceDetailRepository: ServiceDetailReposi
         startJob {
             val list = serviceDetailRepository.list()
             servicesAdapter.bindItems(ArrayList(list))
+
+            Log.d(TAG, list.toString())
 
             val price = serviceDetailRepository.summaryPrice()
             summaryPrice.set(price)

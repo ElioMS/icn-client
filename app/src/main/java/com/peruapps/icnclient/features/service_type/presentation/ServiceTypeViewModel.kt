@@ -95,7 +95,7 @@ class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRe
 
         if (serviceId == 2) {
             when (scheduleValue) {
-                true -> getNavigator().showNextView("SCHEDULE")
+                true -> getNavigator().showNextView("CALENDAR")
                 false -> {
 
                     startJob {

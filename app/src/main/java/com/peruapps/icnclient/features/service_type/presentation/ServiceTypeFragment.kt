@@ -77,7 +77,7 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
         model.setNavigator(this)
         binding.setVariable(BR.viewModel, model)
 
-        setSpinnerData()
+//        setSpinnerData()
     }
 
     override fun showContactUsModelDialog() {
@@ -152,7 +152,7 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
         when (viewName) {
             "CALENDAR" -> {
                 NavigationHelper.changeFragment(fragmentManager!!,
-                    R.id.main_container, CalendarFragment.setData(1, service, model.serviceType.get()!!), "CalendarFragment")
+                    R.id.main_container, CalendarFragment.setData(1, service, model.serviceType.get()), "CalendarFragment")
             }
             "SUBSTANCES" -> {
                 NavigationHelper.changeFragment(fragmentManager!!,

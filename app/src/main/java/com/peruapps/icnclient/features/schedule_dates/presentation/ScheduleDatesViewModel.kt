@@ -48,9 +48,9 @@ class ScheduleDatesViewModel(private val serviceDetailRepository: ServiceDetailR
                 ServiceDetail(
                     serviceId = service.get()!!.id,
                     serviceName = service.get()!!.name,
-                    serviceTypeId = serviceType.get()!!.id,
-                    serviceTypeName = serviceType.get()!!.name,
-                    price = serviceType.get()!!.price!!
+                    serviceTypeId = serviceType.get()?.id,
+                    serviceTypeName = serviceType.get()?.name,
+                    price = serviceType.get()?.let { it.price } ?: run { service.get()!!.price }
                 )
             )
         }

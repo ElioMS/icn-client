@@ -27,6 +27,7 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.peruapps.icnclient.BuildConfig
@@ -98,6 +99,7 @@ class CreateAccountFragment : Fragment(), RegisterNavigator {
             }
         }
 
+        subscribeLiveData()
         initFragmentEvents()
     }
 
@@ -109,6 +111,14 @@ class CreateAccountFragment : Fragment(), RegisterNavigator {
         ivAddPhoto.setOnClickListener {
             showGalleryDialog()
         }
+    }
+
+    private fun subscribeLiveData() {
+        registerViewModel.showMessage.observe(this , androidx.lifecycle.Observer {
+            if  (it != "") {
+                Toast.makeText(context!!, it , Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun showPasswordView() {

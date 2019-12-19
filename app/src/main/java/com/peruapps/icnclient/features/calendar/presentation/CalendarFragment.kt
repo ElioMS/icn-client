@@ -41,16 +41,15 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
     var currentCategory = 1
 
     private lateinit var service: Service
-    private lateinit var serviceType: ServiceType
+    private var serviceType: ServiceType? = null
 
     private var calendarVisibility = true
 
     companion object {
-        fun setData(category: Int, service: Service, serviceType: ServiceType) = CalendarFragment().apply {
-            Log.d("calendar_view", "$category $service $serviceType")
+        fun setData(category: Int, service: Service, serviceType: ServiceType? = null) = CalendarFragment().apply {
             this.currentCategory = category
             this.service = service
-            this.serviceType = serviceType
+            serviceType?.let { this.serviceType = it }
         }
     }
 
@@ -68,6 +67,7 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
 
         model.setNavigator(this)
         model.price.set(0f)
+        model.service.set(service)
         model.categoryId.set(currentCategory)
         model.serviceType.set(serviceType)
         binding.setVariable(BR.viewModel, model)
@@ -117,10 +117,16 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
 
         days.sortBy { selector(it) }
         model.scheduledDates.value = days
-        val newPrice = days.size * model.serviceType.get()!!.price!!
-        model.price.set(newPrice)
 
-        Log.d("click_day", model.scheduledDates.value.toString())
+        var newPrice = 0f
+
+        model.serviceType.get()?.let {
+            newPrice = days.size * it.price!!
+        } ?: run {
+            newPrice = days.size * service.price
+        }
+
+        model.price.set(newPrice)
     }
 
     private fun selector(p: AppointmentDate): String = p.date
@@ -130,7 +136,12 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
             "DAY" -> {
                 NavigationHelper.changeFragment(fragmentManager!!,
                     R.id.main_container,
-                    ScheduleDatesFragment.setData(this.currentCategory, service, serviceType.apply { price = model.price.get()!! }, this.days, model.selectedScheduleType.get()),
+                    ScheduleDatesFragment.setData(
+                        this.currentCategory,
+                        service.apply { price = model.price.get()!! },
+                        serviceType?.apply { price = model.price.get()!! },
+                        this.days,
+                        model.selectedScheduleType.get()),
                     "ScheduleDatesFragment")
             }
             "SUMMARY" -> {

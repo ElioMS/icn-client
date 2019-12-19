@@ -10,68 +10,81 @@
                   type="com.peruapps.icnclient.room.entity.ServiceDetail"/>
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/expandData"
+                android:layout_below="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_forward" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"/>
 
         <TextView
                 android:id="@+id/tv2"
-                android:layout_below="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/muli_bold"
+                android:textSize="@dimen/services_detail_titles"
+                android:text="Servicio"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+                android:visibility="@{ item.serviceTypeName != null ? View.VISIBLE : View.GONE }"
+                android:layout_below="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/muli_bold"
                 android:textSize="@dimen/services_detail_titles"
                 android:text="Tipo"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="15dp"/>
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tv2"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:id="@+id/textView3" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         <TextView
+                android:id="@+id/serviceName"
                 android:textSize="@dimen/services_detail_titles"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:layout_below="@+id/tv1"
                 android:layout_toEndOf="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/muli_bold"
                 android:textColor="@color/colorGray"
                 tools:text="Endovenoso"
-                android:text="@{ item.serviceName }"/>
+                android:text="@{ item.serviceName }"
+                app:layout_constraintStart_toEndOf="@+id/tv2"
+                android:layout_marginStart="18dp"/>
 
         <TextView
                 android:id="@+id/textServiceType"
+                android:visibility="@{ item.serviceTypeName != null ? View.VISIBLE : View.GONE }"
                 android:layout_toEndOf="@+id/tv2"
                 android:layout_below="@+id/tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
                 android:textSize="@dimen/label_size"
                 android:fontFamily="@font/muli_bold"
                 android:textColor="@color/colorGray"
                 tools:text="Canalización"
-                android:text="@{ item.serviceTypeName }"/>
+                android:text="@{ item.serviceTypeName }"
+                app:layout_constraintStart_toEndOf="@+id/textView3" android:layout_marginStart="46dp"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/serviceName"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/expandData"
-                android:layout_below="@+id/tv2"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                app:srcCompat="@drawable/ic_forward"/>
-
-        <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/shrinkData"
-                android:visibility="gone"
-                android:layout_below="@+id/tv2"
-                android:layout_alignParentEnd="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                app:srcCompat="@drawable/ic_arrow_down"/>
+        <!--<androidx.appcompat.widget.AppCompatImageView-->
+                <!--android:id="@+id/shrinkData"-->
+                <!--android:visibility="gone"-->
+                <!--android:layout_below="@+id/tv2"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginEnd="15dp"-->
+                <!--app:srcCompat="@drawable/ic_arrow_down"/>-->
 
         <!--<androidx.recyclerview.widget.RecyclerView-->
                 <!--android:id="@+id/rvSubstances"-->
@@ -82,5 +95,5 @@
                 <!--tools:itemCount="2"-->
                 <!--tools:listitem="@layout/rv_item_substance_detail"/>-->
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -11,11 +11,11 @@ import com.peruapps.icnclient.R
 import kotlinx.android.synthetic.main.custom_dialog_contact_us.*
 import kotlinx.android.synthetic.main.custom_dialog_other_service.*
 
-class CustomDialogOtherService(context: Context) : Dialog(context) {
+class CustomDialogOtherService(context: Context, style: Int) : Dialog(context, style) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(R.layout.custom_dialog_other_service)
 
         initEvents()

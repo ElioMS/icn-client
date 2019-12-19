@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 
 import com.peruapps.icnclient.R
@@ -44,6 +45,7 @@ class PasswordFragment : Fragment(), RegisterNavigator {
 //        }
 
         initFragmentEvents()
+        subscribeLiveData()
     }
 
     override fun showPasswordView() {
@@ -52,5 +54,13 @@ class PasswordFragment : Fragment(), RegisterNavigator {
 
     private fun initFragmentEvents() {
         iv_back.setOnClickListener { activity?.onBackPressed() }
+    }
+
+    private fun subscribeLiveData() {
+        registerViewModel.showMessage.observe(this , androidx.lifecycle.Observer {
+            if  (it != "") {
+                Toast.makeText(context!!, it , Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

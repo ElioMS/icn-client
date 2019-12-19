@@ -11,7 +11,7 @@ class ItemServiceDetailViewHolder(private var binding: RvItemSummaryServiceDetai
     RecyclerView.ViewHolder(binding.root) {
 
     var expand: AppCompatImageView = itemView.findViewById(R.id.expandData)
-    var shrink: AppCompatImageView = itemView.findViewById(R.id.shrinkData)
+//    var shrink: AppCompatImageView = itemView.findViewById(R.id.shrinkData)
 //    var data: RecyclerView = itemView.findViewById(R.id.rvSubstances)
 
     fun bind(data: ServiceDetail) {

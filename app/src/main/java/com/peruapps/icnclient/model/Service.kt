@@ -3,6 +3,6 @@ package com.peruapps.icnclient.model
 data class Service(
     val id: Int,
     val name: String,
-    val price: Float,
+    var price: Float,
     val icon: String
 )

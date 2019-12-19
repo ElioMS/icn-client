@@ -65,7 +65,8 @@
                         android:textSize="19sp"
                         android:layout_marginStart="15dp"
                         android:layout_marginTop="8dp"
-                        android:text="@{ viewModel.serviceType.name }"/>
+                        tools:text="Instramusculares"
+                        android:text="@{ viewModel.serviceType != null ? viewModel.serviceType.name : viewModel.service.name }"/>
 
                 <TextView
                         style="@style/ServicesListTitle"

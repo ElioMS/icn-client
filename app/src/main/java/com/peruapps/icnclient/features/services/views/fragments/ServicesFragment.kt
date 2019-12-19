@@ -66,7 +66,7 @@ class ServicesFragment : Fragment(), ServicesNavigator {
     }
 
     override fun showOthersDialog() {
-        val dialog = CustomDialogOtherService(context!!)
+        val dialog = CustomDialogOtherService(context!!, R.style.FullScreenDialogStyle)
         dialog.show()
     }
 
