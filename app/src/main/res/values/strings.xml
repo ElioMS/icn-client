@@ -9,7 +9,7 @@
     <string name="sign_in_button">Iniciar sesión</string>
 
     <string name="login_title">Iniciar sesión</string>
-    <string name="login_username">Usuario</string>
+    <string name="login_username">Correo</string>
     <string name="password">Contraseña</string>
     <string name="change_password">Cambiar contraseña</string>
     <string name="new_password">Nueva contraseña</string>
@@ -40,9 +40,7 @@
     <string name="text_surname">Apellidos</string>
 
     <string name="login_button">Ingresar</string>
-    <string name="login_facebook_button">Ingresar con
-        <b>facebook</b>
-    </string>
+    <string name="login_facebook_button">Ingresar con</string>
 
     <string name="services_title">Solicitar servicio</string>
     <string name="services_material_title">¿Posee material?</string>
@@ -51,7 +49,8 @@
     <string name="button_next">Siguiente</string>
     <string name="button_generate">Generar</string>
     <string name="button_confirm">Confirmar</string>
-    <string name="custom_dialog_text">Comuníquese con nosotros \n al +51923187226 para \n indicarle los medicamentos \n que debe tener
+    <string name="custom_dialog_text">Recuerda que para realizar los procesos de enfermería necesitas los materiales mencionados</string>
+    <string name="custom_dialog_other">Comuníquese con nosotros \n al +51923187226 para \n indicarle los medicamentos \n que debe tener
     </string>
     <string name="dialog_register_text">Para mayor \n información \n comuníquese con</string>
 
@@ -75,14 +74,14 @@
     <string name="text_notification_dialog">¿Ha llegado a cumplir su jornada?</string>
     <string name="title_service_detail">Detalle del servicio</string>
     <string name="title_notifications">Califícame</string>
-    <string name="text_notifications">Aún no has solicitado un técnico o enfermera.</string>
+    <string name="text_notifications">Aún no has solicitado una enfermera o técnico</string>
     <string name="text_contact">Contáctanos</string>
     <string name="phone_contact">+51 377 9999</string>
     <string name="text_no_appointments">No tienes servicios pendientes</string>
     <string name="text_delete">Eliminar</string>
     <string name="text_generate">Generar</string>
     <string name="add_new_substance">Agregar otra sustancia</string>
-    <string name="success_reservation_message">Nos contactaremos contigo \n para finalizar el servicio.</string>
+    <string name="success_reservation_message">Nos contactaremos contigo \n para finalizar el servicio</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -140,4 +139,14 @@
     <string name="facebook_app_id">498990974034950</string>
     <string name="fb_login_protocol_scheme">fb498990974034950</string>
 
+    <!-- VALIDATION -->
+    <string name="validation_empty">Por favor complete los campos vacíos</string>
+    <string name="validation_email">Formato de correo incorrecto</string>
+    <string name="validation_confirm_password">Las contraseñas no coinciden</string>
+    <string name="validation_alphanumeric_password">Las contraseñas tiene que ser alfanúmerica</string>
+    <string name="validation_password_min_characters">La contraseña debe tener como mínimo de 6 caracteres </string>
+    <string name="validation_service_type_hour">Debe de seleccionar un horario de atención</string>
+    <string name="validation_calendar_days">Debe de seleccionar al menos un día</string>
+    <string name="validation_dni">Formato de DNI incorrecto</string>
+    <string name="validation_pasaporte">Formato de pasaporte incorrecto</string>
 </resources>

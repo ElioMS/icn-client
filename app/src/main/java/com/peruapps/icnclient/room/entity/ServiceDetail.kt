@@ -19,5 +19,7 @@ data class ServiceDetail(
     @ColumnInfo(name = "service_type_name")
     val serviceTypeName: String? = null,
     @ColumnInfo(name = "price")
-    val price: Float
+    val price: Float,
+    @ColumnInfo(name = "hour")
+    val hour: String? = null
 )

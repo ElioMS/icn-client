@@ -15,13 +15,16 @@ class ProfileViewModel(private val preferencesManager: PreferencesManager): Base
         getUserDataFromPreferences()
     }
 
-    private fun getUserDataFromPreferences() {
+    fun getUserDataFromPreferences() {
         profile.set(preferencesManager.getUserData())
     }
 
     fun logOut() {
-        preferencesManager.removeAuthData()
         getNavigator().redirectAfterLogOut()
+    }
+
+    fun removeUserAuthData() {
+        preferencesManager.removeAuthData()
     }
 
     fun hideProfileView() {

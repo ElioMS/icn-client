@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.peruapps.icnclient.R
+import com.peruapps.icnclient.features.account.presentation.views.AccountActivity
 import com.peruapps.icnclient.features.register.presentation.dialogs.DialogRegister
+import com.peruapps.icnclient.helpers.NavigationHelper
 import kotlinx.android.synthetic.main.fragment_account_type.*
 
 class AccountTypeFragment : Fragment() {
@@ -33,8 +35,12 @@ class AccountTypeFragment : Fragment() {
     }
 
     private fun showDialog() {
-        val dialog = DialogRegister(context!!, R.style.FullScreenDialogStyle)
+        val dialog = DialogRegister(context!!, R.style.FullScreenDialogStyle, ::showAccountView)
         dialog.show()
+    }
+
+    private fun showAccountView() {
+        NavigationHelper.redirectTo(activity!!, AccountActivity::class.java, true)
     }
 
     private fun showCreateAccountView() {

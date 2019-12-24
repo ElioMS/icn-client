@@ -1,10 +1,12 @@
 package com.peruapps.icnclient.features.profile.presentation
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.facebook.login.LoginManager
@@ -42,13 +44,8 @@ class ProfileFragment : Fragment(), ProfileNavigator {
 
         binding.setVariable(BR.viewModel, model)
         model.setNavigator(this)
-
+        model.getUserDataFromPreferences()
         setParentData(true)
-    }
-
-    override fun onDestroyView() {
-//        setParentData(false)
-        super.onDestroyView()
     }
 
     override fun redirectAfterLogOut() {
@@ -61,8 +58,20 @@ class ProfileFragment : Fragment(), ProfileNavigator {
 //            GraphRequest.Callback {
 //                LoginManager.getInstance().logOut()
 //            }).executeAsync()
+        if (!isRemoving) {
+            val alertDialog = AlertDialog.Builder(context!!)
+            alertDialog.setMessage("¿Deseas cerrar sesión?")
+                .setPositiveButton("Cerrar sesión") { _, _ ->
+                    model.removeUserAuthData()
+                    NavigationHelper.redirectTo(activity!!, AccountActivity::class.java, true)
+                }
+                .setNegativeButton("Cancelar") { dialog, which ->
+                    dialog.dismiss()
+                }
 
-        NavigationHelper.redirectTo(activity!!, AccountActivity::class.java, true)
+            alertDialog.create()
+            alertDialog.show()
+        }
     }
 
     override fun goBack() {
@@ -70,13 +79,17 @@ class ProfileFragment : Fragment(), ProfileNavigator {
     }
 
     override fun showEditProfileView() {
-        NavigationHelper.changeFragment(fragmentManager!!, R.id.main_container,
+        NavigationHelper.changeFragment(
+            fragmentManager!!, R.id.main_container,
             EditProfileFragment(),
-            "EditProfileFragment")
+            "EditProfileFragment"
+        )
     }
+
 
     private fun setParentData(value: Boolean) {
         val myParentActivity = (activity) as ReservationActivity
         myParentActivity.hideActionBar(value)
+        myParentActivity.showNavigationIndicator(999)
     }
 }

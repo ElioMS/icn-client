@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"/>
 
         <LinearLayout
-                android:visibility="@{ viewModel.requestLoading ? View.GONE : View.VISIBLE }"
+                android:visibility="@{ safeUnbox(viewModel.requestLoading) ? View.GONE : View.VISIBLE }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -94,14 +94,49 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp">
 
-            <Button
+            <!--<Button-->
+                    <!--style="@null"-->
+                    <!--android:id="@+id/login_fbbutton"-->
+                    <!--android:text="@string/login_facebook_button"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="@font/muli_bold"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:height="60dp"-->
+                    <!--android:textColor="@color/colorWhite"-->
+                    <!--android:gravity="center"-->
+                    <!--android:drawablePadding="-50dp"-->
+                    <!--android:drawableEnd="@drawable/ic_facebook"/>-->
+
+            <RelativeLayout
                     android:id="@+id/login_fbbutton"
-                    style="@style/Button.Rounded.Accent"
-                    android:text="@string/login_facebook_button"
+                    android:background="@drawable/ripple_effect"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/muli_bold"
-                    android:textSize="20sp"/>
+                    android:layout_height="60dp" >
+
+                <TextView
+                        android:id="@+id/fbText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli_bold"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="20sp"
+                        android:layout_centerVertical="true"
+                        android:text="@string/login_facebook_button"/>
+
+                <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/fbText"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_facebook"/>
+
+            </RelativeLayout>
 
             <Button
                     android:id="@+id/btn_log_in"
@@ -114,6 +149,7 @@
                     android:onClick="@{() -> viewModel.signIn()}"/>
 
         </LinearLayout>
+
     </RelativeLayout>
 
 </layout>

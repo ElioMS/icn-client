@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.reset_password.data.ResetPasswordRepository
 import com.peruapps.icnclient.model.request.ResetPasswordRequest
 import com.peruapps.icnclient.ui.base.BaseViewModel
@@ -15,8 +16,8 @@ class ResetPasswordViewModel (private val repository: ResetPasswordRepository): 
     val password = ObservableField<String>("")
     val confirmPassword = ObservableField<String>("")
 
-    private val _validationMessage = MutableLiveData<String>()
-    val validationMessage : LiveData<String>
+    private val _validationMessage = MutableLiveData<Int>()
+    val validationMessage : LiveData<Int>
         get() = _validationMessage
 
     private fun validator(): Boolean {
@@ -24,17 +25,21 @@ class ResetPasswordViewModel (private val repository: ResetPasswordRepository): 
         val confirmPassword = confirmPassword.get()
 
         if (password == "") {
-            _validationMessage.value = "El campo contraseña es obligatorio."
+            _validationMessage.value = R.string.validation_empty
             return false
         }
 
+        if (password != "" && password?.length!! < 6) {
+            _validationMessage.value = R.string.validation_password_min_characters
+        }
+
         if (confirmPassword == "") {
-            _validationMessage.value = "El campo confirmar contraseña es obligatorio."
+            _validationMessage.value = R.string.validation_empty
             return false
         }
 
         if (password != confirmPassword) {
-            _validationMessage.value = "Las contraseñas no coinciden."
+            _validationMessage.value = R.string.validation_confirm_password
             return false
         }
 
@@ -44,9 +49,11 @@ class ResetPasswordViewModel (private val repository: ResetPasswordRepository): 
     fun onClickResetPassword() {
         val validator = validator()
 
-        val data = ResetPasswordRequest(token.get()!!,
-            email.get()!!,
-            password = password.get()!!)
+        val data = ResetPasswordRequest(
+            token = token.get()!!,
+            email = email.get()!!,
+            password = password.get()!!
+        )
 
         if (validator) {
             startJob {

@@ -6,6 +6,7 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.peruapps.icnclient.R
 import com.peruapps.icnclient.features.register.data.RegisterRepository
 import com.peruapps.icnclient.model.request.RegisterRequest
 
@@ -35,14 +36,14 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
         get() = _showMessage
 
     fun onClickNextButton() {
-//        val validator = infoValidator()
-
-//        if (!validator.status) {
+        val validator = infoValidator()
+//
+        if (!validator.status) {
 //            _showMessage.value = ""
             getNavigator().showPasswordView()
-//        } else {
-//            _showMessage.value = validator.message?.let { it } ?: run { "Por favor complete los campos vacíos" }
-//        }
+       } else {
+            _showMessage.value = validator.message?.let { it } ?: run { "Por favor complete los campos vacíos" }
+        }
     }
 
     fun setGender(value: Int) {
@@ -58,6 +59,7 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
         val name = name.get()
         val surname = surname.get()
         val gender = gender.get()
+        val documentType = documentType.get()
         val documentNumber = documentNumber.get()
         val age = age.get()
         val email = email.get()
@@ -70,10 +72,21 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
         if (surname == "") { return validation }
         if (gender == "") { return validation }
         if (documentNumber == "") { return validation }
+
+        documentNumber?.let {
+            if  (documentNumber.length != 8 && documentType == 1) {
+                return validation.apply { message = "Formato de DNI incorrecto" }
+            }
+
+            if  (documentNumber.length != 15 && documentType == 2) {
+                return validation.apply { message = "Formato de pasaporte incorrecto" }
+            }
+        }
+
         if (age == "") { return validation }
 
         if (age !== "" && age?.toInt()!! < 18) {
-            return validation.apply { message = "Menor de edad" }
+            return validation.apply { message = "Es necesario que sea mayor de edad" }
         }
 
         if (email == "") { return  validation }
@@ -97,7 +110,7 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
         if (password == "") { return validation }
 
         if  (password != "" && password?.length!! < 6) {
-            return validation.apply { message = "Mínimo de 6 caracteres" }
+            return validation.apply { message = "La contraseña debe tener como mínimo de 6 caracteres" }
         }
 
         if (password != confirmPassword) {
@@ -128,13 +141,15 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
                     password = password.get()!!
                 )
 
-                Log.d("REGISTER_RESPONSE", response.toString())
-
                 getNavigator().showPasswordView()
             }
         } else {
             _showMessage.value = validator.message?.let { it } ?: run { "Por favor complete los campos vacíos" }
         }
+    }
+
+    fun resetMessage() {
+        _showMessage.value = ""
     }
 }
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -186,11 +187,13 @@ class CustomCalendarView @JvmOverloads constructor(context: Context,
     private fun setUpWeekDaysLayout() {
         var tvDayOfWeek: TextView?
         var dayOfTheWeekString: String
-        val weekDaysArray = DateFormatSymbols(Locale.getDefault()).weekdays
+        val spanish =  Locale("es", "ES")
+        val weekDaysArray = DateFormatSymbols(spanish).weekdays
         for (i in 1 until weekDaysArray.size) {
             tvDayOfWeek =_rootView.findViewWithTag(DAY_OF_THE_WEEK_TEXT + getWeekIndex(i, currentCalendar))
             dayOfTheWeekString = weekDaysArray[i]
             //result = Lun/ Mar/ Mie/ Jue/ Vie...
+            val day = dayOfTheWeekString.substring(0, 1).toUpperCase()+dayOfTheWeekString.substring(1, 3)
             tvDayOfWeek?.text = "${dayOfTheWeekString.substring(0, 1).toUpperCase()}${dayOfTheWeekString.substring(1, 3)}"
         }
     }

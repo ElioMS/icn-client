@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Observer
 import com.peruapps.icnclient.BR
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.CustomDialogCodeBinding
@@ -40,7 +42,19 @@ class CodeDialog : DialogFragment(), CodeDialogNavigator {
         super.onViewCreated(view, savedInstanceState)
         model.setNavigator(this)
         binding.setVariable(BR.viewModel, model)
+
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+        })
+
+        model.showError.observe(this, Observer {
+            if  (it != "") {
+                Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
+
 
     override fun showResetPasswordView(response: PasswordResetTokenResponse) {
         this.dismiss()

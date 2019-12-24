@@ -56,6 +56,7 @@ class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigato
 
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
         autocompleteFragment.setCountry("PE")
+        autocompleteFragment.setHint("Buscar")
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {

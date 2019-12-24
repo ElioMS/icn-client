@@ -12,5 +12,5 @@ interface EditProfileRepository {
                               documentType: Int,
                               documentNumber: String,
                               address: String,
-                              addressReference: String): Response<Unit>
+                              addressReference: String? = null): Response<Unit>
 }

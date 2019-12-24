@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.peruapps.icnclient.BR
 import com.peruapps.icnclient.R
@@ -24,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_calendar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.lifecycle.Observer
 
 class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, CalendarNavigator {
 
@@ -99,6 +101,8 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
                 it.setDropDownViewResource(R.layout.item_simple_spinner)
             }
         spTurns.adapter = turnAdapter
+
+        subscribeLiveData()
     }
 
     override fun onDayClicked(date: Date) {
@@ -141,7 +145,8 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
                         service.apply { price = model.price.get()!! },
                         serviceType?.apply { price = model.price.get()!! },
                         this.days,
-                        model.selectedScheduleType.get()),
+                        model.selectedScheduleType.get(),
+                        model.price.get()),
                     "ScheduleDatesFragment")
             }
             "SUMMARY" -> {
@@ -151,5 +156,11 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
 //                    "SummaryFragment")
             }
         }
+    }
+
+    private fun subscribeLiveData() {
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+        })
     }
 }

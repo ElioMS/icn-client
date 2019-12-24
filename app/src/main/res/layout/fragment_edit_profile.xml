@@ -141,9 +141,10 @@
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
-                        android:inputType="number"
+                        android:inputType="phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLength="9"
                         android:text="@={viewModel.phoneNumber}"/>
 
                 <TextView
@@ -223,7 +224,7 @@
                                 android:inputType="phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={``+viewModel.age}"/>
+                                android:text="@={viewModel.age}"/>
                     </LinearLayout>
 
                 </LinearLayout>

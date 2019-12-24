@@ -41,12 +41,12 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/rv_item_notification"
-                app:itemNotificationAdapter="@{ viewModel.adapter }">
-        </androidx.recyclerview.widget.RecyclerView>
+        <!--<androidx.recyclerview.widget.RecyclerView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--tools:listitem="@layout/rv_item_notification"-->
+                <!--app:itemNotificationAdapter="@{ viewModel.adapter }">-->
+        <!--</androidx.recyclerview.widget.RecyclerView>-->
 
     </RelativeLayout>
 

@@ -44,6 +44,8 @@ class NotificationFragment : Fragment(), NotificationNavigator {
         val myParentActivity = (activity) as ReservationActivity
         myParentActivity.changeActionBarTitle("Mis notificaciones")
         myParentActivity.showNavigationIndicator(1)
+        myParentActivity.hideActionBar(false)
+
     }
 
     override fun showNotificationDialog() {

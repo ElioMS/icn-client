@@ -29,6 +29,7 @@ class ScheduleDatesViewModel(private val serviceDetailRepository: ServiceDetailR
 
     var nursesCount = ObservableInt(0)
     var techniciansCount = ObservableInt(0)
+    var price = ObservableField<Float>()
 
     private fun setHour(model: AppointmentDate, position: Int) {
         selectedAppointmentDate.set(position)

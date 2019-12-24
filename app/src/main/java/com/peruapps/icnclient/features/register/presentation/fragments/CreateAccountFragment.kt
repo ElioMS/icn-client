@@ -72,6 +72,8 @@ class CreateAccountFragment : Fragment(), RegisterNavigator {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        registerViewModel.resetMessage()
+
         binding.setVariable(BR.viewModel, registerViewModel)
         registerViewModel.setNavigator(this)
 

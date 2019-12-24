@@ -53,7 +53,7 @@ class ResetPasswordFragment : Fragment(), ResetPasswordNavigator {
     private fun subscribeLiveData() {
         model.validationMessage.observe(this, Observer {
             Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
-            Log.d("validation", it)
+//            Log.d("validation", it)
         })
     }
 

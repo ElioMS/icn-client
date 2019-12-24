@@ -93,9 +93,14 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
         val tpDialog = TimePickerDialog(context!!, TimePickerDialog.OnTimeSetListener(function = { _, h, m ->
 
             val selectedHour: String
-//
+
+            val minutes: String = when {
+                m < 10 -> "0$m"
+                else -> "$m"
+            }
+
             if (h <= 12) {
-                selectedHour = "$h:$m AM"
+                selectedHour = "$h:$minutes AM"
             } else {
                 var hour = h
 
@@ -103,7 +108,7 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
                     hour = h - 12
                 }
 
-                selectedHour = "$hour:$m PM"
+                selectedHour = "$hour:$minutes PM"
             }
 
             tvHour.text = selectedHour
@@ -141,7 +146,7 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
             val date = calendar.time
             val spanish = Locale("es", "ES")
             val formatDate = SimpleDateFormat("yyy-MM-dd", spanish).format(date)
-            val weekdayName = SimpleDateFormat("EEEE dd", spanish).format(date)
+            val weekdayName = SimpleDateFormat("MMMM dd", spanish).format(date)
 
             model.dateToString.set(weekdayName.capitalize())
             model.isoDate.set(formatDate)

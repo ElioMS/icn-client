@@ -3,6 +3,9 @@ package com.peruapps.icnclient.features.service_type.presentation
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.peruapps.icnclient.R
 import com.peruapps.icnclient.adapter.ItemServiceTypeAdapter
 import com.peruapps.icnclient.model.Service
 import com.peruapps.icnclient.model.ServiceType
@@ -15,14 +18,15 @@ class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRe
     var service = ObservableField<Service>()
     var serviceType = ObservableField<ServiceType>()
     var serviceTypePosition = ObservableField(0)
-
     var showSubstances = ObservableField<Boolean>(false)
-
     val showTimePicker = ObservableField<Boolean>(false)
-
     val substanceQuantity = ObservableInt(0)
-
     val serviceTypesCount = ObservableField(0)
+    val hour = ObservableField("")
+
+    private val _validationMessage = MutableLiveData<Int>()
+    val validationMessage : LiveData<Int>
+        get() = _validationMessage
 
     val itemServiceTypeAdapter = ItemServiceTypeAdapter(arrayListOf()) { model, position ->
         checkSelectedServiceType(model, position)
@@ -75,20 +79,11 @@ class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRe
             when (scheduleValue) {
                 true -> getNavigator().showNextView("CALENDAR")
                 false -> {
-                    startJob {
-                        serviceDetailRepository.insert(
-                            ServiceDetail(
-                                serviceId = service.get()!!.id,
-                                serviceName = service.get()!!.name,
-                                serviceTypeId = serviceType.get()!!.id,
-                                serviceTypeName = serviceType.get()!!.name,
-                                price = serviceType.get()!!.price!!
-                            )
-                        )
-
-                        getNavigator().showNextView("SUMMARY")
+                    if  (hour.get() != "") {
+                        registerFlow()
+                    } else {
+                        _validationMessage.value = R.string.validation_service_type_hour
                     }
-
                 }
             }
         }
@@ -113,6 +108,23 @@ class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRe
                     getNavigator().showNextView("SUMMARY")
                 }
             }
+        }
+    }
+
+    private fun registerFlow() {
+        startJob {
+            serviceDetailRepository.insert(
+                ServiceDetail(
+                    serviceId = service.get()!!.id,
+                    serviceName = service.get()!!.name,
+                    serviceTypeId = serviceType.get()!!.id,
+                    serviceTypeName = serviceType.get()!!.name,
+                    price = serviceType.get()!!.price!!,
+                    hour = hour.get()
+                )
+            )
+
+            getNavigator().showNextView("SUMMARY")
         }
     }
 

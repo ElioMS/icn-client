@@ -13,7 +13,9 @@ import com.peruapps.icnclient.BR
 
 import com.peruapps.icnclient.R
 import com.peruapps.icnclient.databinding.FragmentChangePasswordBinding
+import com.peruapps.icnclient.features.profile.presentation.ProfileFragment
 import com.peruapps.icnclient.features.reservations.presentation.views.ReservationActivity
+import com.peruapps.icnclient.helpers.NavigationHelper
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChangePasswordFragment : Fragment(), ChangePasswordNavigator {
@@ -36,29 +38,39 @@ class ChangePasswordFragment : Fragment(), ChangePasswordNavigator {
         binding.setVariable(BR.viewModel, model)
         model.setNavigator(this)
         subscribeLiveData()
-        setParentData(hideProfile = true, hideNavigation = false)
+//        setParentData(hideProfile = true, hideNavigation = false)
     }
 
-    override fun onDestroyView() {
-        setParentData(hideProfile = false, hideNavigation = true)
-        super.onDestroyView()
-    }
-
-    private fun setParentData(hideProfile: Boolean, hideNavigation: Boolean) {
-        val myParentActivity = (activity) as ReservationActivity
-        myParentActivity.changeActionBarTitle("Cambiar contraseña")
-        myParentActivity.hideProfileOption(hideProfile)
-        myParentActivity.hideNavigationOption(hideNavigation)
-    }
+//    private fun setParentData(hideProfile: Boolean, hideNavigation: Boolean) {
+//        val myParentActivity = (activity) as ReservationActivity
+//        myParentActivity.changeActionBarTitle("Cambiar contraseña")
+////        myParentActivity.hideProfileOption(hideProfile)
+//        myParentActivity.hideNavigationOption(false)
+//    }
 
     override fun showSuccessToast() {
         Toast.makeText(context!!, "Contraseña actualizada", Toast.LENGTH_SHORT).show()
+
+        NavigationHelper.changeFragment(
+            fragmentManager!!, R.id.main_container,
+            ProfileFragment(),
+            "ProfileFragment"
+        )
     }
 
     private fun subscribeLiveData() {
         model.validationMessage.observe(this, Observer {
             Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
-            Log.d("validation", it)
         })
+
+        model.showError.observe(this, Observer {
+            if (it != "") {
+                Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    override fun navigationBack() {
+        activity!!.onBackPressed()
     }
 }

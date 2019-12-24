@@ -53,40 +53,40 @@ class LoginFragment : Fragment(), LoginNavigator {
 
         callbackManager = CallbackManager.Factory.create()
 
-        login_fbbutton.setOnClickListener {
-            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
-
-            LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-                override fun onSuccess(result: LoginResult?) {
-                    val request = GraphRequest.newMeRequest(result!!.accessToken) { `object`, response ->
-                        try {
-                            //here is the data that you want
-                            val email = `object`.get("email").toString()
-                            val name = `object`.get("name").toString()
-//                            Log.d("fb_result", `object`.toString())
-                            model.facebookSignIn(email, name)
-
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-//                            dismissDialogLogin()
-                        }
-                    }
-
-                    val parameters = Bundle()
-                    parameters.putString("fields", "name,email,id,picture.type(large)")
-                    request.parameters = parameters
-                    request.executeAsync()
-                }
-
-                override fun onCancel() {
-                    Log.d("fb_result", "cancel")
-                }
-
-                override fun onError(error: FacebookException?) {
-                    Log.d("fb_result", error.toString())
-                }
-            })
-        }
+//        login_fbbutton.setOnClickListener {
+//            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
+//
+//            LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+//                override fun onSuccess(result: LoginResult?) {
+//                    val request = GraphRequest.newMeRequest(result!!.accessToken) { `object`, response ->
+//                        try {
+//                            //here is the data that you want
+//                            val email = `object`.get("email").toString()
+//                            val name = `object`.get("name").toString()
+////                            Log.d("fb_result", `object`.toString())
+//                            model.facebookSignIn(email, name)
+//
+//                        } catch (e: Exception) {
+//                            e.printStackTrace()
+////                            dismissDialogLogin()
+//                        }
+//                    }
+//
+//                    val parameters = Bundle()
+//                    parameters.putString("fields", "name,email,id,picture.type(large)")
+//                    request.parameters = parameters
+//                    request.executeAsync()
+//                }
+//
+//                override fun onCancel() {
+//                    Log.d("fb_result", "cancel")
+//                }
+//
+//                override fun onError(error: FacebookException?) {
+//                    Log.d("fb_result", error.toString())
+//                }
+//            })
+//        }
 
         model.setNavigator(this)
         subscribeLiveData()
@@ -109,6 +109,10 @@ class LoginFragment : Fragment(), LoginNavigator {
             if  (it != "") {
                 Toast.makeText(context!!, it , Toast.LENGTH_SHORT).show()
             }
+        })
+
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
         })
     }
 

@@ -32,6 +32,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.lifecycle.Observer
 
 class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListener, ServiceTypeNavigator {
 
@@ -52,7 +53,6 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
         fun newInstance(data: ArrayList<ServiceType>, service: Service) = ServiceTypeFragment().apply {
             this.list = data
             this.service = service
-            Log.d(TAG, service.toString())
         }
     }
 
@@ -70,14 +70,9 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        calendarView = calendar?.also {
-//            it.setDayClickedListener(this)
-//        }
-
         model.setNavigator(this)
         binding.setVariable(BR.viewModel, model)
-
-//        setSpinnerData()
+        subscribeLiveData()
     }
 
     override fun showContactUsModelDialog() {
@@ -107,20 +102,12 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
             }
 
             tvHour.text = selectedHour
+            val hour = "$h:$m"
+            model.hour.set(hour)
 
-            Toast.makeText(context!!, selectedHour, Toast.LENGTH_LONG).show()
 
         }),11, 12,false)
         tpDialog.show()
-    }
-
-    private fun setSpinnerData() {
-        spinner = view!!.findViewById(R.id.sp_schedule)
-        val turnAdapter = ArrayAdapter.createFromResource(context!!, R.array.turn_list, R.layout.item_simple_spinner)
-            .also {
-                it.setDropDownViewResource(R.layout.item_simple_spinner)
-            }
-        spinner.adapter = turnAdapter
     }
 
     override fun onDayClicked(date: Date) {
@@ -166,5 +153,11 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
                 NavigationHelper.redirectTo(activity!!, SummaryActivity::class.java)
             }
         }
+    }
+
+    private fun subscribeLiveData() {
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+        })
     }
 }

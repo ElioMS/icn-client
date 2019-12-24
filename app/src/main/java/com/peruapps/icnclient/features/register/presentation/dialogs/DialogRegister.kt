@@ -6,9 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.peruapps.icnclient.R
+import com.peruapps.icnclient.helpers.NavigationHelper
 import kotlinx.android.synthetic.main.custom_dialog_contact_us.*
 
-class DialogRegister (context: Context, style: Int) : Dialog(context, style) {
+class DialogRegister (context: Context,
+                      style: Int,
+                      var closeDialog: () -> Unit) : Dialog(context, style) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +21,9 @@ class DialogRegister (context: Context, style: Int) : Dialog(context, style) {
     }
 
     private fun initEvents() {
-        btnCLoseContactUs.setOnClickListener { this.dismiss() }
+        btnCLoseContactUs.setOnClickListener {
+            closeDialog.invoke()
+            this.dismiss()
+        }
     }
 }

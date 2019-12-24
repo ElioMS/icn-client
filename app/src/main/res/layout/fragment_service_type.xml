@@ -124,7 +124,7 @@
                             android:layout_toStartOf="@+id/ivTimePicker"
                             android:padding="15dp"
                             android:layout_centerVertical="true"
-                            android:text="Horas"/>
+                            android:text=""/>
 
                     <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/ivTimePicker"

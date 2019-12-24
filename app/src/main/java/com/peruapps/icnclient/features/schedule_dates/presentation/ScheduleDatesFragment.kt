@@ -48,10 +48,17 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
 
     private lateinit var currentService: Service
     private var currentServiceType: ServiceType? = null
+    private var price: Float? = null
 
 
     companion object {
-        fun setData(category: Int, service: Service, serviceType: ServiceType? = null, dates: ArrayList<AppointmentDate>, scheduleType: Int?) = ScheduleDatesFragment().apply {
+        fun setData(category: Int,
+                    service: Service,
+                    serviceType: ServiceType? = null,
+                    dates: ArrayList<AppointmentDate>,
+                    scheduleType: Int?,
+                    price: Float? = null) = ScheduleDatesFragment().apply {
+
             this.selectedDatesList = dates
             this.currentCategory = category
 
@@ -60,6 +67,7 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
 
             this.currentService = service
 
+            price?.let { this.price = price }
             serviceType?.let { this.currentServiceType = it }
             scheduleType?.let { this.scheduleType = it }
         }
@@ -90,6 +98,7 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
         model.addDates(selectedDatesList)
         model.service.set(currentService)
         model.serviceType.set(currentServiceType)
+        model.price.set(price)
 
         val timePicker = view.findViewById(R.id.timePicker) as TimePicker
 
@@ -137,9 +146,11 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
 
         when (scheduleType) {
             0 -> {
-                model.appointmentAdapter.items[model.selectedAppointmentDate.get()!!].hour = "$hourOfDay:$min"
-                model.appointmentAdapter.items[model.selectedAppointmentDate.get()!!].stringHour = "$hourOfDay:$min $meridiem"
-                model.appointmentAdapter.notifyDataSetChanged()
+                model.selectedAppointmentDate.get()?.let {
+                    model.appointmentAdapter.items[it].hour = "$hourOfDay:$min"
+                    model.appointmentAdapter.items[it].stringHour = "$hourOfDay:$min $meridiem"
+                    model.appointmentAdapter.notifyDataSetChanged()
+                }
             }
             else -> {
                 model.appointmentAdapter.items.forEach {

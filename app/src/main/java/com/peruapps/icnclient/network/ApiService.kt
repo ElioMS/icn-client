@@ -66,7 +66,7 @@ interface ApiService {
                               @Part("document_type") documentType: RequestBody,
                               @Part("document_number") documentNumber: RequestBody,
                               @Part("address") address: RequestBody,
-                              @Part("address_reference") addressReference: RequestBody): Response<Unit>
+                              @Part("address_reference") addressReference: RequestBody? = null): Response<Unit>
 
     @PUT("me/changepassword")
     suspend fun changePassword(@Body data: PasswordRequest): ResponseBody

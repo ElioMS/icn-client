@@ -35,6 +35,9 @@ class PasswordFragment : Fragment(), RegisterNavigator {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        registerViewModel.resetMessage()
+
         registerViewModel.setNavigator(this)
         binding.setVariable(BR.viewModel, registerViewModel)
 
@@ -49,7 +52,7 @@ class PasswordFragment : Fragment(), RegisterNavigator {
     }
 
     override fun showPasswordView() {
-        NavigationHelper.redirectTo(activity!!, ReservationActivity::class.java, false)
+        NavigationHelper.redirectTo(activity!!, ReservationActivity::class.java, true)
     }
 
     private fun initFragmentEvents() {

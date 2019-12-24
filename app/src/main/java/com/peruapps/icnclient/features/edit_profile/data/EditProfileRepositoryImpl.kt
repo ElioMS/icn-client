@@ -18,7 +18,7 @@ class EditProfileRepositoryImpl(private val apiService: ApiService) : EditProfil
         documentType: Int,
         documentNumber: String,
         address: String,
-        addressReference: String
+        addressReference: String?
     ): Response<Unit> {
 
         var body: MultipartBody.Part? = null
@@ -35,7 +35,10 @@ class EditProfileRepositoryImpl(private val apiService: ApiService) : EditProfil
         val rbDocumentType = RequestBody.create(MediaType.parse("text/plain"), documentType.toString())
         val rbDocumentNumber = RequestBody.create(MediaType.parse("text/plain"), documentNumber)
         val rbAddress = RequestBody.create(MediaType.parse("text/plain"), address)
-        val rbAddressReference = RequestBody.create(MediaType.parse("text/plain"), addressReference)
+
+        val rbAddressReference = addressReference?.let {
+             RequestBody.create(MediaType.parse("text/plain"), addressReference)
+        }
 
         return apiService.updateProfile(body, fPhoneNumber, fEmail, fGender, fAge, rbDocumentType, rbDocumentNumber, rbAddress, rbAddressReference)
     }

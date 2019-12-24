@@ -32,11 +32,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import com.peruapps.icnclient.BuildConfig
+import com.peruapps.icnclient.features.profile.presentation.ProfileFragment
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.lifecycle.Observer
 
 
 class EditProfileFragment : Fragment(), EditProfileNavigator{
@@ -73,11 +75,7 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
         spGender.adapter = monthAdapter
 
         setParentData(true)
-    }
-
-    override fun onDestroyView() {
-//        setParentData(false)
-        super.onDestroyView()
+        subscribeLiveData()
     }
 
     private fun setParentData(value: Boolean) {
@@ -93,6 +91,10 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
 
     override fun updateUserData() {
         Toast.makeText(context!!, "Perfil actualizado", Toast.LENGTH_SHORT).show()
+
+        NavigationHelper.changeFragment(fragmentManager!!, R.id.main_container,
+            ProfileFragment(),
+            "ProfileFragment")
     }
 
     override fun showGalleryDialog() {
@@ -211,4 +213,15 @@ class EditProfileFragment : Fragment(), EditProfileNavigator{
         activity!!.onBackPressed()
     }
 
+    private fun subscribeLiveData() {
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+        })
+
+        model.showError.observe(this, Observer {
+            if  (it != "") {
+                Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
