@@ -157,7 +157,7 @@
 
         <RelativeLayout
                 android:id="@+id/nursesCounter"
-                android:visibility="@{ safeUnbox(viewModel.categoryId == 2) ? View.VISIBLE : View.GONE }"
+                android:visibility="@{ safeUnbox(viewModel.service.id == 5) ? View.VISIBLE : View.GONE }"
                 android:layout_below="@+id/spPersonal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -210,7 +210,7 @@
 
         <RelativeLayout
                 android:layout_below="@+id/nursesCounter"
-                android:visibility="@{ safeUnbox(viewModel.categoryId == 2) ? View.VISIBLE : View.GONE }"
+                android:visibility="@{ safeUnbox(viewModel.service.id == 6) ? View.VISIBLE : View.GONE }"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -264,6 +264,7 @@
 
         <LinearLayout
                 android:id="@+id/btn_next"
+                android:visibility="@{ safeUnbox(viewModel.categoryId == 1) ? View.VISIBLE : View.GONE }"
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:gravity="center"
@@ -278,6 +279,27 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="22sp"
                     android:text="@string/button_generate"
+                    android:fontFamily="@font/muli_bold"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/btn_next_nurses"
+                android:visibility="@{ safeUnbox(viewModel.categoryId == 2) ? View.VISIBLE : View.GONE }"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_height="60dp"
+                android:background="@color/colorPrimary"
+                android:layout_alignParentBottom="true"
+                android:onClick="@{ () -> viewModel.createPersonalAppointment( )}">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="22sp"
+                    android:text="@string/button_next"
                     android:fontFamily="@font/muli_bold"
             />
         </LinearLayout>

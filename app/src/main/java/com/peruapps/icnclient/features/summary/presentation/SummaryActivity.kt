@@ -33,6 +33,8 @@ import androidx.lifecycle.Observer
 
 class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigator {
 
+    val TAG = SummaryActivity::class.java.simpleName
+
     val model: SummaryViewModel by viewModel()
     private lateinit var mMap: GoogleMap
 
@@ -63,6 +65,7 @@ class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigato
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
+                Log.d(TAG, place.toString())
                 val location = place.latLng
                 mMap.clear()
                 mMap.addMarker(MarkerOptions().position(location!!))

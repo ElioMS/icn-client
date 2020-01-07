@@ -101,19 +101,23 @@ class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRe
                 true -> getNavigator().showNextView("CALENDAR")
                 false -> {
 
-                    startJob {
-                        serviceDetailRepository.insert(
-                            ServiceDetail(
-                                serviceId = service.get()!!.id,
-                                serviceName = service.get()!!.name,
-                                serviceTypeId = null,
-                                serviceTypeName = null,
-                                price = service.get()!!.price!!
+                    if (hour.get() == "") {
+                        _validationMessage.value = R.string.validation_service_type_hour
+                    } else {
+                        startJob {
+                            serviceDetailRepository.insert(
+                                ServiceDetail(
+                                    serviceId = service.get()!!.id,
+                                    serviceName = service.get()!!.name,
+                                    serviceTypeId = null,
+                                    serviceTypeName = null,
+                                    price = service.get()!!.price!!
+                                )
                             )
-                        )
-                    }
+                        }
 
-                    getNavigator().showNextView("SUMMARY")
+                        getNavigator().showNextView("SUMMARY")
+                    }
                 }
             }
         }

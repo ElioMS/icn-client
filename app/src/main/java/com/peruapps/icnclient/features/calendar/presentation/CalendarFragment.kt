@@ -26,6 +26,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.lifecycle.Observer
+import com.peruapps.icnclient.extensions.toDate
+import com.peruapps.icnclient.features.summary.presentation.SummaryActivity
 
 class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, CalendarNavigator {
 
@@ -106,31 +108,37 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
     }
 
     override fun onDayClicked(date: Date) {
-        val formatDate = SimpleDateFormat("yyy-MM-dd").format(date)
-        // Get the week day with spanish locale
-        val spanish =  Locale("es", "ES")
-        val weekdayName = SimpleDateFormat("EEEE dd", spanish).format(date)
+        val currentDate = Date()
 
-        val appointmentDate = AppointmentDate(weekdayName.capitalize(),"", formatDate, 0,0, 1000)
+        if (date.date >= currentDate.date) {
+            val spanish =  Locale("es", "ES")
 
-        if (!days.contains(appointmentDate)) {
-            days.add(appointmentDate)
+            val formatDate = SimpleDateFormat("yyy-MM-dd", spanish).format(date)
+            val weekdayName = SimpleDateFormat("EEEE dd", spanish).format(date)
+
+            val appointmentDate = AppointmentDate(weekdayName.capitalize(),"", formatDate, 1,1, 1000)
+
+            if (!days.contains(appointmentDate)) {
+                days.add(appointmentDate)
+            } else {
+                days.remove(appointmentDate)
+            }
+
+            days.sortBy { selector(it) }
+            model.scheduledDates.value = days
+
+            var newPrice = 0f
+
+            model.serviceType.get()?.let {
+                newPrice = days.size * it.price!!
+            } ?: run {
+                newPrice = days.size * service.price
+            }
+
+            model.price.set(newPrice)
         } else {
-            days.remove(appointmentDate)
+            Toast.makeText(context!!, "Horario de atención no disponible", Toast.LENGTH_LONG).show()
         }
-
-        days.sortBy { selector(it) }
-        model.scheduledDates.value = days
-
-        var newPrice = 0f
-
-        model.serviceType.get()?.let {
-            newPrice = days.size * it.price!!
-        } ?: run {
-            newPrice = days.size * service.price
-        }
-
-        model.price.set(newPrice)
     }
 
     private fun selector(p: AppointmentDate): String = p.date
@@ -150,10 +158,7 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
                     "ScheduleDatesFragment")
             }
             "SUMMARY" -> {
-//                NavigationHelper.changeFragment(fragmentManager!!,
-//                    R.id.main_container,
-//                    SummaryFragment(),
-//                    "SummaryFragment")
+                NavigationHelper.redirectTo(activity!!, SummaryActivity::class.java)
             }
         }
     }

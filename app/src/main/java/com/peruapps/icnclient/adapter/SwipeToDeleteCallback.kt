@@ -35,6 +35,7 @@ abstract class SwipeToDeleteCallback : ItemTouchHelper.SimpleCallback(0, ItemTou
     ) {
 
         val itemView = viewHolder.itemView
+        val itemHeight = itemView.bottom - itemView.top
 
         // Draw the red delete background
         background.color = backgroundColor
@@ -49,10 +50,15 @@ abstract class SwipeToDeleteCallback : ItemTouchHelper.SimpleCallback(0, ItemTou
 
         val inbox = itemView.context.resources.getString(R.string.text_delete)
         val paint = Paint()
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(40F);
-        paint.setTextAlign(Paint.Align.CENTER);
-        c.drawText(inbox, itemView.right.toFloat() - 200, itemView.height.toFloat() / 2, paint)
+
+        paint.setColor(Color.WHITE)
+        paint.setTextSize(40F)
+        paint.setTextAlign(Paint.Align.CENTER)
+
+        val textTop = itemView.top + (itemHeight) / 2
+        val textRight = itemView.right - 150
+
+        c.drawText(inbox, textRight.toFloat(), textTop.toFloat(), paint)
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }
@@ -60,4 +66,8 @@ abstract class SwipeToDeleteCallback : ItemTouchHelper.SimpleCallback(0, ItemTou
 //    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 //    }
+
+    override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
+        return 0.7f
+    }
 }

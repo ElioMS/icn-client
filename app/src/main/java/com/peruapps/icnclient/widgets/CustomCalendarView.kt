@@ -63,22 +63,27 @@ class CustomCalendarView @JvmOverloads constructor(context: Context,
 
         // Depending on your needs, you would have to set
         // a background instead of backgroundColor.
+        val currentDate = Date()
+        val clickedDay  = Integer.valueOf(dayOfTheMonthText.text.toString())
+//        Log.d("calendar", "click $clickedDay - current ${currentDate.date}")
 
-        if (shouldPaintDateView(calendar.time.time.toDate())) {
-            dayOfTheMonthText.apply {
-                setBackgroundResource(R.drawable.background_day_of_the_month)
-                setTextColor(Color.WHITE)
+        if  (clickedDay >= currentDate.date ) {
+            if (shouldPaintDateView(calendar.time.time.toDate())) {
+
+                dayOfTheMonthText.apply {
+                    setBackgroundResource(R.drawable.background_day_of_the_month)
+                    setTextColor(Color.WHITE)
+                }
+            } else {
+
+                dayOfTheMonthText.apply {
+                    setBackgroundResource(R.drawable.background_day_of_the_month_none)
+                    setTextColor(ContextCompat.getColor(this.context, R.color.colorSecondaryText))
+                }
             }
         } else {
-
-            dayOfTheMonthText.apply {
-//                setBackgroundColor(Color.parseColor("#ffffff"))
-                setBackgroundResource(R.drawable.background_day_of_the_month_none)
-                setTextColor(ContextCompat.getColor(this.context, R.color.colorSecondaryText))
-            }
-//            dayOfTheMonthText.setBackgroundColor(Color.parseColor("#ffffff"))
+            Log.d("calendar", "Menor ${calendar.time.time.toDate()}")
         }
-
 
         // Fire event
         checkNotNull(calendarListener) { "You must assign a valid CustomCalendarListener first!" }

@@ -38,6 +38,11 @@ class AppointmentAdapter(var items: MutableList<AppointmentDate>,
         val date = holder.date
         val hour = holder.hour
 
+        if  (lastCheckedPosition == -1) {
+            lastCheckedPosition = 0
+            verifyState(layout, date, hour)
+        }
+
         if (position == lastCheckedPosition) {
             verifyState(layout, date, hour)
         }

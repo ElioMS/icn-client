@@ -97,9 +97,13 @@ fun <T> setItemSummaryDetailAdapter(recyclerView: RecyclerView, masterAdapter: I
 @BindingAdapter("turnAdapter")
 fun <T> setTurnAdapter(textView: TextView, position: AppointmentDate) {
     val data = when (position.turn) {
-        0 -> "Día"
-        1 -> "Noche"
-        2 -> "24 hrs"
+        0 -> "Mañana"
+        1 -> "Tarde"
+        2 -> "Noche"
+        3 -> "Mañana-Tarde"
+        4 -> "Mañana-Tarde-Noche"
+        5 -> "Tarde-Noche"
+        6 -> "Noche-Mañana"
         else -> position.stringHour
     }
     textView.text = data

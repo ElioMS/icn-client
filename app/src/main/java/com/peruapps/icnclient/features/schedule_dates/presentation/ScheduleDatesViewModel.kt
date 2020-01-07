@@ -5,31 +5,41 @@ import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.peruapps.icnclient.R
 import com.peruapps.icnclient.adapter.AppointmentAdapter
 import com.peruapps.icnclient.model.AppointmentDate
 import com.peruapps.icnclient.model.Service
 import com.peruapps.icnclient.model.ServiceType
+import com.peruapps.icnclient.room.entity.PersonalTable
 import com.peruapps.icnclient.room.entity.ServiceDetail
+import com.peruapps.icnclient.room.repository.PersonalTableRepository
 import com.peruapps.icnclient.room.repository.ServiceDetailRepository
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
-class ScheduleDatesViewModel(private val serviceDetailRepository: ServiceDetailRepository): BaseViewModel<ScheduleDatesNavigator>() {
+class ScheduleDatesViewModel(
+    private val serviceDetailRepository: ServiceDetailRepository,
+    private val personalTableRepository: PersonalTableRepository
+) : BaseViewModel<ScheduleDatesNavigator>() {
 
-    val appointmentAdapter = AppointmentAdapter(arrayListOf()) {
-            model, position -> setHour(model, position)
+    val appointmentAdapter = AppointmentAdapter(arrayListOf()) { model, position ->
+        setHour(model, position)
     }
 
     val service = ObservableField<Service>()
     val serviceType = ObservableField<ServiceType>()
 
     var categoryId = ObservableField<Int>()
-    val selectedAppointmentDate = ObservableField<Int>()
+    val selectedAppointmentDate = ObservableField(0)
 
     val scheduledDates = MutableLiveData<ArrayList<AppointmentDate>>()
 
-    var nursesCount = ObservableInt(0)
-    var techniciansCount = ObservableInt(0)
+    var nursesCount = ObservableInt(1)
+    var techniciansCount = ObservableInt(1)
     var price = ObservableField<Float>()
+
+    private val _validationMessage = MutableLiveData<Int>()
+    val validationMessage: LiveData<Int>
+        get() = _validationMessage
 
     private fun setHour(model: AppointmentDate, position: Int) {
         selectedAppointmentDate.set(position)
@@ -44,6 +54,59 @@ class ScheduleDatesViewModel(private val serviceDetailRepository: ServiceDetailR
     }
 
     fun createAppointment() {
+
+        val hours = appointmentAdapter.items.map { it.stringHour }
+
+        if (hours.contains("")) {
+            _validationMessage.value = R.string.validation_empty
+        } else {
+            saveAppointmentsDatabase()
+            getNavigator().showSummaryView()
+        }
+    }
+
+    fun createPersonalAppointment() {
+        val turns = appointmentAdapter.items.map { it.turnToString() }
+
+        if (turns.contains("")) {
+            _validationMessage.value = R.string.validation_empty
+        } else {
+            val currentServiceType = service.get()!!
+
+            val type: Int = when (currentServiceType.id) {
+                5 -> 1
+                else -> 2
+            }
+
+            startJob {
+                val id = serviceDetailRepository.insert(
+                    ServiceDetail(
+                        serviceId = service.get()!!.id,
+                        serviceName = service.get()!!.name,
+                        serviceTypeId = serviceType.get()?.id,
+                        serviceTypeName = serviceType.get()?.name,
+                        price = serviceType.get()?.let { it.price!! * appointmentAdapter.items.size } ?: run { service.get()!!.price * appointmentAdapter.items.size }
+                    )
+                )
+
+                appointmentAdapter.items.forEach { x ->
+                    personalTableRepository.insert(
+                        PersonalTable(
+                            hour = "",
+                            turn = x.turn,
+                            quantity = if (service.get()!!.id == 5) nursesCount.get() else techniciansCount.get(),
+                            detailId = id.toInt()
+                        )
+                    )
+                }
+
+                getNavigator().showSummaryView()
+            }
+            Log.d("nurses", type.toString())
+        }
+    }
+
+    private fun saveAppointmentsDatabase() {
         startJob {
             serviceDetailRepository.insert(
                 ServiceDetail(
@@ -55,37 +118,53 @@ class ScheduleDatesViewModel(private val serviceDetailRepository: ServiceDetailR
                 )
             )
         }
-        getNavigator().showSummaryView()
     }
 
     fun incrementValue(value: Int) {
-        when(value) {
-            0 ->{
-                nursesCount.set(nursesCount.get().plus(1))
-                scheduledDates.value!![selectedAppointmentDate.get()!!].nurses = nursesCount.get()
+        when (value) {
+            0 -> {
+                val nurses = nursesCount.get()
+
+                if (nurses < 2) {
+                    nursesCount.set(nursesCount.get().plus(1))
+                    scheduledDates.value!![selectedAppointmentDate.get()!!].nurses = nursesCount.get()
+                } else {
+                    _validationMessage.value = R.string.validation_max_personal
+                }
             }
             else -> {
-                techniciansCount.set(techniciansCount.get().plus(1))
-                scheduledDates.value!![selectedAppointmentDate.get()!!].technicians = techniciansCount.get()
+                val technicians = techniciansCount.get()
+
+                if (technicians < 2) {
+                    techniciansCount.set(techniciansCount.get().plus(1))
+                    scheduledDates.value!![selectedAppointmentDate.get()!!].technicians = techniciansCount.get()
+                } else {
+                    _validationMessage.value = R.string.validation_max_personal
+                }
             }
         }
-
 
 
     }
 
     fun decrementValue(value: Int) {
-        when(value) {
+        when (value) {
             0 -> {
-                if (nursesCount.get() > 0) {
+                val nurses = nursesCount.get()
+
+                if (nurses > 1) {
                     nursesCount.set(nursesCount.get().minus(1))
                     scheduledDates.value!![selectedAppointmentDate.get()!!].nurses = nursesCount.get()
+                } else {
+                    _validationMessage.value = R.string.validation_min_personal
                 }
             }
             else -> {
-                if (techniciansCount.get() > 0) {
+                if (techniciansCount.get() > 1) {
                     techniciansCount.set(techniciansCount.get().minus(1))
                     scheduledDates.value!![selectedAppointmentDate.get()!!].technicians = techniciansCount.get()
+                } else {
+                    _validationMessage.value = R.string.validation_min_personal
                 }
             }
         }

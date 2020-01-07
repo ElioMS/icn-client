@@ -3,8 +3,8 @@ package com.peruapps.icnclient.model
 data class AppointmentDate(val string_date: String,
                            var hour: String,
                            val date: String,
-                           var nurses: Int = 0,
-                           var technicians: Int = 0,
+                           var nurses: Int = 1,
+                           var technicians: Int = 1,
                            var turn: Int?,
                            var stringHour: String? = "") {
 

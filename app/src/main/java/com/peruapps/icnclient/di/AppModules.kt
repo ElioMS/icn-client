@@ -50,6 +50,8 @@ import com.peruapps.icnclient.features.summary_detail.presentation.SummaryDetail
 import com.peruapps.icnclient.network.ApiService
 import com.peruapps.icnclient.network.BasicAuthInterceptor
 import com.peruapps.icnclient.room.database.AppDatabase
+import com.peruapps.icnclient.room.repository.PersonalTableRepository
+import com.peruapps.icnclient.room.repository.PersonalTableRepositoryImpl
 import com.peruapps.icnclient.room.repository.ServiceDetailRepository
 import com.peruapps.icnclient.room.repository.ServiceDetailRepositoryImpl
 import okhttp3.Cache
@@ -92,7 +94,7 @@ val retrofitModules = module {
         Retrofit.Builder()
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://192.168.1.37:8000/api/v1/")
+            .baseUrl("http://192.168.1.9:8000/api/v1/")
             .build()
     }
 }
@@ -105,6 +107,7 @@ val roomModule = module {
     single { AppDatabase.buildDatabase(androidContext()) }
     single { get<AppDatabase>().serviceDetailDAO() }
     single { get<AppDatabase>().substanceDao() }
+    single { get<AppDatabase>().personalDao() }
 }
 
 val repositoryModule = module {
@@ -119,6 +122,7 @@ val repositoryModule = module {
     single<ForgotPasswordRepository> { ForgotPasswordRepositoryImpl(get()) }
     single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get(), get()) }
     single<ServiceDetailRepository> { ServiceDetailRepositoryImpl(get()) }
+    single<PersonalTableRepository> { PersonalTableRepositoryImpl(get()) }
 }
 
 val viewModelModule = module {
@@ -130,7 +134,7 @@ val viewModelModule = module {
     viewModel { ServiceTypeViewModel(get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { CalendarViewModel() }
-    viewModel { ScheduleDatesViewModel(get()) }
+    viewModel { ScheduleDatesViewModel(get(), get()) }
     viewModel { SubstancesViewModel(get(), get()) }
     viewModel { NursingStaffViewModel() }
     viewModel { SubstanceDialogViewModel(get()) }

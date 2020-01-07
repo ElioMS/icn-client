@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="model"
@@ -24,6 +24,8 @@
                   app:layout_constraintStart_toStartOf="parent"
                   android:layout_marginStart="8dp"
                   android:id="@+id/textView14"
+                  android:fontFamily="@font/muli_bold"
+                  tools:text="Servicio básico"
                   app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
@@ -31,7 +33,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="S/ 200"
+                tools:text="200"
+                android:fontFamily="@font/muli_bold"
+                android:text="@{ `S/ ` +model.price }"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintTop_toTopOf="parent"/>

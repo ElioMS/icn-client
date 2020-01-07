@@ -143,13 +143,19 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
             val month = if (currentMonth < 10) "0"+currentMonth else currentMonth
             val day = if (selectedDay < 10) "0"+selectedDay else selectedDay
 
-            val date = calendar.time
-            val spanish = Locale("es", "ES")
-            val formatDate = SimpleDateFormat("yyy-MM-dd", spanish).format(date)
-            val weekdayName = SimpleDateFormat("MMMM dd", spanish).format(date)
+            if  (selectedDay >= Date().date) {
+                val date = calendar.time
+                val spanish = Locale("es", "ES")
+                val formatDate = SimpleDateFormat("yyy-MM-dd", spanish).format(date)
+                val weekdayName = SimpleDateFormat("MMMM dd", spanish).format(date)
 
-            model.dateToString.set(weekdayName.capitalize())
-            model.isoDate.set(formatDate)
+                model.dateToString.set(weekdayName.capitalize())
+                model.isoDate.set(formatDate)
+            } else {
+                Toast.makeText(context!!, "Horario de atención no disponible", Toast.LENGTH_LONG).show()
+            }
+
+
 
 //            Log.d("picker_dialog", weekdayName.capitalize())
         }

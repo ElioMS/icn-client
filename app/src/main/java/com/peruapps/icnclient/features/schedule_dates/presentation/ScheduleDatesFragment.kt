@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.peruapps.icnclient.BR
@@ -60,11 +61,9 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
                     price: Float? = null) = ScheduleDatesFragment().apply {
 
             this.selectedDatesList = dates
+            Log.d("dates", dates.toString())
+
             this.currentCategory = category
-
-            Log.d(TAG, service.toString())
-            Log.d(TAG, serviceType.toString())
-
             this.currentService = service
 
             price?.let { this.price = price }
@@ -73,11 +72,6 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        subscribeToLiveData()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -119,10 +113,14 @@ class ScheduleDatesFragment : Fragment(), ScheduleDatesNavigator {
         }
 
         timePicker.setOnTimeChangedListener { view, hourOfDay, minute -> updateDisplay(hourOfDay, minute) }
+
+        subscribeLiveData()
     }
 
-    private fun subscribeToLiveData() {
-
+    private fun subscribeLiveData() {
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun updateDisplay(hourOfDay: Int, minute: Int) {

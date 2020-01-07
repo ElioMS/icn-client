@@ -31,8 +31,8 @@
     <string name="text_gallery">Galería</string>
     <string name="text_camera">Cámara</string>
     <string name="text_logout">Cerrar sesión</string>
-    <string name="category_nurse">Procedimientos de enfermería</string>
-    <string name="category_technician">Personal de enfermería o técnico de enfermería</string>
+    <string name="category_nurse">Procedimientos \n de enfermería</string>
+    <string name="category_technician">Personal de enfermería \n Técnico de enfermería</string>
 
     <string name="category_technician_text">Personal de \n enfermería o Técnico \n de enfermería</string>
 
@@ -83,7 +83,7 @@
     <string name="text_no_appointments">No tienes servicios pendientes</string>
     <string name="text_delete">Eliminar</string>
     <string name="text_generate">Generar</string>
-    <string name="add_new_substance">Agregar otra sustancia</string>
+    <string name="add_new_substance">Agregar sustancia</string>
     <string name="success_reservation_message">Nos contactaremos contigo \n para finalizar el servicio</string>
     <string name="text_ruc">RUC</string>
     <string name="text_business_name">Razón social</string>
@@ -120,9 +120,13 @@
     </string-array>
 
     <string-array name="turn_list">
-        <item>Día</item>
+        <item>Mañana</item>
+        <item>Tarde</item>
         <item>Noche</item>
-        <item>24 hrs</item>
+        <item>Mañana-Tarde</item>
+        <item>Mañana-Tarde-Noche</item>
+        <item>Tarde-Noche</item>
+        <item>Noche-Mañana</item>
     </string-array>
 
     <string-array name="period_list">
@@ -159,4 +163,7 @@
     <string name="validation_ruc">Formato de RUC incorrecto</string>
     <string name="validation_phone_number">Formato de celular incorrecto</string>
     <string name="validation_blank_space">La contraseña no debe contener espacios en blanco</string>
+    <string name="validation_max_days">Mínimo 1 día y máximo 2 días</string>
+    <string name="validation_max_personal">Como máximo 2 enfermeras</string>
+    <string name="validation_min_personal">Como mínimo 1 enfermera</string>
 </resources>
