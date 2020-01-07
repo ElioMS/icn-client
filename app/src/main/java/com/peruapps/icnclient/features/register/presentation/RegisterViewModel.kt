@@ -68,17 +68,14 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
 
         val validation = ValidatorState(true)
 
-        if (name == "") { return validation }
-        if (surname == "") { return validation }
-        if (gender == "") { return validation }
-        if (documentNumber == "") { return validation }
+        if (name == "" || surname == "" || gender == "" || documentNumber == "") { return validation }
 
         documentNumber?.let {
             if  (documentNumber.length != 8 && documentType == 1) {
                 return validation.apply { message = "Formato de DNI incorrecto" }
             }
 
-            if  (documentNumber.length != 15 && documentType == 2) {
+            if  ( (documentNumber.length >= 15 && documentType == 2) || (documentNumber.length <= 1 && documentType == 2)) {
                 return validation.apply { message = "Formato de pasaporte incorrecto" }
             }
         }
@@ -95,8 +92,11 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
             return validation.apply { message = "Formato de correo incorrecto" }
         }
 
-        if (phone == "") { return validation }
-        if (address == "") { return validation }
+        if (phone == "" || address == "") { return validation }
+
+        if  (phone!!.length != 9) {
+            return validation.apply { message = "Formato de celular incorrecto" }
+        }
 
         return ValidatorState(false)
     }
@@ -113,6 +113,14 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
             return validation.apply { message = "La contraseña debe tener como mínimo de 6 caracteres" }
         }
 
+        val numRegex = ".*[0-9].*".toRegex()
+        val alphaRegex = ".*[A-Z].*".toRegex()
+
+        if  ((!password.matches(numRegex) && !password.matches(alphaRegex)) || (!confirmPassword!!.matches(numRegex) && !confirmPassword.matches(alphaRegex))) {
+            return validation.apply { message = "Las contraseña tiene que ser alfanumérica" }
+        }
+
+
         if (password != confirmPassword) {
             return validation.apply { message = "Las contraseñas deben coincidir" }
         }
@@ -126,7 +134,7 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
 
         if  (!validator.status) {
             startJob {
-                val response = repository.createClientAccount(
+                repository.createClientAccount(
                     loadedPicture.get(),
                     name = name.get()!!,
                     surname = surname.get()!!,

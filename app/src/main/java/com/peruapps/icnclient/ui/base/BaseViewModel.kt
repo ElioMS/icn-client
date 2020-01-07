@@ -36,6 +36,10 @@ abstract class BaseViewModel<T> : ViewModel() {
         return navigator?.get()!!
     }
 
+    fun clearHttpError() {
+        _showError.value = ""
+    }
+
     fun setNavigator(navigator: T) {
         this.navigator = WeakReference(navigator)
     }
@@ -50,6 +54,7 @@ abstract class BaseViewModel<T> : ViewModel() {
 
                 if (error is HttpException) {
                     oError = JSONObject(error.response()?.errorBody()!!.string()).optString("description")
+
                     Log.e("viewmodel", oError)
                 }
 //                val message = JSONObject(error.toString()).optString("message")

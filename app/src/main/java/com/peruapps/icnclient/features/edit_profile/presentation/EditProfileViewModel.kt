@@ -132,14 +132,20 @@ class EditProfileViewModel(
     }
 
     private fun validator (): Boolean {
+        val phone = phoneNumber.get()
         val email = email.get()
         val age = age.get()
         val address = address.get()
         val documentType = documentType.get()
         val documentNumber = documentNumber.get()
 
-        if (email == "" || age == "" || address == "" || documentNumber == "") {
+        if (phone == "" || email == "" || age == "" || address == "" || documentNumber == "") {
             _validationMessage.value = R.string.validation_empty
+            return false
+        }
+
+        if  (phone!!.length != 9) {
+            _validationMessage.value = R.string.validation_phone_number
             return false
         }
 
@@ -154,7 +160,7 @@ class EditProfileViewModel(
                 return false
             }
 
-            if  (documentNumber.length != 15 && documentType == 2) {
+            if  ((documentNumber.length >= 15 && documentType == 2) || (documentNumber.length <= 1 && documentType == 2)) {
                 _validationMessage.value = R.string.validation_pasaporte
                 return false
             }

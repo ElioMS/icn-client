@@ -40,7 +40,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.lifecycle.Observer
 
-
 class EditProfileFragment : Fragment(), EditProfileNavigator{
 
     private lateinit var binding: FragmentEditProfileBinding

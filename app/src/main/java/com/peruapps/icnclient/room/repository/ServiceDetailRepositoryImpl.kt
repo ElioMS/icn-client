@@ -5,6 +5,14 @@ import com.peruapps.icnclient.room.entity.ServiceDetail
 
 class ServiceDetailRepositoryImpl (private val serviceDetailDao: ServiceDetailDao): ServiceDetailRepository {
 
+    override suspend fun deleteById(id: Int) {
+        serviceDetailDao.deleteById(id)
+    }
+
+    override suspend fun findById(id: Int): ServiceDetail {
+        return serviceDetailDao.findById(id)
+    }
+
     override suspend fun deleteAll() {
         serviceDetailDao.deleteAll()
     }
@@ -17,7 +25,7 @@ class ServiceDetailRepositoryImpl (private val serviceDetailDao: ServiceDetailDa
         return serviceDetailDao.list()
     }
 
-    override suspend fun insert(data: ServiceDetail) {
-        serviceDetailDao.insert(data)
+    override suspend fun insert(data: ServiceDetail): Long {
+        return serviceDetailDao.insert(data)
     }
 }

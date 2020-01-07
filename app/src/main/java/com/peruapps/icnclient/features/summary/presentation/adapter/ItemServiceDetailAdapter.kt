@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceDetailAdapter
 import com.peruapps.icnclient.room.entity.ServiceDetail
 
-class ItemServiceDetailAdapter(var items: MutableList<ServiceDetail>) :
+class ItemServiceDetailAdapter(var items: MutableList<ServiceDetail>,
+                               var listener: (ServiceDetail, Int) -> Unit) :
     RecyclerView.Adapter<ItemServiceDetailViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemServiceDetailViewHolder {
@@ -27,6 +28,10 @@ class ItemServiceDetailAdapter(var items: MutableList<ServiceDetail>) :
     override fun onBindViewHolder(holder: ItemServiceDetailViewHolder, position: Int) {
         val model = items[position]
         holder.bind(model)
+
+        holder.expand.setOnClickListener {
+            listener.invoke(model, position)
+        }
 
 //       model.data?.let {
 //           val mLayoutManager = LinearLayoutManager(holder.data.context)

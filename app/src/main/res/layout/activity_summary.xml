@@ -48,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{ `S/ `+ viewModel.summaryPrice }"
+                    tools:text="100"
                     android:layout_marginEnd="15dp"
                     android:layout_marginTop="15dp"/>
 
@@ -59,7 +60,8 @@
                     android:layout_margin="10dp"
                     tools:itemCount="1"
                     tools:listitem="@layout/rv_item_summary_service_detail"
-                    app:itemServiceDetailAdapter="@{ viewModel.servicesAdapter }"/>
+                    app:itemServiceDetailAdapter="@{ viewModel.servicesAdapter }"
+                    app:swipeHandler="@{ viewModel.swipeHandler }"/>
 
             <LinearLayout
                     android:id="@+id/addNewService"
@@ -248,20 +250,24 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_gray_rounded_style"
                         android:inputType="" android:padding="15dp"
-                        android:hint="Dirección"
+                        android:hint="@string/text_address"
                         android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"/>
+                        android:layout_marginEnd="15dp"
+                        android:text="@={ viewModel.address }"/>
 
                 <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_gray_rounded_style"
-                        android:inputType="" android:padding="15dp"
-                        android:hint="RUC"
+                        android:inputType="phone"
+                        android:padding="15dp"
+                        android:maxLength="11"
+                        android:hint="@string/text_ruc"
                         android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"/>
+                        android:layout_marginEnd="15dp"
+                        android:text="@={ viewModel.documentNumber }"/>
 
                 <EditText
                         android:id="@+id/etName"
@@ -269,11 +275,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/et_gray_rounded_style"
                         android:inputType="" android:padding="15dp"
-                        android:hint="Razón social"
+                        android:hint="@string/text_business_name"
                         android:layout_marginTop="15dp"
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="15dp"
-                        android:layout_marginBottom="10dp"/>
+                        android:layout_marginBottom="10dp"
+                        android:text="@={ viewModel.businessName }"/>
 
             </LinearLayout>
 

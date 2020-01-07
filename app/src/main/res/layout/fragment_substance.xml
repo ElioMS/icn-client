@@ -275,7 +275,7 @@
                     android:textColor="@color/colorWhite"
                     android:fontFamily="@font/muli_bold"
                     android:textSize="22sp"
-                    android:text="@string/text_generate"/>
+                    android:text="@string/button_next"/>
         </LinearLayout>
 
     </RelativeLayout>

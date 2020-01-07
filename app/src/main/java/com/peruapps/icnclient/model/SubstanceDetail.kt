@@ -9,7 +9,7 @@ data class SubstanceDetail(var substance: Substance? = null,
 
     fun periodToString (): String {
         return when(timePeriod) {
-            0 -> "24 hrs"
+            0 -> "12 hrs"
             1 -> "8 hrs"
             2 -> "6 hrs"
             else -> ""

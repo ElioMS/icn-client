@@ -8,7 +8,6 @@ import com.peruapps.icnclient.features.change_password.data.ChangePasswordReposi
 import com.peruapps.icnclient.model.request.PasswordRequest
 import com.peruapps.icnclient.ui.base.BaseViewModel
 
-
 class ChangePasswordViewModel(
     private val repository: ChangePasswordRepository
 ) : BaseViewModel<ChangePasswordNavigator>() {
@@ -42,14 +41,20 @@ class ChangePasswordViewModel(
             return false
         }
 
+        if (currentPassword!!.contains(" ") || newPassword!!.contains(" ") || confirmPassword!!.contains(" ")) {
+            _validationMessage.value = R.string.validation_blank_space
+            return false
+        }
+
         if (currentPassword?.length!! < 6 || newPassword?.length!! < 6 || confirmPassword?.length!! < 6) {
             _validationMessage.value = R.string.validation_password_min_characters
             return false
         }
 
-        val regex = "^[a-zA-Z0-9]+\$".toRegex()
+        val numRegex = ".*[0-9].*".toRegex()
+        val alphaRegex = ".*[A-Z].*".toRegex()
 
-        if  (!newPassword.matches(regex) || !confirmPassword.matches(regex)) {
+        if  ((!newPassword.matches(numRegex) && !newPassword.matches(alphaRegex)) || (!confirmPassword.matches(numRegex) && !confirmPassword.matches(alphaRegex))) {
             _validationMessage.value = R.string.validation_alphanumeric_password
             return false
         }

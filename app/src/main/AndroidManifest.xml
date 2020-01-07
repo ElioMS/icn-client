@@ -16,6 +16,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".features.summary_detail.presentation.SummaryDetailActivity">
+        </activity>
         <activity android:name=".features.summary.presentation.SummaryActivity">
         </activity>
 

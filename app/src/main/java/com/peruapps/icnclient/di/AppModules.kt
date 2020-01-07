@@ -46,6 +46,7 @@ import com.peruapps.icnclient.features.substances.data.SubstanceRepositoryImpl
 import com.peruapps.icnclient.features.substances.presentation.SubstancesViewModel
 import com.peruapps.icnclient.features.substances.presentation.dialogs.SubstanceDialogViewModel
 import com.peruapps.icnclient.features.summary.presentation.SummaryViewModel
+import com.peruapps.icnclient.features.summary_detail.presentation.SummaryDetailViewModel
 import com.peruapps.icnclient.network.ApiService
 import com.peruapps.icnclient.network.BasicAuthInterceptor
 import com.peruapps.icnclient.room.database.AppDatabase
@@ -91,7 +92,7 @@ val retrofitModules = module {
         Retrofit.Builder()
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://192.168.1.27:8000/api/v1/")
+            .baseUrl("http://192.168.1.37:8000/api/v1/")
             .build()
     }
 }
@@ -103,20 +104,20 @@ val apiModule = module {
 val roomModule = module {
     single { AppDatabase.buildDatabase(androidContext()) }
     single { get<AppDatabase>().serviceDetailDAO() }
+    single { get<AppDatabase>().substanceDao() }
 }
 
 val repositoryModule = module {
     single<LoginRepository> { LoginRepositoryImpl(get(), get()) }
     single<AppointmentRepository> { AppointmentRepositoryImpl(get()) }
     single<ServiceRepository> { ServiceRepositoryImpl(get()) }
-    single<SubstanceRepository> { SubstanceRepositoryImpl(get()) }
+    single<SubstanceRepository> { SubstanceRepositoryImpl(get(), get()) }
     single<NotificationRepository> { NotificationRepositoryImpl(get()) }
     single<EditProfileRepository> { EditProfileRepositoryImpl(get()) }
     single<ChangePasswordRepository> { ChangePasswordRepositoryImpl(get()) }
     single<RegisterRepository> { RegisterRepositoryImpl(get(), get()) }
     single<ForgotPasswordRepository> { ForgotPasswordRepositoryImpl(get()) }
     single<ResetPasswordRepository> { ResetPasswordRepositoryImpl(get(), get()) }
-
     single<ServiceDetailRepository> { ServiceDetailRepositoryImpl(get()) }
 }
 
@@ -140,6 +141,7 @@ val viewModelModule = module {
     viewModel { RegisterViewModel(get()) }
     viewModel { CodeDialogViewModel(get()) }
     viewModel { ResetPasswordViewModel(get()) }
+    viewModel { SummaryDetailViewModel(get(), get()) }
 }
 
 val icnModules = listOf(

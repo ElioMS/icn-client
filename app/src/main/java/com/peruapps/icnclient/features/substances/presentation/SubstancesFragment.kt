@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_service_type.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.lifecycle.Observer
 import kotlin.collections.ArrayList
 
 class SubstancesFragment : Fragment(), SubstancesNavigator {
@@ -70,9 +71,8 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
                 it.setDropDownViewResource(R.layout.item_simple_spinner)
             }
         spSchedule.adapter = monthAdapter
-//        model.substanceQuantity.set(quantity)
-//
-//        model.addSubstanceItems()
+
+        subscribeLiveData()
     }
 
     override fun updateDetail(data: SubstanceDetail) {
@@ -114,7 +114,7 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
             tvHour.text = selectedHour
             model.hour.set(selectedHour)
 
-            Toast.makeText(context!!, selectedHour, Toast.LENGTH_LONG).show()
+//            Toast.makeText(context!!, selectedHour, Toast.LENGTH_LONG).show()
 
         }),11, 12,false)
         tpDialog.show()
@@ -151,12 +151,19 @@ class SubstancesFragment : Fragment(), SubstancesNavigator {
             model.dateToString.set(weekdayName.capitalize())
             model.isoDate.set(formatDate)
 
-            Log.d("picker_dialog", weekdayName.capitalize())
+//            Log.d("picker_dialog", weekdayName.capitalize())
         }
 
     override fun showSummaryView() {
         NavigationHelper.redirectTo(activity!!, SummaryActivity::class.java)
 //        NavigationHelper.changeFragment(fragmentManager!!,
 //            R.id.main_container, SummaryFragment.newInstance(service, serviceType, ArrayList(model.detailAdapter.items)), "SummaryFragment")
+    }
+
+
+    private fun subscribeLiveData() {
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(context!!, it, Toast.LENGTH_SHORT).show()
+        })
     }
 }

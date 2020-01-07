@@ -21,12 +21,10 @@ import com.peruapps.icnclient.features.schedule_dates.presentation.ScheduleDates
 import com.peruapps.icnclient.features.substances.presentation.SubstancesFragment
 import com.peruapps.icnclient.features.summary.presentation.SummaryActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
-import com.peruapps.icnclient.model.Appointment
 import com.peruapps.icnclient.model.AppointmentDate
 import com.peruapps.icnclient.model.Service
 import com.peruapps.icnclient.model.ServiceType
 import com.peruapps.icnclient.widgets.CustomCalendarView
-import kotlinx.android.synthetic.main.fragment_calendar.*
 import kotlinx.android.synthetic.main.fragment_service_type.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -48,6 +46,9 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
     var days = ArrayList<AppointmentDate>()
     private var calendarView : CustomCalendarView? = null
 
+    private var hour: Int = 0
+    private var minute: Int = 0
+
 
     companion object {
         fun newInstance(data: ArrayList<ServiceType>, service: Service) = ServiceTypeFragment().apply {
@@ -60,6 +61,11 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.HOUR, 4)
+        hour = calendar.get(Calendar.HOUR_OF_DAY)
+        minute = calendar.get(Calendar.MINUTE)
 
         model.setServiceTypeItems(list, service)
 
@@ -85,28 +91,41 @@ class ServiceTypeFragment : Fragment(), CustomCalendarView.CustomCalendarListene
     }
 
     private fun openTimePickerDialog() {
+
         val tpDialog = TimePickerDialog(context!!, TimePickerDialog.OnTimeSetListener(function = { _, h, m ->
 
             val selectedHour: String
-//
-            if (h <= 12) {
-                selectedHour = "$h:$m AM"
-            } else {
-                var hour = h
 
-                if (h != 12) {
-                    hour = h - 12
+
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.HOUR, 4)
+
+            val datetime = Calendar.getInstance()
+            datetime.set(Calendar.HOUR_OF_DAY, h)
+            datetime.set(Calendar.MINUTE, m)
+
+            if (datetime.timeInMillis < calendar.timeInMillis) {
+                Toast.makeText(context!!, "Horario de atención no disponible", Toast.LENGTH_LONG).show()
+            } else {
+//
+                if (h <= 12) {
+                    selectedHour = "$h:$m AM"
+                } else {
+                    var hour = h
+
+                    if (h != 12) {
+                        hour = h - 12
+                    }
+
+                    selectedHour = "$hour:$m PM"
                 }
 
-                selectedHour = "$hour:$m PM"
+                tvHour.text = selectedHour
+                val hour = "$h:$m"
+                model.hour.set(hour)
             }
 
-            tvHour.text = selectedHour
-            val hour = "$h:$m"
-            model.hour.set(hour)
-
-
-        }),11, 12,false)
+        }),hour, minute,false)
         tpDialog.show()
     }
 

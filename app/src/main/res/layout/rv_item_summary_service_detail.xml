@@ -43,9 +43,10 @@
                 android:textSize="@dimen/services_detail_titles"
                 android:text="Tipo"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tv2"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
                 android:id="@+id/textView3" android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"/>
 
         <TextView
                 android:id="@+id/serviceName"
@@ -72,9 +73,10 @@
                 android:textColor="@color/colorGray"
                 tools:text="Canalización"
                 android:text="@{ item.serviceTypeName }"
-                app:layout_constraintStart_toEndOf="@+id/textView3" android:layout_marginStart="46dp"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/serviceName"
-                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView3" android:layout_marginStart="48dp"
+                app:layout_constraintVertical_bias="1.0"/>
 
         <!--<androidx.appcompat.widget.AppCompatImageView-->
                 <!--android:id="@+id/shrinkData"-->

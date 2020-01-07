@@ -49,8 +49,11 @@
     <string name="button_next">Siguiente</string>
     <string name="button_generate">Generar</string>
     <string name="button_confirm">Confirmar</string>
-    <string name="custom_dialog_text">Recuerda que para realizar los procesos de enfermería necesitas los materiales mencionados</string>
-    <string name="custom_dialog_other">Comuníquese con nosotros \n al +51923187226 para \n indicarle los medicamentos \n que debe tener
+    <string name="custom_dialog_text">Recuerda que para realizar los procesos de enfermería necesitas los materiales
+        mencionados
+    </string>
+    <string name="custom_dialog_other">Comuníquese con nosotros \n al +51923187226 para \n indicarle los medicamentos \n
+        que debe tener
     </string>
     <string name="dialog_register_text">Para mayor \n información \n comuníquese con</string>
 
@@ -82,6 +85,8 @@
     <string name="text_generate">Generar</string>
     <string name="add_new_substance">Agregar otra sustancia</string>
     <string name="success_reservation_message">Nos contactaremos contigo \n para finalizar el servicio</string>
+    <string name="text_ruc">RUC</string>
+    <string name="text_business_name">Razón social</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -143,10 +148,15 @@
     <string name="validation_empty">Por favor complete los campos vacíos</string>
     <string name="validation_email">Formato de correo incorrecto</string>
     <string name="validation_confirm_password">Las contraseñas no coinciden</string>
-    <string name="validation_alphanumeric_password">Las contraseñas tiene que ser alfanúmerica</string>
-    <string name="validation_password_min_characters">La contraseña debe tener como mínimo de 6 caracteres </string>
+    <string name="validation_alphanumeric_password">Las contraseña tiene que ser alfanúmerica</string>
+    <string name="validation_password_min_characters">La contraseña debe tener como mínimo de 6 caracteres</string>
     <string name="validation_service_type_hour">Debe de seleccionar un horario de atención</string>
+    <string name="validation_service_type">Debe de seleccionar un tipo de servicio</string>
     <string name="validation_calendar_days">Debe de seleccionar al menos un día</string>
     <string name="validation_dni">Formato de DNI incorrecto</string>
     <string name="validation_pasaporte">Formato de pasaporte incorrecto</string>
+    <string name="validation_credit_card">Debe de seleccionar una tarjeta</string>
+    <string name="validation_ruc">Formato de RUC incorrecto</string>
+    <string name="validation_phone_number">Formato de celular incorrecto</string>
+    <string name="validation_blank_space">La contraseña no debe contener espacios en blanco</string>
 </resources>

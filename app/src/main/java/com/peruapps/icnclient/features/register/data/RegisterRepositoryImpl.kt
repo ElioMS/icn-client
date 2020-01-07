@@ -73,9 +73,9 @@ class RegisterRepositoryImpl(
             rbPassword
         )
 
-        Log.d("REGISTER_RESPONSE", response.toString())
+//        Log.d("REGISTER_RESPONSE", response.toString())
 
-        preferencesManager.saveAuthData(response)
+//        preferencesManager.saveAuthData(response)
         return response
     }
 

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginBottom="10dp">
+
+    <data>
+        <variable name="item"
+                  type="com.peruapps.icnclient.room.entity.SubstanceTable"/>
+    </data>
+
+    <LinearLayout
+            android:id="@+id/rvItemSubstanceLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/background_gray_round_corners">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Sustancia"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ item.substanceName }"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Días"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_marginEnd="20dp"
+                    android:text="@{ ``+item.days }"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Cada"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ item.periodToString }"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Primera dosis"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ item.date }"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="@string/title_hour"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ item.hour }"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

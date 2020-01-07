@@ -2,6 +2,7 @@ package com.peruapps.icnclient.helpers
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.peruapps.icnclient.R
@@ -16,7 +17,7 @@ object NavigationHelper {
         val page = Intent(activity, c)
 
         if (end) {
-//            page.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            page.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             activity.finish()
         }
 
@@ -51,10 +52,13 @@ object NavigationHelper {
         )
 
         if (addToStack) {
+            Log.d("testing", "aaaaa")
             fragmentTransaction.replace(layout, newFrag, fragName)
             fragmentTransaction.addToBackStack(fragName)
             fragmentTransaction.commit()
         } else {
+            Log.d("testing", "bbbbbbb")
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
             fragmentTransaction.replace(layout, newFrag, fragName)
             fragmentTransaction.commit()
         }

@@ -16,8 +16,14 @@ interface ServiceDetailDao {
     suspend fun sumPrice(): Float
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(data: ServiceDetail)
+    suspend fun insert(data: ServiceDetail): Long
 
     @Query("DELETE FROM service_details")
     suspend fun deleteAll()
+
+    @Query("SELECT * from service_details WHERE id =:id limit 1")
+    suspend fun findById(id: Int): ServiceDetail
+
+    @Query("DELETE from service_details WHERE id =:id")
+    suspend fun deleteById(id: Int)
 }

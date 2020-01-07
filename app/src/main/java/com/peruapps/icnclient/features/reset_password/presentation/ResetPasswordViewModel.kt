@@ -29,12 +29,26 @@ class ResetPasswordViewModel (private val repository: ResetPasswordRepository): 
             return false
         }
 
-        if (password != "" && password?.length!! < 6) {
+        if  (password!!.contains(" ")) {
+            _validationMessage.value = R.string.validation_blank_space
+            return false
+        }
+
+        if (password != "" && password.length < 6) {
             _validationMessage.value = R.string.validation_password_min_characters
+            return false
         }
 
         if (confirmPassword == "") {
             _validationMessage.value = R.string.validation_empty
+            return false
+        }
+
+        val numRegex = ".*[0-9].*".toRegex()
+        val alphaRegex = ".*[A-Z].*".toRegex()
+
+        if  ((!password.matches(numRegex) && !password.matches(alphaRegex)) || (!confirmPassword!!.matches(numRegex) && !confirmPassword.matches(alphaRegex))) {
+            _validationMessage.value = R.string.validation_alphanumeric_password
             return false
         }
 

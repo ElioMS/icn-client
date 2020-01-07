@@ -3,6 +3,7 @@ package com.peruapps.icnclient.features.summary.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -21,12 +22,14 @@ import com.peruapps.icnclient.databinding.ActivitySummaryBinding
 import com.peruapps.icnclient.features.reservations.presentation.views.ReservationActivity
 import com.peruapps.icnclient.features.service_category.views.ServiceCategoryActivity
 import com.peruapps.icnclient.features.summary.presentation.dialogs.DialogSuccessReservation
+import com.peruapps.icnclient.features.summary_detail.presentation.SummaryDetailActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
 import com.peruapps.icnclient.room.dao.ServiceDetailDao
 import com.peruapps.icnclient.room.database.AppDatabase
 import kotlinx.android.synthetic.main.services_navigation_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import androidx.lifecycle.Observer
 
 class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigator {
 
@@ -76,6 +79,7 @@ class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigato
 
     private fun initEvents() {
         ib_back.setOnClickListener { onBackPressed() }
+        subscribeLiveData()
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -97,5 +101,21 @@ class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigato
 
     override fun addNewService() {
         NavigationHelper.redirectTo(this, ServiceCategoryActivity::class.java, true)
+    }
+
+    override fun showDetail(id: Int) {
+        NavigationHelper.redirecToWithData(this, SummaryDetailActivity::class.java, id)
+    }
+
+    private fun subscribeLiveData() {
+        model.validationMessage.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
+        model.showError.observe(this, Observer {
+            if  (it != "") {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

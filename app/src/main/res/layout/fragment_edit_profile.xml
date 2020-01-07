@@ -258,6 +258,7 @@
                             android:backgroundTint="@{ safeUnbox(viewModel.documentType == 2) ? @color/colorPrimary : @color/colorItem }"
                             android:textColor="@{ safeUnbox(viewModel.documentType == 2) ? @color/colorWhite : @color/colorSecondaryText }"
                             android:layout_width="wrap_content"
+                            android:layout_marginStart="15dp"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
                             android:layout_height="60dp"
@@ -277,7 +278,7 @@
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@={viewModel.documentNumber}"/>

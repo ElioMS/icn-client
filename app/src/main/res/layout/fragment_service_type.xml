@@ -184,7 +184,7 @@
                     android:textColor="@color/colorWhite"
                     android:textSize="22sp"
                     android:fontFamily="@font/muli_bold"
-                    android:text="@{ safeUnbox(viewModel.showSubstances) ?  @string/button_next : (safeUnbox(viewModel.doSchedule) ? @string/button_next : @string/button_confirm) }"/>
+                    android:text="@string/button_next"/>
         </LinearLayout>
 
     </RelativeLayout>

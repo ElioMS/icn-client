@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.peruapps.icnclient.databinding.RvItemCreditCardBinding
 import com.peruapps.icnclient.model.CreditCard
 
-class ItemCreditCardAdapter (var items: MutableList<CreditCard>,
-                             var listener: (CreditCard, Int) -> Unit): RecyclerView.Adapter<ItemCreditCardViewHolder>() {
+class ItemCreditCardAdapter(
+    var items: MutableList<CreditCard>,
+    var listener: (CreditCard, Int) -> Unit
+) : RecyclerView.Adapter<ItemCreditCardViewHolder>() {
 
     private var lastCheckedPosition = -1
 

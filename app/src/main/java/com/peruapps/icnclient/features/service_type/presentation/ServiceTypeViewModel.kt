@@ -77,11 +77,19 @@ class ServiceTypeViewModel (private val serviceDetailRepository: ServiceDetailRe
 //
         if (serviceId == 1 && position == 0 || serviceId == 3) {
             when (scheduleValue) {
-                true -> getNavigator().showNextView("CALENDAR")
-                false -> {
-                    if  (hour.get() != "") {
-                        registerFlow()
+                true -> {
+                    if (serviceType.get() == null) {
+                        _validationMessage.value = R.string.validation_service_type
                     } else {
+                        getNavigator().showNextView("CALENDAR")
+                    }
+                }
+                false -> {
+                    if  (hour.get() != "" && serviceType.get() != null) {
+                        registerFlow()
+                    } else if (serviceType.get() == null) {
+                        _validationMessage.value = R.string.validation_service_type
+                    } else if (hour.get() == "") {
                         _validationMessage.value = R.string.validation_service_type_hour
                     }
                 }

@@ -75,7 +75,8 @@ class ProfileFragment : Fragment(), ProfileNavigator {
     }
 
     override fun goBack() {
-        activity!!.onBackPressed()
+//        activity!!.onBackPressed()
+        NavigationHelper.redirectTo(activity!!, ReservationActivity::class.java)
     }
 
     override fun showEditProfileView() {

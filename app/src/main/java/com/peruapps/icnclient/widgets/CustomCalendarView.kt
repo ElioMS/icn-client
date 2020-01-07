@@ -23,6 +23,7 @@ import com.peruapps.icnclient.extensions.safeValue
 import com.peruapps.icnclient.extensions.toDate
 import java.text.DateFormatSymbols
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CustomCalendarView @JvmOverloads constructor(context: Context,
                                                    attrs: AttributeSet? = null,
@@ -148,7 +149,29 @@ class CustomCalendarView @JvmOverloads constructor(context: Context,
 
     private fun createViews(view: View) {
         spMonths = view.findViewById(R.id.spMonths)
-        val monthAdapter = ArrayAdapter.createFromResource(_rootView.context, R.array.months, R.layout.item_simple_spinner)
+
+        val array = ArrayList<String>()
+        val allowedMonths = ArrayList<String>()
+
+        array.add("Enero")
+        array.add("Febrero")
+        array.add("Marzo")
+        array.add("Abril")
+        array.add("Mayo")
+        array.add("Junio")
+        array.add("Julio")
+        array.add("Agosto")
+        array.add("Septiembre")
+        array.add("Octubre")
+        array.add("Noviembre")
+        array.add("Diciembre")
+
+        val firstMonth =  currentCalendar.get(Calendar.MONTH)
+        allowedMonths.add(array[firstMonth])
+        allowedMonths.add(array[firstMonth+1])
+
+
+        val monthAdapter = ArrayAdapter(_rootView.context,R.layout.item_simple_spinner , allowedMonths)
             .also {
                 it.setDropDownViewResource(R.layout.item_simple_spinner)
             }

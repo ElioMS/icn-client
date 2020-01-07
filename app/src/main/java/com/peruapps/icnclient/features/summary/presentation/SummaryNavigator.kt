@@ -4,4 +4,5 @@ interface SummaryNavigator {
     fun showSuccessReservationDialog()
     fun showAppointmentsView()
     fun addNewService()
+    fun showDetail(id: Int)
 }

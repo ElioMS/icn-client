@@ -12,6 +12,7 @@ import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubst
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceDetailAdapter
 import com.peruapps.icnclient.features.summary.presentation.adapter.ItemCreditCardAdapter
 import com.peruapps.icnclient.features.summary.presentation.adapter.ItemServiceDetailAdapter
+import com.peruapps.icnclient.features.summary_detail.presentation.adapter.ItemSummaryDetailAdapter
 import com.peruapps.icnclient.model.AppointmentDate
 
 @BindingAdapter("appointmentsAdapter")
@@ -87,6 +88,12 @@ fun <T> setItemNotificationAdapter(recyclerView: RecyclerView, masterAdapter: It
     recyclerView.adapter = masterAdapter
 }
 
+@BindingAdapter("itemSummaryDetailAdapter")
+fun <T> setItemSummaryDetailAdapter(recyclerView: RecyclerView, masterAdapter: ItemSummaryDetailAdapter) {
+    recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+    recyclerView.adapter = masterAdapter
+}
+
 @BindingAdapter("turnAdapter")
 fun <T> setTurnAdapter(textView: TextView, position: AppointmentDate) {
     val data = when (position.turn) {
@@ -96,4 +103,10 @@ fun <T> setTurnAdapter(textView: TextView, position: AppointmentDate) {
         else -> position.stringHour
     }
     textView.text = data
+}
+
+@BindingAdapter("swipeHandler")
+fun <T> setSwipeHandler(recyclerView: RecyclerView, swipeHandler: SwipeToDeleteCallback) {
+    val itemTouchHelper = ItemTouchHelper(swipeHandler)
+    itemTouchHelper.attachToRecyclerView(recyclerView)
 }
