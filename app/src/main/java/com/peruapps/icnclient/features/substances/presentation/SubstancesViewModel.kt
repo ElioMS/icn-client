@@ -141,7 +141,7 @@ class SubstancesViewModel(
             return false
         }
 
-        if (days!!.toInt() < 1 || days!!.toInt() > 2) {
+        if (days != "" && days!!.toInt() < 1 || days != "" &&  days!!.toInt() > 2) {
             _validationMessage.value = R.string.validation_max_days
             return false
         }

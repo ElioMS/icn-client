@@ -24,12 +24,39 @@ data class PersonalTable(
     @ColumnInfo(name = "hour")
     val hour: String = "",
 
+    @ColumnInfo(name = "string_hour")
+    val stringHour: String = "",
+
+    @ColumnInfo(name = "date")
+    val date: String = "",
+
+    @ColumnInfo(name = "string_date")
+    val stringDate: String = "",
+
     @ColumnInfo(name = "turn")
     val turn: Int? = null,
 
     @ColumnInfo(name = "quantity")
     val quantity: Int? = null,
 
+    @ColumnInfo(name = "price")
+    val price: Float? = null,
+
     @ColumnInfo(name = "detail_id")
     val detailId: Int
-)
+) {
+
+    fun turnToString() : String {
+        return when (turn) {
+            0 -> "Mañana"
+            1 -> "Tarde"
+            2 -> "Noche"
+            3 -> "Mañana-Tarde"
+            4 -> "Mañana-Tarde-Noche"
+            5 -> "Tarde-Noche"
+            6 -> "Noche-Mañana"
+            else -> ""
+        }
+    }
+
+}

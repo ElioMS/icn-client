@@ -16,9 +16,14 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".features.summary_detail.presentation.SummaryDetailActivity">
+
+        <activity
+                android:name=".features.summary_detail.presentation.SummaryDetailActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".features.summary.presentation.SummaryActivity">
+        <activity
+                android:name=".features.summary.presentation.SummaryActivity"
+                android:screenOrientation="portrait">
         </activity>
 
         <provider
@@ -57,11 +62,14 @@
                 <data android:scheme="@string/fb_login_protocol_scheme"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".features.services.views.ServiceActivity"
                 android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".features.service_category.views.ServiceCategoryActivity">
+        <activity
+                android:name=".features.service_category.views.ServiceCategoryActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".features.reservations.presentation.views.ReservationActivity"

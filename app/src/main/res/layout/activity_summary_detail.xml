@@ -110,8 +110,17 @@
                     android:layout_below="@+id/header"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    tools:itemCount="1"
                     tools:listitem="@layout/rv_item_summary_detail"
                     itemSummaryDetailAdapter="@{ viewModel.adapter }">
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_below="@+id/header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/rv_item_appointment_date"
+                    itemAppointmentDateAdapter="@{ viewModel.appointmentAdapter }">
             </androidx.recyclerview.widget.RecyclerView>
 
         </RelativeLayout>

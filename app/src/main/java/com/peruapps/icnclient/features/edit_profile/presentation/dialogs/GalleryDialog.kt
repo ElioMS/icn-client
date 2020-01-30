@@ -10,7 +10,6 @@ import com.peruapps.icnclient.features.edit_profile.presentation.EditProfileNavi
 import kotlinx.android.synthetic.main.dialog_gallery.*
 
 class GalleryDialog (context: Context,
-//                     style: Int,
                      var openGallery: () -> Unit,
                      var openCamera: () -> Unit
 
@@ -24,13 +23,11 @@ class GalleryDialog (context: Context,
 
         btnOpenGallery.setOnClickListener {
             openGallery.invoke()
-//            navigator.openGallery()
             dismiss()
         }
 
         btnOpenCamera.setOnClickListener {
             openCamera.invoke()
-//            navigator.openCamera()
             dismiss()
         }
     }

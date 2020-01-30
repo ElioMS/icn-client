@@ -12,6 +12,7 @@ import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubst
 import com.peruapps.icnclient.features.substances.presentation.adapter.ItemSubstanceDetailAdapter
 import com.peruapps.icnclient.features.summary.presentation.adapter.ItemCreditCardAdapter
 import com.peruapps.icnclient.features.summary.presentation.adapter.ItemServiceDetailAdapter
+import com.peruapps.icnclient.features.summary_detail.presentation.adapter.ItemAppointmentDateAdapter
 import com.peruapps.icnclient.features.summary_detail.presentation.adapter.ItemSummaryDetailAdapter
 import com.peruapps.icnclient.model.AppointmentDate
 
@@ -90,6 +91,12 @@ fun <T> setItemNotificationAdapter(recyclerView: RecyclerView, masterAdapter: It
 
 @BindingAdapter("itemSummaryDetailAdapter")
 fun <T> setItemSummaryDetailAdapter(recyclerView: RecyclerView, masterAdapter: ItemSummaryDetailAdapter) {
+    recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
+    recyclerView.adapter = masterAdapter
+}
+
+@BindingAdapter("itemAppointmentDateAdapter")
+fun <T> setItemAppointmentDateAdapter(recyclerView: RecyclerView, masterAdapter: ItemAppointmentDateAdapter) {
     recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
     recyclerView.adapter = masterAdapter
 }

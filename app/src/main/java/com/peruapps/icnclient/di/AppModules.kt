@@ -94,7 +94,7 @@ val retrofitModules = module {
         Retrofit.Builder()
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://192.168.1.9:8000/api/v1/")
+            .baseUrl("http://icn-backend.pappstest.com/api/v1/")
             .build()
     }
 }
@@ -145,7 +145,7 @@ val viewModelModule = module {
     viewModel { RegisterViewModel(get()) }
     viewModel { CodeDialogViewModel(get()) }
     viewModel { ResetPasswordViewModel(get()) }
-    viewModel { SummaryDetailViewModel(get(), get()) }
+    viewModel { SummaryDetailViewModel(get(), get(), get()) }
 }
 
 val icnModules = listOf(

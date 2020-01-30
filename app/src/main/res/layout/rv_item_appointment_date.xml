@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginBottom="10dp">
+
+    <data>
+        <variable name="item"
+                  type="com.peruapps.icnclient.room.entity.PersonalTable"/>
+    </data>
+
+    <LinearLayout
+            android:id="@+id/rvItemSubstanceLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/background_gray_round_corners">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="Día"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_marginEnd="20dp"
+                    android:text="@{ item.stringDate }"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="@string/title_turn"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ item.turnToString }"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    style="@style/AccentText"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/muli_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="@string/title_price"/>
+
+            <TextView
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorGray"
+                    android:fontFamily="@font/muli_bold"
+                    android:text="@{ `S/ `+item.price }"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

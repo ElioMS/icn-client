@@ -10,9 +10,13 @@ data class AppointmentDate(val string_date: String,
 
     fun turnToString() : String {
         return when (turn) {
-            0 -> "Día"
-            1 -> "Noche"
-            2 -> "24 hrs"
+            0 -> "Mañana"
+            1 -> "Tarde"
+            2 -> "Noche"
+            3 -> "Mañana-Tarde"
+            4 -> "Mañana-Tarde-Noche"
+            5 -> "Tarde-Noche"
+            6 -> "Noche-Mañana"
             else -> ""
         }
     }

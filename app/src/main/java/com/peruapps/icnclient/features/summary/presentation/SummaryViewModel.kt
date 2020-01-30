@@ -36,6 +36,8 @@ class SummaryViewModel(private val serviceDetailRepository: ServiceDetailReposit
     var isVoucher = ObservableBoolean(true)
     val creditCard = ObservableField<CreditCard>()
 
+    val clientAddress = ObservableField("")
+
     val address = ObservableField("")
     val documentNumber = ObservableField("")
     val businessName = ObservableField("")
@@ -82,7 +84,12 @@ class SummaryViewModel(private val serviceDetailRepository: ServiceDetailReposit
         val address = address.get()
         val documentNumber = documentNumber.get()
         val businessName = businessName.get()
+        val clientAddress = clientAddress.get()
 
+        if (clientAddress == "") {
+            _validationMessage.value = R.string.validation_empty
+            return false
+        }
 
         if (creditCard == null) {
             _validationMessage.value = R.string.validation_credit_card

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
-        <variable name="viewModel"
-                  type="com.peruapps.icnclient.features.edit_profile.presentation.EditProfileViewModel"/>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="viewModel"
+                type="com.peruapps.icnclient.features.edit_profile.presentation.EditProfileViewModel" />
     </data>
 
     <RelativeLayout
@@ -19,49 +21,49 @@
                 android:id="@+id/background"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="25dp"
-                android:layout_marginTop="-25dp">
+                android:layout_marginTop="-25dp"
+                app:cardCornerRadius="25dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/profile_background"/>
+                    android:src="@drawable/profile_background" />
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_close"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="20dp"
                     android:layout_marginTop="50dp"
-                    android:src="@drawable/ic_close"
-                    android:onClick="@{ () -> viewModel.onClickCloseView() }"/>
+                    android:layout_marginEnd="20dp"
+                    android:onClick="@{ () -> viewModel.onClickCloseView() }"
+                    android:src="@drawable/ic_close" />
 
         </androidx.cardview.widget.CardView>
 
         <FrameLayout
                 android:id="@+id/iv_add_photo"
-                android:elevation="10dp"
-                android:layout_marginTop="100dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:elevation="10dp"
                 android:onClick="@{ () -> viewModel.onClickAddPhoto() }">
 
             <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/profile_image"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
+                    android:elevation="10dp"
                     android:scaleType="centerInside"
-                    app:roundedCornerRadius="50dp"
-                    app:roundAsCircle="true"
-                    app:roundingBorderWidth="3dp"
-                    app:roundingBorderColor="@color/colorAccent"
-                    app:setImageControllerResize="@{viewModel.profile.photo}"
                     app:failureImage="@drawable/ic_add_photo"
                     app:placeholderImage="@drawable/ic_add_photo"
-                    android:elevation="10dp"/>
+                    app:roundAsCircle="true"
+                    app:roundedCornerRadius="50dp"
+                    app:roundingBorderColor="@color/colorAccent"
+                    app:roundingBorderWidth="3dp"
+                    app:setImageControllerResize="@{viewModel.profile.photo}" />
 
             <!--<de.hdodenhof.circleimageview.CircleImageView-->
             <!--android:id="@+id/profile_image"-->
@@ -74,169 +76,170 @@
             <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_add_image"
                     android:layout_gravity="end|bottom"
-                    android:elevation="20dp"/>
+                    android:elevation="20dp"
+                    app:srcCompat="@drawable/ic_add_image" />
 
         </FrameLayout>
 
         <TextView
                 android:id="@+id/tvName"
                 style="@style/AccentText"
-                android:layout_below="@+id/iv_add_photo"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_below="@+id/iv_add_photo"
                 android:layout_centerHorizontal="true"
-                android:textSize="20sp"
                 android:fontFamily="@font/muli_bold"
-                android:text="@{viewModel.profile.fullName}"/>
+                android:gravity="center"
+                android:text="@{viewModel.profile.fullName}"
+                android:textSize="20sp" />
 
         <ProgressBar
-                android:visibility="@{ safeUnbox(viewModel.requestLoading) ? View.VISIBLE : View.GONE }"
-                android:layout_below="@+id/tvName"
-                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"/>
+                android:layout_below="@+id/tvName"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:visibility="@{ safeUnbox(viewModel.requestLoading) ? View.VISIBLE : View.GONE }" />
 
         <TextView
                 android:id="@+id/tvEdit"
-                android:visibility="@{ safeUnbox(viewModel.requestLoading) ? View.GONE : View.VISIBLE }"
-                android:layout_below="@+id/tvName"
-                android:layout_alignParentEnd="true"
                 style="@style/PrimaryText"
-                android:fontFamily="@font/muli_bold"
-                android:text="@string/text_save"
-                android:textSize="16sp"
-                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tvName"
+                android:layout_alignParentEnd="true"
                 android:layout_marginEnd="20dp"
-                android:onClick="@{ () -> viewModel.saveProfile() }"/>
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/muli_bold"
+                android:onClick="@{ () -> viewModel.saveProfile() }"
+                android:text="@string/text_save"
+                android:textSize="16sp"
+                android:visibility="@{ safeUnbox(viewModel.requestLoading) ? View.GONE : View.VISIBLE }" />
 
         <ScrollView
                 android:id="@+id/scrollMainContent"
-                android:layout_below="@+id/tvEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/tvEdit"
                 android:scrollbars="none">
 
             <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
                     tools:context=".features.edit_profile.presentation.EditProfileFragment">
 
                 <TextView
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_phone"/>
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/text_phone"
+                        android:textSize="18sp" />
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
-                        android:inputType="phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="phone"
                         android:maxLength="9"
-                        android:text="@={viewModel.phoneNumber}"/>
+                        android:text="@={viewModel.phoneNumber}" />
 
                 <TextView
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_email"/>
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/text_email"
+                        android:textSize="18sp" />
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
-                        android:inputType="textEmailAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.email}"/>
+                        android:inputType="textEmailAddress"
+                        android:text="@={viewModel.email}" />
 
 
                 <LinearLayout
-                        android:baselineAligned="false" android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal"
                         android:weightSum="1">
 
                     <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.5">
+                            android:layout_weight="0.5"
+                            android:orientation="vertical">
 
                         <TextView
                                 style="@style/AccentText"
-                                android:fontFamily="@font/muli_bold"
-                                android:textSize="18sp"
-                                android:layout_marginBottom="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/text_gender"/>
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/muli_bold"
+                                android:text="@string/text_gender"
+                                android:textSize="18sp" />
 
                         <FrameLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:background="@drawable/background_gray_round_corners"
                                 android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
-                                android:background="@drawable/background_gray_round_corners">
+                                android:paddingBottom="5dp">
 
                             <Spinner
                                     android:id="@+id/sp_gender"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:selectedItemPosition="@={viewModel.gender}"
                                     android:spinnerMode="dropdown"
-                                    android:textAlignment="textStart"
-                                    android:selectedItemPosition="@={viewModel.gender}"/>
+                                    android:textAlignment="textStart" />
 
                         </FrameLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="0.5">
+                            android:layout_weight="0.5"
+                            android:orientation="vertical">
 
                         <TextView
                                 style="@style/AccentText"
-                                android:fontFamily="@font/muli_bold"
-                                android:textSize="18sp"
-                                android:layout_marginBottom="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/text_age"/>
+                                android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/muli_bold"
+                                android:text="@string/text_age"
+                                android:textSize="18sp" />
 
                         <EditText
                                 style="@style/TextField.Rounded.Gray"
-                                android:inputType="phone"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@={viewModel.age}"/>
+                                android:inputType="phone"
+                                android:text="@={viewModel.age}" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <TextView
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_document_type"/>
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/text_document_type"
+                        android:textSize="18sp" />
 
                 <LinearLayout
                         android:layout_width="match_parent"
@@ -244,89 +247,89 @@
 
                     <Button
                             style="@style/Button.Rounded.Gray"
-                            android:backgroundTint="@{ safeUnbox(viewModel.documentType == 1) ? @color/colorPrimary : @color/colorItem }"
-                            android:textColor="@{ safeUnbox(viewModel.documentType == 1) ? @color/colorWhite : @color/colorSecondaryText }"
-                            android:paddingStart="25dp"
-                            android:paddingEnd="25dp"
                             android:layout_width="wrap_content"
                             android:layout_height="60dp"
+                            android:backgroundTint="@{ safeUnbox(viewModel.documentType == 1) ? @color/colorPrimary : @color/colorItem }"
+                            android:onClick="@{ () -> viewModel.setDocumentType(1) }"
+                            android:paddingStart="25dp"
+                            android:paddingEnd="25dp"
                             android:text="@string/text_dni"
-                            android:onClick="@{ () -> viewModel.setDocumentType(1) }"/>
+                            android:textColor="@{ safeUnbox(viewModel.documentType == 1) ? @color/colorWhite : @color/colorSecondaryText }" />
 
                     <Button
                             style="@style/Button.Rounded.Gray"
-                            android:backgroundTint="@{ safeUnbox(viewModel.documentType == 2) ? @color/colorPrimary : @color/colorItem }"
-                            android:textColor="@{ safeUnbox(viewModel.documentType == 2) ? @color/colorWhite : @color/colorSecondaryText }"
                             android:layout_width="wrap_content"
+                            android:layout_height="60dp"
                             android:layout_marginStart="15dp"
+                            android:backgroundTint="@{ safeUnbox(viewModel.documentType == 2) ? @color/colorPrimary : @color/colorItem }"
+                            android:onClick="@{ () -> viewModel.setDocumentType(2) }"
                             android:paddingStart="20dp"
                             android:paddingEnd="20dp"
-                            android:layout_height="60dp"
                             android:text="@string/text_passport"
-                            android:onClick="@{ () -> viewModel.setDocumentType(2) }"/>
+                            android:textColor="@{ safeUnbox(viewModel.documentType == 2) ? @color/colorWhite : @color/colorSecondaryText }" />
 
                 </LinearLayout>
 
                 <TextView
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_document_number"/>
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/text_document_number"
+                        android:textSize="18sp" />
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@={viewModel.documentNumber}"/>
+                        android:text="@={viewModel.documentNumber}" />
 
                 <TextView
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_address"/>
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/text_address"
+                        android:textSize="18sp" />
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
-                        android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.address}"/>
+                        android:inputType="text"
+                        android:text="@={viewModel.address}" />
 
                 <TextView
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/text_address_reference"/>
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:text="@string/text_address_reference"
+                        android:textSize="18sp" />
 
                 <EditText
                         style="@style/TextField.Rounded.Gray"
-                        android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@={viewModel.addressReference}"/>
+                        android:inputType="text"
+                        android:text="@={viewModel.addressReference}" />
 
                 <TextView
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="60dp"
                         style="@style/AccentText"
-                        android:fontFamily="@font/muli_bold"
-                        android:textSize="20sp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="60dp"
+                        android:fontFamily="@font/muli_bold"
+                        android:gravity="center"
+                        android:onClick="@{ () -> viewModel.showChangePasswordView() }"
                         android:text="@string/change_password"
-                        android:onClick="@{ () -> viewModel.showChangePasswordView() }"/>
+                        android:textSize="20sp" />
 
             </LinearLayout>
 

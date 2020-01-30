@@ -3,6 +3,7 @@ package com.peruapps.icnclient.features.summary.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.common.api.Status
@@ -24,12 +25,12 @@ import com.peruapps.icnclient.features.service_category.views.ServiceCategoryAct
 import com.peruapps.icnclient.features.summary.presentation.dialogs.DialogSuccessReservation
 import com.peruapps.icnclient.features.summary_detail.presentation.SummaryDetailActivity
 import com.peruapps.icnclient.helpers.NavigationHelper
-import com.peruapps.icnclient.room.dao.ServiceDetailDao
-import com.peruapps.icnclient.room.database.AppDatabase
 import kotlinx.android.synthetic.main.services_navigation_toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import androidx.lifecycle.Observer
+import androidx.databinding.adapters.ImageViewBindingAdapter.setImageDrawable
+import android.widget.LinearLayout
 
 class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigator {
 
@@ -58,14 +59,16 @@ class SummaryActivity : AppCompatActivity(), OnMapReadyCallback, SummaryNavigato
         val autocompleteFragment =
             supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
 
+        val searchIcon = (autocompleteFragment.getView() as LinearLayout).getChildAt(0) as ImageView
+        searchIcon.setImageDrawable(resources.getDrawable(R.drawable.ic_flag))
 
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS))
         autocompleteFragment.setCountry("PE")
         autocompleteFragment.setHint("Buscar")
 
         autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
             override fun onPlaceSelected(place: Place) {
-                Log.d(TAG, place.toString())
+                model.clientAddress.set(place.address)
                 val location = place.latLng
                 mMap.clear()
                 mMap.addMarker(MarkerOptions().position(location!!))

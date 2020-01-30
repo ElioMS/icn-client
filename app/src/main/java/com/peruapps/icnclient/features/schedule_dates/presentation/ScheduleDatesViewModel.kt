@@ -71,30 +71,33 @@ class ScheduleDatesViewModel(
         if (turns.contains("")) {
             _validationMessage.value = R.string.validation_empty
         } else {
-            val currentServiceType = service.get()!!
-
-            val type: Int = when (currentServiceType.id) {
-                5 -> 1
-                else -> 2
-            }
 
             startJob {
+
+                val price = serviceType.get()?.let { it.price!! * appointmentAdapter.items.size } ?: run { service.get()!!.price * appointmentAdapter.items.size }
+
                 val id = serviceDetailRepository.insert(
                     ServiceDetail(
                         serviceId = service.get()!!.id,
                         serviceName = service.get()!!.name,
                         serviceTypeId = serviceType.get()?.id,
                         serviceTypeName = serviceType.get()?.name,
-                        price = serviceType.get()?.let { it.price!! * appointmentAdapter.items.size } ?: run { service.get()!!.price * appointmentAdapter.items.size }
+                        price = price
                     )
                 )
+
+                val itemPrice = price / appointmentAdapter.items.size
 
                 appointmentAdapter.items.forEach { x ->
                     personalTableRepository.insert(
                         PersonalTable(
                             hour = "",
+                            stringHour = "",
+                            date = x.date,
+                            stringDate = x.string_date,
                             turn = x.turn,
                             quantity = if (service.get()!!.id == 5) nursesCount.get() else techniciansCount.get(),
+                            price = itemPrice,
                             detailId = id.toInt()
                         )
                     )
@@ -102,7 +105,6 @@ class ScheduleDatesViewModel(
 
                 getNavigator().showSummaryView()
             }
-            Log.d("nurses", type.toString())
         }
     }
 
