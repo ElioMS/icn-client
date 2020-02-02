@@ -21,6 +21,7 @@ class CalendarViewModel : BaseViewModel<CalendarNavigator>() {
     val service = ObservableField<Service>()
     val serviceType = ObservableField<ServiceType>()
     var price = ObservableField<Float>(0f)
+    val activeButton = ObservableField(false)
 
     private val _validationMessage = MutableLiveData<Int>()
     val validationMessage : LiveData<Int>
@@ -28,15 +29,22 @@ class CalendarViewModel : BaseViewModel<CalendarNavigator>() {
 
     fun calendarButtonEvent() {
         scheduledDates.value?.let {
-            if (categoryId.get()!! == 1) {
-                getNavigator().showNextView("DAY")
-            } else {
-                if (selectedScheduleType.get() == 0) {
+
+            if (activeButton.get()!!) {
+                if (categoryId.get()!! == 1) {
                     getNavigator().showNextView("DAY")
                 } else {
-                    getNavigator().showNextView("SUMMARY")
+                    if (selectedScheduleType.get() == 0) {
+                        getNavigator().showNextView("DAY")
+                    } else {
+                        getNavigator().showNextView("SUMMARY")
+                    }
                 }
+            } else {
+                _validationMessage.value = R.string.validation_calendar_days
             }
+
+
         } ?: run {
             _validationMessage.value = R.string.validation_calendar_days
         }

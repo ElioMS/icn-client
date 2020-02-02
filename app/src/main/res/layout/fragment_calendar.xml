@@ -283,7 +283,7 @@
                 android:layout_height="60dp"
                 android:background="@color/colorLightGray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:backgroundTint="@color/colorLightGray"
+                android:backgroundTint="@{ safeUnbox(viewModel.activeButton) ? @color/colorPrimary : @color/colorLightGray }"
                 android:onClick="@{ () -> viewModel.calendarButtonEvent() }">
 
             <TextView

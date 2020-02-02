@@ -129,10 +129,22 @@ class SummaryViewModel(private val serviceDetailRepository: ServiceDetailReposit
 
             startJob {
                 serviceDetailRepository.deleteById(item.id)
+                val items = serviceDetailRepository.countItems()
+
+                if  (items == 0) {
+                    summaryPrice.set(0f)
+                } else {
+                    val price = serviceDetailRepository.summaryPrice()
+                    summaryPrice.set(price)
+                }
+
+                Log.d(TAG, "$items")
+
+                servicesAdapter.items.removeAt(position)
+                servicesAdapter.notifyDataSetChanged()
             }
 
-            servicesAdapter.items.removeAt(position)
-            servicesAdapter.notifyDataSetChanged()
+
         }
     }
 }

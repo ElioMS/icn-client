@@ -113,13 +113,12 @@ class RegisterViewModel(private val repository: RegisterRepository) : BaseViewMo
             return validation.apply { message = "La contraseña debe tener como mínimo de 6 caracteres" }
         }
 
-        val numRegex = ".*[0-9].*".toRegex()
+        val numRegex = "^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)\$".toRegex()
         val alphaRegex = ".*[A-Z].*".toRegex()
 
-        if  ((!password.matches(numRegex) && !password.matches(alphaRegex)) || (!confirmPassword!!.matches(numRegex) && !confirmPassword.matches(alphaRegex))) {
+        if  ((!password.matches(numRegex)) || (!confirmPassword!!.matches(numRegex))) {
             return validation.apply { message = "Las contraseña tiene que ser alfanumérica" }
         }
-
 
         if (password != confirmPassword) {
             return validation.apply { message = "Las contraseñas deben coincidir" }

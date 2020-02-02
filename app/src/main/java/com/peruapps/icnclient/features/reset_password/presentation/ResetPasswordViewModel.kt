@@ -44,10 +44,10 @@ class ResetPasswordViewModel (private val repository: ResetPasswordRepository): 
             return false
         }
 
-        val numRegex = ".*[0-9].*".toRegex()
+        val numRegex = "^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)\$".toRegex()
         val alphaRegex = ".*[A-Z].*".toRegex()
 
-        if  ((!password.matches(numRegex) && !password.matches(alphaRegex)) || (!confirmPassword!!.matches(numRegex) && !confirmPassword.matches(alphaRegex))) {
+        if  ((!password.matches(numRegex)) || (!confirmPassword!!.matches(numRegex))) {
             _validationMessage.value = R.string.validation_alphanumeric_password
             return false
         }

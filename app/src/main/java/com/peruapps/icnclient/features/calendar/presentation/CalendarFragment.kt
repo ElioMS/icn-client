@@ -124,6 +124,12 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
                 days.remove(appointmentDate)
             }
 
+            if (days.size > 0) {
+                model.activeButton.set(true)
+            } else {
+                model.activeButton.set(false)
+            }
+
             days.sortBy { selector(it) }
             model.scheduledDates.value = days
 
@@ -136,6 +142,7 @@ class CalendarFragment : Fragment(), CustomCalendarView.CustomCalendarListener, 
             }
 
             model.price.set(newPrice)
+
         } else {
             Toast.makeText(context!!, "Horario de atención no disponible", Toast.LENGTH_LONG).show()
         }

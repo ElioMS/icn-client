@@ -12,6 +12,9 @@ interface ServiceDetailDao {
     @Query("SELECT * from service_details ORDER BY id ASC")
     suspend fun list(): List<ServiceDetail>
 
+    @Query("SELECT COUNT(*) from service_details")
+    suspend fun countItems(): Int
+
     @Query("SELECT SUM(price) from service_details")
     suspend fun sumPrice(): Float
 

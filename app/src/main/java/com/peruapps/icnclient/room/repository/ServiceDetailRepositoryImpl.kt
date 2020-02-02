@@ -5,6 +5,10 @@ import com.peruapps.icnclient.room.entity.ServiceDetail
 
 class ServiceDetailRepositoryImpl (private val serviceDetailDao: ServiceDetailDao): ServiceDetailRepository {
 
+    override suspend fun countItems(): Int {
+        return serviceDetailDao.countItems()
+    }
+
     override suspend fun deleteById(id: Int) {
         serviceDetailDao.deleteById(id)
     }

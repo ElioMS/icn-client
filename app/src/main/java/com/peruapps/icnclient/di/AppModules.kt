@@ -94,7 +94,7 @@ val retrofitModules = module {
         Retrofit.Builder()
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("http://icn-backend.pappstest.com/api/v1/")
+            .baseUrl("http://192.168.1.9:8000/api/v1/")
             .build()
     }
 }

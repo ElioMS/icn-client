@@ -51,10 +51,9 @@ class ChangePasswordViewModel(
             return false
         }
 
-        val numRegex = ".*[0-9].*".toRegex()
-        val alphaRegex = ".*[A-Z].*".toRegex()
+        val numRegex = "^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)\$".toRegex()
 
-        if  ((!newPassword.matches(numRegex) && !newPassword.matches(alphaRegex)) || (!confirmPassword.matches(numRegex) && !confirmPassword.matches(alphaRegex))) {
+        if  ((!newPassword.matches(numRegex)) || (!confirmPassword.matches(numRegex))) {
             _validationMessage.value = R.string.validation_alphanumeric_password
             return false
         }
